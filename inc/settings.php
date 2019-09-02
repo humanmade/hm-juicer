@@ -22,6 +22,9 @@ function bootstrap() {
 	add_action( 'cmb2_admin_init', __NAMESPACE__ . '\\options_page' );
 }
 
+/**
+ * Register the CMB2 options page.
+ */
 function options_page() {
 	$cmb = new_cmb2_box( [
 		'id' => 'juicer_settings_menu',
