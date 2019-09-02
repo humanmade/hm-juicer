@@ -14,11 +14,13 @@ composer require humanmade/hm-juicer
 ```
 
 ### Step 2
-Add the Juicer account name to the `wp-config.php` file via the `JUICER_ID` constant.
+Add the Juicer feed name to the `wp-config.php` file via the `JUICER_ID` constant.
 
 ```php
 const JUICER_ID = 'myaccountname';
 ```
+
+Alternately, if no `JUICER_ID` is set, the feed name can be set via a settings page that appears if this constant does not exist.
 
 ## Usage
 
