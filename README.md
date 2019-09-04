@@ -8,7 +8,6 @@ Integrates with Juicer API for social feeds and allows accessible display of soc
 
 This plugin expects the following other libraries to exist:
 
-* [HM Autoloader class](https://github.com/humanmade/hm-base/blob/master/content/mu-plugins/class-autoloader.php) from HM Base
 * [CMB2](https://github.com/CMB2/CMB2)
 
 ## Installation
