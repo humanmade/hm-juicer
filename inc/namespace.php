@@ -35,11 +35,8 @@ function get_id() {
 		return JUICER_ID;
 	}
 
-	// Attempt to get the option, if it exists.
-	$juicer_id = cmb2_get_option( 'juicer_options', 'juicer_id', false );
-
-	// Return the CMB2 setting if it exists, or false if it doesn't.
-	return $juicer_id;
+	// Return the option, if it exists.
+	return cmb2_get_option( 'juicer_options', 'juicer_id', false );
 }
 
 /**
