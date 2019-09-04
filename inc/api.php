@@ -18,12 +18,10 @@ namespace HM\Juicer;
  * @return mixed     WP_Error on API error, false if no feed items, an array of item objects if request was successful.
  */
 function get_posts( $count = 10, $page = 1 ) {
-	$cached_response = wp_cache_get( "response_per_$count-page_$page", 'juicer' );
+	$feed = wp_cache_get( "response_per_$count-page_$page", 'juicer' );
 
 	// Check for a cached response.
-	if ( $cached_response ) {
-		$feed = json_decode( $cached_response );
-	} else {
+	if ( ! $feed ) {
 		// If no cached response, make a new API request.
 		$url = juicer_api_url() . '?' . http_build_query( [
 			'per'  => $count,
@@ -37,10 +35,12 @@ function get_posts( $count = 10, $page = 1 ) {
 			return new \WP_Error( 'juicer_bad_response', wp_remote_retrieve_response_message( $response ), $response );
 		}
 
-		wp_cache_set( "response_per_$count-page_$page", $response, 'juicer', DAY_IN_SECONDS );
-
-		$feed = json_decode( wp_remote_retrieve_body( $response ) );
+		// Pull out the response body and cache it.
+		$feed = wp_remote_retrieve_body( $response );
+		wp_cache_set( "response_per_$count-page_$page", $feed, 'juicer', DAY_IN_SECONDS );
 	}
+
+	$feed = json_decode( $feed );
 
 	// Bail if there weren't any post items.
 	if ( count( $feed->posts->items ) === 0 ) {
