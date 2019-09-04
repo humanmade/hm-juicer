@@ -5,6 +5,9 @@
  * @package Hm_Juicer
  */
 
+// Define a JUICER_ID for testing.
+defined( 'JUICER_ID' ) or define( 'JUICER_ID', 'testenv' );
+
 $_tests_dir = getenv( 'WP_TESTS_DIR' );
 
 if ( ! $_tests_dir ) {
