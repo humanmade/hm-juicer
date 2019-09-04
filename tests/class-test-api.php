@@ -14,6 +14,13 @@ namespace HM\Juicer;
  */
 class Test_Api extends \WP_UnitTestCase {
 	/**
+	 * Path to Juicer API mock data.
+	 *
+	 * @var string Juicer API mock data path.
+	 */
+	protected static $mock_data = __DIR__ . '/data/juicer-mock.json';
+
+	/**
 	 * Test that the juicer_id function returns the correct ID.
 	 *
 	 * JUICER_ID is set in the testing environment's bootstrap.php.
