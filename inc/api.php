@@ -18,6 +18,8 @@ namespace HM\Juicer;
  * @return mixed     WP_Error on API error, false if no feed items, an array of item objects if request was successful.
  */
 function get_posts( $count = 10, $page = 1 ) {
+	global $juicer_posts;
+
 	$feed = wp_cache_get( "response_per_$count-page_$page", 'juicer' );
 
 	// Check for a cached response.
@@ -47,6 +49,12 @@ function get_posts( $count = 10, $page = 1 ) {
 		return false;
 	}
 
+	// Update the $juicer_posts global to the array of posts.
+	$juicer_posts = prepare_post_items( $feed->posts->items );
+
+	// Return the juicer posts.
+	return $juicer_posts;
+}
 
 /**
  * Take an array of Juicer feed items and return just the data that we need.
