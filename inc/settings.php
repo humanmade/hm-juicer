@@ -4,7 +4,7 @@
  *
  * This should only load if the JUICER_ID is not defined in the wp-config.php file.
  *
- * @package HM/Juicer
+ * @package HM\Juicer
  */
 
 namespace HM\Juicer\Settings;

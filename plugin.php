@@ -6,7 +6,7 @@
  * Author: Human Made
  * Author URI: https://github.com/humanmade
  *
- * @package HM/Juicer
+ * @package HM\Juicer
  */
 
 namespace HM\Juicer;

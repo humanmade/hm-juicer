@@ -4,7 +4,7 @@
  *
  * Handles all the functionality around communicating back and forth with the Juicer API.
  *
- * @package HM/Juicer
+ * @package HM\Juicer
  */
 
 namespace HM\Juicer;

@@ -4,7 +4,7 @@
  *
  * Main plugin namespace for HM Juicer plugin.
  *
- * @package HM/Juicer
+ * @package HM\Juicer
  */
 
 namespace HM\Juicer;
