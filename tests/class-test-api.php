@@ -52,4 +52,34 @@ class Test_Api extends \WP_UnitTestCase {
 			juicer_api_url()
 		);
 	}
+
+	/**
+	 * Test the API get posts function and make sure the data we get is what we expected.
+	 */
+	public function test_get_posts() {
+		// Cache the mock data before trying to get posts.
+		$this->cache_mock_data();
+
+		// Get the posts from Juicer.
+		$posts = get_posts();
+
+		// Test that we got 10, it's the default and it's also the number of posts in the mock data.
+		$this->assertEquals(
+			10,
+			count( $posts )
+		);
+
+		// Test that each post in the array is itself an object.
+		foreach ( $posts as $post ) {
+			$this->assertTrue(
+				is_object( $post )
+			);
+		}
+
+		// Test that the feed on a Juicer post is the same as the Juicer ID.
+		$this->assertEquals(
+			juicer_id(),
+			$posts[0]->feed
+		);
+	}
 }
