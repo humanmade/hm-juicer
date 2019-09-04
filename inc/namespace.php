@@ -29,7 +29,7 @@ function bootstrap() {
  *
  * @return mixed Either the JUICER_ID from the constant defined in wp-config or options, or false if neither is set.
  */
-function juicer_id() {
+function get_id() {
 	// Check the JUICER_ID constant and return it if it exists.
 	if ( defined( 'JUICER_ID' ) ) {
 		return JUICER_ID;
@@ -47,12 +47,12 @@ function juicer_id() {
  *
  * This expects that juicer_id returns a string. If juicer_id returns false, juicer_api_url will return false also.
  *
- * @see juicer_id()
+ * @see get_id()
  * @return mixed Either the full Juicer feed API url or false if juicer_id returns false.
  */
-function juicer_api_url() {
+function api_url() {
 	// Bail if the ID isn't set. This is intended to be an authoritative URL, so it's no help if the feed name doesn't exist.
-	if ( ! juicer_id() ) {
+	if ( ! get_id() ) {
 		return false;
 	}
 
