@@ -35,10 +35,10 @@ class Test_Api extends \WP_UnitTestCase {
 	 *
 	 * JUICER_ID is set in the testing environment's bootstrap.php.
 	 */
-	public function test_juicer_id() {
+	public function test_get_id() {
 		$this->assertEquals(
 			'testenv',
-			juicer_id(),
+			get_id(),
 			__( 'Juicer feed name (JUICER_ID) was not `testenv` as expected. Make sure your bootstrap.php in your testing environment is set correctly.', 'hm-juicer' )
 		);
 	}
@@ -46,10 +46,10 @@ class Test_Api extends \WP_UnitTestCase {
 	/**
 	 * Test that the juicer endpoint is what we expect for the feed name set in bootstrap.php.
 	 */
-	public function test_juicer_api_url() {
+	public function test_api_url() {
 		$this->assertEquals(
 			'https://www.juicer.io/api/feeds/testenv',
-			juicer_api_url()
+			api_url()
 		);
 	}
 
@@ -78,7 +78,7 @@ class Test_Api extends \WP_UnitTestCase {
 
 		// Test that the feed on a Juicer post is the same as the Juicer ID.
 		$this->assertEquals(
-			juicer_id(),
+			get_id(),
 			$posts[0]->feed
 		);
 	}
