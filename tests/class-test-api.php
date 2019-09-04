@@ -21,6 +21,16 @@ class Test_Api extends \WP_UnitTestCase {
 	protected static $mock_data = __DIR__ . '/data/juicer-mock.json';
 
 	/**
+	 * Cache the mock API data.
+	 *
+	 * We can create a mock API request by simply caching the data in the juicer-mock.json file since Juicer\get_posts checks the cache first.
+	 */
+	private function cache_mock_data() {
+		$api_data = file_get_contents( self::$mock_data );
+		wp_cache_set( 'response_per_10-page_1', $api_data, 'juicer', DAY_IN_SECONDS );
+	}
+
+	/**
 	 * Test that the juicer_id function returns the correct ID.
 	 *
 	 * JUICER_ID is set in the testing environment's bootstrap.php.
