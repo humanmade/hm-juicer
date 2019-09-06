@@ -53,6 +53,147 @@ Found in `functions.php`
 
 Populates the `$juicer_post` global and removes the current post from the `$juicer_posts` array.
 
+### `juicer_get_post()`
+Return the current Juicer post object.
+
+Must be used inside the Juicer Loop.
+
+#### Return
+_(object)_ The current Juicer post object.
+
+### `juicer_get_date( string $date_format )`
+Return the Juicer post date of the current Juicer post.
+
+Must be used inside the Juicer Loop
+
+#### Parameters
+_(string)_ `$date_format` (Optional) The PHP date format string. Defaults to Unix time.
+
+#### See also
+[`date()`](https://www.php.net/manual/en/function.date.php)
+
+#### Return
+_(string)_ The Juicer post date.
+
+#### `juicer_the_date( string $date_format )`
+Display the Juicer post date of the current Juicer post.
+
+#### `juicer_get_humanized_time()`
+Return the humanized time (e.g. "1 day ago") of the current Juicer post.
+
+Must be used inside the Juicer Loop.
+
+#### Return
+_(string)_ The humanized time of the Juicer post.
+
+#### `juicer_the_humanized_time()`
+Display the humanized time (e.g. "1 day ago") of the current Juicer post.
+
+#### `juicer_get_the_content()`
+Return the Juicer post content of the current Juicer post.
+
+Must be used inside the Juicer Loop.
+
+#### Return
+_(string)_ The content of the Juicer post.
+
+#### `juicer_the_content()`
+Display the Juicer post content of the current Juicer post.
+
+#### `juicer_get_image_url()`
+Return the URL to the Juicer post featured image.
+
+Must be used inside the Juicer Loop
+
+#### Return
+_(string)_ The Juicer social image.
+
+#### `juicer_the_image_url()`
+Display the URL to the Juicer post featured image.
+
+### `juicer_get_source()`
+Return the social media source for the Juicer post.
+
+Must be used inside the Juicer Loop.
+
+#### Return
+_(string)_ The Juicer social media source (e.g. Facebook).
+
+#### `juicer_the_source()`
+Display the social media source for the Juicer post.
+
+### `juicer_get_sharing_link()`
+Return the sharing link for the posted social media object.
+
+Must be used inside the Juicer Loop.
+
+#### Return
+_(string)_ The social media sharing link.
+
+#### `juicer_the_sharing_link()`
+Display the sharing link for the posted social media object.
+
+### `juicer_get_like_count()`
+The like count for the current social media post.
+
+Must be used inside the Juicer Loop.
+
+#### Return
+_(int)_ The post like count.
+
+#### `juicer_the_like_count()`
+Display the like count for the current social media post.
+
+### `juicer_get_comment_count()`
+The comment count for the social media post.
+
+Must be used inside the Juicer Loop.
+
+#### Return
+_(int)_ The post comment count.
+
+#### `juicer_the_comment_count()`
+Display the comment count for the social media post.
+
+### `juicer_get_author_name()`
+The social media account display name or account name.  If display name exists, display name is used, otherwise the account name is used.
+
+Must be used inside the Juicer Loop.
+
+#### Return
+_(string)_ The social media author/account name.
+
+#### `juicer_the_author_name()`
+Display the social media account display name or account name.  If display name exists, display name is used, otherwise the account name is used.
+
+### `juicer_get_author_url()`
+Return the link to the social media author profile.
+
+Must be used inside the Juicer Loop.
+
+#### Return
+_(string)_ The link to the social media author profile.
+
+#### `juicer_the_author_url()`
+Display the link to the social media author profile.
+
+### `juicer_get_author_image()`
+Return the social media account avatar URL.
+
+Must be used inside the Juicer Loop.
+
+#### Return
+_(string)_ The URL to the social media account avatar.
+
+#### `juicer_the_author_image()`
+Display the social media account avatar URL.
+
+### `juicer_get_template( string $template )`
+Load the Juicer template file. By default, will load the requested template file from the templates directory in the plugin with a prefix of `'part-juicer'`, but both the path to the template directory and the prefix can be filtered.
+
+#### Return
+_(string)_ $template (Required) The template to load (e.g. `'feed'` or `'post'`), not including the prefix (`'part-juicer'`).
+
 ### `juicer_feed( int $count, int $page )`
 Found in: `functions.php`
 
@@ -65,7 +206,7 @@ Uses [`Juicer\get_posts`](#get_posts).
 
 `$page` _(int)_ (Optional) The page to display.
 
-### `juicer_id`
+### `juicer_id()`
 Found in: `functions.php`
 
 Wrapper for `Juicer\get_id` found in `namespace.php`.
@@ -77,7 +218,7 @@ If neither is defined, returns `false`.
 #### Return
 _(mixed)_ Either the `JUICER_ID` from the constant defined in `wp-config.php` or options, or `false` if neither is set.
 
-### `juicer_api_url`
+### `juicer_api_url()`
 Found in: `functions.php`
 
 Wrapper for `Juicer\api_url` found in `namespace.php`.
@@ -104,3 +245,47 @@ Get Juicer feed posts.
 
  #### Return
 _(mixed)_ WP_Error on API error, `false` if no feed items, an array of item objects if request was successful.
+
+## Filters
+
+### `apply_filters( 'juicer_filter_feed_template', string $feed_template )`
+Filters the feed template name.
+
+To allow robust custom templating, it might be desirable to change the feed template file name to something totally different. In this case, developers might want to use this filter to change the feed template slug to something other than `'feed'`.
+
+The single post template is called inside the feed template file (by default, although this could be different if a custom feed template was used), so if that template name was customized, it would be reflected in the custom feed template.
+
+#### Parameters
+`$feed_template` _(string)_ The Juicer feed template slug. Defaults to `'feed'` (for `part-juicer-feed.php`).
+
+### `apply_filters( 'juicer_filter_the_content', string $post_content )`
+Filter the Juicer post content.
+
+`$post_content` _(string)_ The original Juicer post content.
+
+### `apply_filters( 'juicer_filter_template_dir_path', string $template_path )`
+Filters the template directory path. Defaults to the templates directory in the plugin.
+
+#### Example usage
+```php
+add_filter( 'juicer_filter_template_dir_path', function() {
+	return get_template_directory() . 'template-parts';
+} );
+```
+
+#### Parameters
+`$template_path` _(string)_ The full path to the template directory.
+
+### `apply_filters( 'juicer_filter_template_prefix', string $template_prefix )`
+Allow the template prefix to be filtered, e.g. if you wanted to use something other than `part-juicer`.
+
+#### Example usage
+
+```php
+add_filter( 'juicer_filter_template_prefix', function() {
+	return 'section-social';
+} );
+```
+
+#### Parameters
+`$template_prefix` _(string)_ The prefix for the template part.
