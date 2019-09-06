@@ -115,6 +115,18 @@ function juicer_get_date( $date_format = 'U' ) : string {
 }
 
 /**
+ * Display the Juicer post date of the current Juicer post.
+ *
+ * Must be used inside the Juicer Loop
+ *
+ * @param string $date_format The PHP date format string. Defaults to Unix time.
+ * @see date()
+ */
+function juicer_the_date( $date_format = 'U' ) {
+	echo juicer_get_date( $date_format );
+}
+
+/**
  * Return the humanized time (e.g. "1 day ago") of the current Juicer post.
  *
  * Must be used inside the Juicer Loop.
@@ -130,6 +142,15 @@ function juicer_get_humanized_time() : string {
 	}
 
 	return $juicer_post->post_date_humanized;
+}
+
+/**
+ * Display the humanized time (e.g. "1 day ago") of the current Juicer post.
+ *
+ * Must be used inside the Juicer Loop.
+ */
+function juicer_the_humanized_time() {
+	echo juicer_get_humanized_time();
 }
 
 /**
@@ -156,6 +177,15 @@ function juicer_get_the_content() : string {
 }
 
 /**
+ * Display the Juicer post content of the current Juicer post.
+ *
+ * Must be used inside the Juicer Loop.
+ */
+function juicer_the_content() {
+	echo juicer_get_the_content();
+}
+
+/**
  * Return the URL to the Juicer post featured image.
  *
  * Must be used inside the Juicer Loop
@@ -171,6 +201,15 @@ function juicer_get_image_url() : string {
 	}
 
 	return $juicer_post->image_url;
+}
+
+/**
+ * Display the URL to the Juicer post featured image.
+ *
+ * Must be used inside the Juicer Loop
+ */
+function juicer_the_image_url() {
+	echo juicer_get_image_url();
 }
 
 /**
@@ -192,6 +231,15 @@ function juicer_get_source() : string {
 }
 
 /**
+ * Display the social media source for the Juicer post.
+ *
+ * Must be used inside the Juicer Loop.
+ */
+function juicer_the_source() {
+	echo juicer_get_source();
+}
+
+/**
  * Return the sharing link for the posted social media object.
  *
  * Must be used inside the Juicer Loop.
@@ -207,6 +255,15 @@ function juicer_get_sharing_link() : string {
 	}
 
 	return $juicer_post->sharing_link;
+}
+
+/**
+ * Display the sharing link for the posted social media object.
+ *
+ * Must be used inside the Juicer Loop.
+ */
+function juicer_the_sharing_link() {
+	echo juicer_get_sharing_link();
 }
 
 /**
@@ -228,6 +285,15 @@ function juicer_get_like_count() : int {
 }
 
 /**
+ * Display the like count for the current social media post.
+ *
+ * Must be used inside the Juicer Loop.
+ */
+function juicer_the_like_count() {
+	echo juicer_get_like_count();
+}
+
+/**
  * The comment count for the social media post.
  *
  * Must be used inside the Juicer Loop.
@@ -243,6 +309,15 @@ function juicer_get_comment_count() : int {
 	}
 
 	return $juicer_post->comments;
+}
+
+/**
+ * Display the comment count for the social media post.
+ *
+ * Must be used inside the Juicer Loop.
+ */
+function juicer_the_comment_count() {
+	echo juicer_get_comment_count();
 }
 
 /**
@@ -264,6 +339,15 @@ function juicer_get_author_name() : string {
 }
 
 /**
+ * Display the social media account display name or account name.  If display name exists, display name is used, otherwise the account name is used.
+ *
+ * Must be used inside the Juicer Loop.
+ */
+function juicer_the_author_name() {
+	echo juicer_get_author_name();
+}
+
+/**
  * Return the link to the social media author profile.
  *
  * Must be used inside the Juicer Loop.
@@ -282,7 +366,13 @@ function juicer_get_author_url() : string {
 }
 
 /**
- * Return the social media account avatar.
+ * Display the link to the social media author profile.
+ *
+ * Must be used inside the Juicer Loop.
+ */
+function juicer_the_author_url() {
+	echo juicer_get_author_url();
+}
  *
  * Must be used inside the Juicer Loop.
  *
@@ -297,4 +387,13 @@ function juicer_get_author_image() : string {
 	}
 
 	return $juicer_post->author_image;
+}
+
+/**
+ * Display the social media account avatar URL.
+ *
+ * Must be used inside the Juicer Loop.
+ */
+function juicer_the_author_image() {
+	echo juicer_get_author_image();
 }
