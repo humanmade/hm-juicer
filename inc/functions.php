@@ -40,7 +40,7 @@ function juicer_api_url() {
  */
 function juicer_feed( $count = 10, $page = 1 ) {
 	global $juicer_posts;
-	$juicer_posts = get_posts( $count, $page );
+	$juicer_posts = Juicer\get_posts( $count, $page );
 
 	/**
 	 * Allow the feed template name to be filtered.
@@ -122,7 +122,7 @@ function juicer_get_date( $date_format = 'U' ) : string {
 		return '';
 	}
 
-	return date( $juicer_post->post_date, $date_format );
+	return date( $date_format, $juicer_post->post_date );
 }
 
 /**
@@ -452,5 +452,5 @@ function juicer_get_template( string $template ) {
 	}
 
 	// Load the template!
-	load_template( $template_file );
+	load_template( $template_file, false );
 }

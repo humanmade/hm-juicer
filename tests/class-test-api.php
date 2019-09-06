@@ -61,7 +61,7 @@ class Test_Api extends \WP_UnitTestCase {
 		$this->cache_mock_data();
 
 		// Get the posts from Juicer.
-		$posts = get_posts();
+		$posts = Juicer\get_posts();
 
 		// Test that we got 10, it's the default and it's also the number of posts in the mock data.
 		$this->assertEquals(
