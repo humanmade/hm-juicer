@@ -122,7 +122,7 @@ function juicer_get_date( $date_format = 'U' ) : string {
 		return '';
 	}
 
-	return date( $juicer_post->post_date, $date_format );
+	return date( $date_format, strtotime( $juicer_post->post_date ) );
 }
 
 /**
