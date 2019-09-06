@@ -76,10 +76,10 @@ class Test_Api extends \WP_UnitTestCase {
 			);
 		}
 
-		// Test that the feed on a Juicer post is the same as the Juicer ID.
+		// Test that the Author name on a Juicer post is what we expect.
 		$this->assertEquals(
-			get_id(),
-			$posts[0]->feed
+			'Juicer Test',
+			$posts[0]->author_name
 		);
 	}
 }
