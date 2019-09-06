@@ -452,5 +452,5 @@ function juicer_get_template( string $template ) {
 	}
 
 	// Load the template!
-	load_template( $template_file );
+	load_template( $template_file, false );
 }
