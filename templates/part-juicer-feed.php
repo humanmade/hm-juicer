@@ -14,7 +14,7 @@ if ( juicer_have_posts() ) :
 		juicer_the_post();
 
 		// Load the single Juicer post template.
-		load_template( plugin_dir_path( dirname( __FILE__ ) ) . 'templates/part-juicer-post.php' );
+		juicer_get_template( 'post' );
 
 	endwhile;
 endif;

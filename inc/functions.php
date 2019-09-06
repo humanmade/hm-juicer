@@ -43,7 +43,7 @@ function juicer_feed( $count = 10, $page = 1 ) {
 	$juicer_posts = get_posts( $count, $page );
 
 	ob_start();
-	load_template( plugin_dir_path( dirname( __FILE__ ) ) . 'templates/part-juicer-feed.php' );
+	juicer_get_template( 'feed' );
 	echo ob_get_clean();
 }
 
@@ -399,4 +399,47 @@ function juicer_get_author_image() : string {
  */
 function juicer_the_author_image() {
 	echo juicer_get_author_image();
+}
+
+/**
+ * Load the Juicer template file. By default, will load the requested template file from the templates directory in the plugin with a prefix of 'part-juicer', but both the path to the template directory and the prefix can be filtered.
+ *
+ * @param string $template (Required) The template to load (e.g. 'feed' or 'post'), not including the prefix ('part-juicer').
+ */
+function juicer_get_template( string $template ) {
+	/**
+	 * Allow the template directory path to be filtered. Defaults to the templates directory in the plugin.
+	 *
+	 * E.g. add_filter( 'juicer_filter_template_dir_path', function() {
+	 * 		return get_template_directory() . 'template-parts';
+	 * } );
+	 *
+	 * @var string The full path to the template directory.
+	 */
+	$template_path = apply_filters( 'juicer_filter_template_dir_path', plugin_dir_path( dirname( __FILE__ ) ) . 'templates/' );
+
+	/**
+	 * Allow the template prefix to be filtered, e.g. if you wanted to use something other than `part-juicer`.
+	 *
+	 * E.g. add_filter( 'juicer_filter_template_prefix', function() {
+	 * 		return 'section-social';
+	 * } );
+	 *
+	 * @var string The prefix for the template part.
+	 */
+	$template_prefix = apply_filters( 'juicer_filter_template_prefix', 'part-juicer' );
+
+	// Build the path to the template file.
+	$template_file = "$template_path/$template_prefix-$template.php";
+
+	// Make sure the file exists. If not (e.g. it's been filtered and the path is incorrect), return an error.
+	if ( ! file_exists( $template_file ) ) {
+		return new WP_Error( 'juicer_file_missing', sprintf(
+			esc_html__( 'No template file exists at the following path: %s. Please check the path again or contact your administrator.', 'hm-juicer' ),
+			$template_file
+		) );
+	}
+
+	// Load the template!
+	load_template( $template_file );
 }
