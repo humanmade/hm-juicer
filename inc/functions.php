@@ -42,8 +42,19 @@ function juicer_feed( $count = 10, $page = 1 ) {
 	global $juicer_posts;
 	$juicer_posts = get_posts( $count, $page );
 
+	/**
+	 * Allow the feed template name to be filtered.
+	 *
+	 * To allow robust custom templating, it might be desirable to change the feed template file name to something totally different. In this case, developers might want to use this filter to change the feed template slug to something other than 'feed'
+	 *
+	 * The single post template is called inside the feed template file (by default, although this could be different if a custom feed template was used), so if that template name was customized, it would be reflected in the custom feed template.
+	 *
+	 * @var string The Juicer feed template slug. Defaults to 'feed' (for part-juicer-feed.php).
+	 */
+	$feed = apply_filters( 'juicer_filter_feed_template', 'feed' );
+
 	ob_start();
-	juicer_get_template( 'feed' );
+	juicer_get_template( $feed );
 	echo ob_get_clean();
 }
 
