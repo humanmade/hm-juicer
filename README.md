@@ -29,6 +29,7 @@ const JUICER_ID = 'myaccountname';
 Alternately, if no `JUICER_ID` is set, the feed name can be set via a settings page that appears if this constant does not exist.
 
 ## Usage
+To add the Juicer feed to a page, simply use the function `juicer_feed` in your template with the correct number of posts to display (and optionally, the page to display from). Documentation on the `juicer_feed` function is available in the [`inc/README.md`](inc/README.md) file.
 
 ## Credits
 
