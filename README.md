@@ -37,6 +37,9 @@ Created by Human Made to render and display accessible social media feeds via th
 
 Written and maintained by [Chris Reynolds](https://github.com/jazzsequence).
 
+Contributors:
+* [Joeleen Kennedy](https://github.com/joeleenk)
+
 ## Contributing
 
 The development process follows [the standard Human Made development process](http://engineering.hmn.md/how-we-work/process/development/).
