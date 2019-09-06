@@ -35,7 +35,7 @@ To add the Juicer feed to a page, simply use the function `juicer_feed` in your 
 
 Created by Human Made to render and display accessible social media feeds via the Juicer API.
 
-Written and maintained by [Chris Reynolds](https://github.com/jazzsequence).
+Maintained by [Chris Reynolds](https://github.com/jazzsequence).
 
 Contributors:
 * [Joeleen Kennedy](https://github.com/joeleenk)
