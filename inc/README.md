@@ -8,6 +8,18 @@ If `JUICER_ID` is not defined in the project's `wp-config.php` file, a Juicer Se
 
 ## Functions
 
+### `juicer_feed( int $count, int $page )`
+Found in: `functions.php`
+
+Display the main Juicer social media feed.
+
+Uses [`get_posts`](#get_posts).
+
+#### Parameters
+`$count` _(int)_ (Optional) The number of posts to display.
+
+`$page` _(int)_ (Optional) The page to display.
+
 ### `juicer_id`
 Found in: `namespace.php`
 
