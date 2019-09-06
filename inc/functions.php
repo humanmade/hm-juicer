@@ -373,6 +373,9 @@ function juicer_get_author_url() : string {
 function juicer_the_author_url() {
 	echo juicer_get_author_url();
 }
+
+/**
+ * Return the social media account avatar URL.
  *
  * Must be used inside the Juicer Loop.
  *
