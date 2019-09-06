@@ -38,7 +38,7 @@ Also, similar to WordPress core functions, **`juicer_get_`** functions will _ret
 
 Any `juicer_get_` or `juicer_the_` function used outside the Juicer Loop will return a `_doing_it_wrong` error.
 
-## Functions
+## Function Reference
 
 ### `juicer_have_posts()`
 Found in `functions.php`
@@ -246,7 +246,7 @@ Get Juicer feed posts.
  #### Return
 _(mixed)_ WP_Error on API error, `false` if no feed items, an array of item objects if request was successful.
 
-## Filters
+## Filter Reference
 
 ### `apply_filters( 'juicer_filter_feed_template', string $feed_template )`
 Filters the feed template name.
