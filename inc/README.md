@@ -21,7 +21,9 @@ Uses [`get_posts`](#get_posts).
 `$page` _(int)_ (Optional) The page to display.
 
 ### `juicer_id`
-Found in: `namespace.php`
+Found in: `functions.php`
+
+Wrapper for `Juicer\get_id` found in `namespace.php`.
 
 Get the Juicer feed name from the constant or CMB2, whichever is defined.
 
@@ -31,13 +33,15 @@ If neither is defined, returns `false`.
 _(mixed)_ Either the `JUICER_ID` from the constant defined in `wp-config.php` or options, or `false` if neither is set.
 
 ### `juicer_api_url`
-Found in: `namespace.php`
+Found in: `functions.php`
+
+Wrapper for `Juicer\api_url` found in `namespace.php`.
 
 Get the Juicer feed API endpoint URL.
 
 This expects that `juicer_id()` returns a string. If `juicer_id()` returns false, `juicer_api_url()` will return false also.
 
-#### See [juicer_id()](#juicer-id)
+#### See [juicer_id()](#juicer_id)
 
 #### Return
 
@@ -49,9 +53,9 @@ Found in: `api.php`
 Get Juicer feed posts.
 
 #### Parameters
-`$count` _(int)_ The number of items to fetch. Defaults to 10.
+`$count` _(int)_ (Optional) The number of items to fetch. Defaults to 10.
 
-`$page` _(int)_ The page to get items from. `$count` 10 and `$page` 2 would get the next 10 posts in the feed.
+`$page` _(int)_ (Optional) The page to get items from. `$count` 10 and `$page` 2 would get the next 10 posts in the feed.
 
  #### Return
 _(mixed)_ WP_Error on API error, false if no feed items, an array of item objects if request was successful.
