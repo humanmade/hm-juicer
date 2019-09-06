@@ -72,7 +72,7 @@ function prepare_post_items( array $items ) : array {
 		$post->post_date           = strtotime( $item->external_created_at );
 		// Translators: %s is a humanized time (e.g. 5 days).
 		$post->post_date_humanized = sprintf( esc_html__( '%s ago', 'hm-juicer' ), human_time_diff( $post->post_date, current_time( 'U' ) ) );
-		$post->post_content        = wp_kses_post( apply_filters( 'juicer_filter_post_content', $item->message ) );
+		$post->post_content        = wp_kses_post( $item->message );
 		$post->image_url           = esc_url_raw( $item->image );
 		$post->additional_images   = $item->additional_photos;
 		$post->source              = esc_html( $item->source->source );
