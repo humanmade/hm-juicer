@@ -422,7 +422,7 @@ function juicer_get_template( string $template ) {
 	 * Allow the template directory path to be filtered. Defaults to the templates directory in the plugin.
 	 *
 	 * E.g. add_filter( 'juicer_filter_template_dir_path', function() {
-	 * 		return get_template_directory() . 'template-parts';
+	 *      return get_template_directory() . 'template-parts';
 	 * } );
 	 *
 	 * @var string The full path to the template directory.
@@ -433,7 +433,7 @@ function juicer_get_template( string $template ) {
 	 * Allow the template prefix to be filtered, e.g. if you wanted to use something other than `part-juicer`.
 	 *
 	 * E.g. add_filter( 'juicer_filter_template_prefix', function() {
-	 * 		return 'section-social';
+	 *      return 'section-social';
 	 * } );
 	 *
 	 * @var string The prefix for the template part.
@@ -446,6 +446,7 @@ function juicer_get_template( string $template ) {
 	// Make sure the file exists. If not (e.g. it's been filtered and the path is incorrect), return an error.
 	if ( ! file_exists( $template_file ) ) {
 		return new WP_Error( 'juicer_file_missing', sprintf(
+			// Translators: %s is the path to the template file.
 			esc_html__( 'No template file exists at the following path: %s. Please check the path again or contact your administrator.', 'hm-juicer' ),
 			$template_file
 		) );
