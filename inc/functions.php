@@ -40,7 +40,7 @@ function juicer_api_url() {
  */
 function juicer_feed( $count = 10, $page = 1 ) {
 	global $juicer_posts;
-	$juicer_posts = get_posts( $count, $page );
+	$juicer_posts = Juicer\get_posts( $count, $page );
 
 	/**
 	 * Allow the feed template name to be filtered.
