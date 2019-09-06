@@ -36,6 +36,8 @@ Just like `get_` and `the_` functions in WordPress core, `juicer_get_` and `juic
 
 Also, similar to WordPress core functions, **`juicer_get_`** functions will _return_ a value, while **`juicer_the_`** functions will _echo_ it. It's generally recommended when building templates that the `juicer_the_` function is used to display the relevant data.
 
+Any `juicer_get_` or `juicer_the_` function used outside the Juicer Loop will return a `_doing_it_wrong` error.
+
 ## Functions
 
 ### `juicer_have_posts()`
