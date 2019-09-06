@@ -6,7 +6,7 @@
         "cmb2/cmb2": "^2.6"
     },
     "require-dev": {
-        "humanmade/coding-standards": "0.7.0",
+        "humanmade/coding-standards": "^0.7",
         "phpunit/phpunit": "5.7.*"
     },
     "license": "GPL-2.0-or-later",
