@@ -455,3 +455,16 @@ function juicer_get_template( string $template ) {
 	// Load the template!
 	load_template( $template_file, false );
 }
+
+/**
+ * Reset (empty) the $juicer_posts global.
+ *
+ * @return array The empty $juicer_posts array.
+ */
+function juicer_unset_posts() : array {
+	global $juicer_posts;
+
+	$juicer_posts = [];
+
+	return $juicer_posts;
+}
