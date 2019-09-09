@@ -67,4 +67,36 @@ class Test_Functions extends \WP_UnitTestCase {
 		);
 	}
 
+	/**
+	 * Test the the_post function in the Juicer Loop.
+	 */
+	public function test_the_post() {
+		global $juicer_posts, $juicer_post;
+
+		// Record how many posts were in the $juicer_posts global before running the_post.
+		$before_post_count = count( $juicer_posts );
+
+		juicer_the_post();
+
+		// Record how many posts were in the $juicer_posts global after running the_post.
+		$after_post_count = count( $juicer_posts );
+
+		// Make sure that the $juicer_post exists and it's an object.
+		$this->assertInternalType(
+			'object',
+			$juicer_post
+		);
+
+		// juicer_the_post unsets one of the posts from the $juicer_posts global, so make sure that the after count is one less than the before count.
+		$this->assertEquals(
+			$before_post_count - 1,
+			$after_post_count
+		);
+
+		// We're not going to check every property of the juicer_post object, but we can at least make sure that the current post ID is what we think it should be.
+		$this->assertEquals(
+			378483666,
+			$juicer_post->id
+		);
+	}
 }
