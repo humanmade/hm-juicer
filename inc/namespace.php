@@ -23,7 +23,7 @@ function bootstrap() {
 	}
 
 	// TODO: Conditionally enqueue scripts and styles only if the plugin is being used.
-	add_action('wp_enqueue_scripts', __NAMESPACE__ . '\\juicer_enqueue_scripts');
+	add_action( 'wp_enqueue_scripts', __NAMESPACE__ . '\\juicer_enqueue_scripts' );
 }
 
 /**
@@ -66,17 +66,17 @@ function api_url() {
 function juicer_enqueue_scripts() {
 
 	// Enqueue Images Loaded Script.
-	wp_enqueue_script('images-loaded', '//cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/4.1.1/imagesloaded.pkgd.min.js', [], null, true);
+	wp_enqueue_script( 'images-loaded', '//cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/4.1.1/imagesloaded.pkgd.min.js', [], null, true );
 
 	// Enqueue custom JS for the HM Juicer layout.
 	Asset_Loader\enqueue_script( [
 		'name'      => 'hm-juicer-js',
 		'handle'    => 'hm-juicer',
 		'build_dir' => dirname( __DIR__ ) . '/build',
-		'deps'      => ['images-loaded'],
+		'deps'      => [ 'images-loaded' ],
 		'in_footer' => true,
 	] );
-	
+
 	// Enqueue custom CSS for the HM Juicer layout.
 	Asset_Loader\enqueue_style( [
 		'name'      => 'hm-juicer-style',
