@@ -9,6 +9,7 @@
 
 namespace HM\Juicer;
 
+use HM\Asset_Loader;
 use HM\Juicer\Settings;
 
 /**
@@ -21,7 +22,8 @@ function bootstrap() {
 		Settings\bootstrap();
 	}
 
-	add_filter( 'juicer_filter_item_content', __NAMESPACE__ . '\\get_item_content', 10, 2 );
+	// TODO: Conditionally enqueue scripts and styles only if the plugin is being used.
+	add_action('wp_enqueue_scripts', __NAMESPACE__ . '\\juicer_enqueue_scripts');
 }
 
 /**
@@ -56,4 +58,29 @@ function api_url() {
 	}
 
 	return JUICER_ENDPOINT . get_id();
+}
+
+/**
+ * Enqueue styles and scripts.
+ */
+function juicer_enqueue_scripts() {
+
+	// Enqueue Images Loaded Script.
+	wp_enqueue_script('images-loaded', '//cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/4.1.1/imagesloaded.pkgd.min.js', [], null, true);
+
+	// Enqueue custom JS for the HM Juicer layout.
+	Asset_Loader\enqueue_script( [
+		'name'      => 'hm-juicer-js',
+		'handle'    => 'hm-juicer',
+		'build_dir' => dirname( __DIR__ ) . '/build',
+		'deps'      => ['images-loaded'],
+		'in_footer' => true,
+	] );
+	
+	// Enqueue custom CSS for the HM Juicer layout.
+	Asset_Loader\enqueue_style( [
+		'name'      => 'hm-juicer-style',
+		'handle'    => 'hm-juicer',
+		'build_dir' => dirname( __DIR__ ) . '/build',
+	] );
 }
