@@ -49,4 +49,22 @@ class Test_Functions extends \WP_UnitTestCase {
 		);
 	}
 
+	/**
+	 * Test the have_posts function in the Juicer Loop.
+	 */
+	public function test_have_posts() {
+		// Right now, we should have juicer posts.
+		$this->assertTrue(
+			juicer_have_posts()
+		);
+
+		// Reset the Juicer Loop.
+		juicer_unset_posts();
+
+		// Now have_posts should return false.
+		$this->assertNotTrue(
+			juicer_have_posts()
+		);
+	}
+
 }
