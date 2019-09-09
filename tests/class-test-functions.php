@@ -36,4 +36,17 @@ class Test_Functions extends \WP_UnitTestCase {
 		$juicer_posts = get_posts();
 	}
 
+	/**
+	 * Test the unset posts function.
+	 *
+	 * This function clears out the $juicer_posts global. We'll also use it in other tests, so we're testing it early.
+	 */
+	public function test_juicer_unset_posts() {
+		$juicer_unset_posts = juicer_unset_posts();
+
+		$this->assertTrue(
+			empty( $juicer_unset_posts )
+		);
+	}
+
 }
