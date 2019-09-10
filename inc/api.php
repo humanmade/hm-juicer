@@ -70,8 +70,7 @@ function prepare_post_items( array $items ) : array {
 		$post = new \stdClass;
 		$post->id                  = absint( $item->id );
 		$post->post_date           = strtotime( $item->external_created_at );
-		// Translators: %s is a humanized time (e.g. 5 days).
-		$post->post_date_humanized = sprintf( esc_html__( '%s ago', 'hm-juicer' ), human_time_diff( $post->post_date, current_time( 'U' ) ) );
+		$post->post_date_humanized = maybe_humanize_time( $post->post_date );
 		$post->post_content        = wp_kses_post( $item->message );
 		$post->image_url           = esc_url_raw( $item->image );
 		$post->additional_images   = $item->additional_photos;
@@ -88,4 +87,24 @@ function prepare_post_items( array $items ) : array {
 	}
 
 	return $posts;
+}
+
+/**
+ * Humanize time if less than 35 days old. Otherwise, display a formatted date.
+ *
+ * @param int $date The Unix timestamp to check.
+ *
+ * @return string   The humanized time or the date string.
+ */
+function maybe_humanize_time( int $date ) : string {
+	$today     = new DateTime();
+	$post_date = new DateTime( $date );
+	$interval  = date_diff( $post_date, $today )->format( '%a' );
+
+	if ( $interval < 35 ) {
+		return date( 'M j, Y', $date );
+	}
+
+	// Translators: %s is a humanized time (e.g. 5 days).
+	return sprintf( esc_html__( '%s ago', 'hm-juicer' ), human_time_diff( $date, current_time( 'U' ) ) );
 }
