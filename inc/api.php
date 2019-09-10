@@ -102,9 +102,9 @@ function maybe_humanize_time( int $date ) : string {
 	$interval  = date_diff( $post_date, $today )->format( '%a' );
 
 	if ( $interval < 35 ) {
-		return date( 'M j, Y', $date );
+		// Translators: %s is a humanized time (e.g. 5 days).
+		return sprintf( esc_html__( '%s ago', 'hm-juicer' ), human_time_diff( $date, current_time( 'U' ) ) );
 	}
 
-	// Translators: %s is a humanized time (e.g. 5 days).
-	return sprintf( esc_html__( '%s ago', 'hm-juicer' ), human_time_diff( $date, current_time( 'U' ) ) );
+	return date( 'M j, Y', $date );
 }
