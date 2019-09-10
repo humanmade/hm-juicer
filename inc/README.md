@@ -256,7 +256,9 @@ Get Juicer feed posts.
 _(mixed)_ WP_Error on API error, `false` if no feed items, an array of item objects if request was successful.
 
 ### `maybe_humanize_time( int $timestamp )`
- Humanize time if less than 35 days old. Otherwise, display a formatted date.
+Found in: `api.php`
+
+Humanize time if less than 35 days old. Otherwise, display a formatted date.
 
 #### Parameters
 `$timestamp` _(int)_ The Unix timestamp to check.
