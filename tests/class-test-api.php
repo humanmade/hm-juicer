@@ -161,4 +161,46 @@ class Test_Api extends \WP_UnitTestCase {
 			$post->author_image
 		);
 	}
+
+	/**
+	 * Test the maybe_humanize_time function.
+	 */
+	public function test_maybe_humanize_time() {
+		$now        = current_time( 'U' );
+		$yesterday  = $now - DAY_IN_SECONDS;
+		$two_weeks  = $now - ( 2 * WEEK_IN_SECONDS );
+		$a_month    = $now - MONTH_IN_SECONDS;
+		$two_months = $now - ( 2 * MONTH_IN_SECONDS );
+
+		/*
+		 * All of these tests will make sure the humanized time is used.
+		 */
+		$this->assertEquals(
+			'1 min ago',
+			maybe_humanize_time( $now )
+		);
+
+		$this->assertEquals(
+			'1 day ago',
+			maybe_humanize_time( $yesterday )
+		);
+
+		$this->assertEquals(
+			'2 weeks ago',
+			maybe_humanize_time( $two_weeks )
+		);
+
+		$this->assertEquals(
+			'1 month ago',
+			maybe_humanize_time( $a_month )
+		);
+
+		/*
+		 * Test to make sure we flip to the full date string.
+		 */
+		$this->assertEquals(
+			date( 'M j, Y', $two_months ),
+			maybe_humanize_time( $two_months )
+		);
+	}
 }
