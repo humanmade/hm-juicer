@@ -233,6 +233,15 @@ This expects that `juicer_id()` returns a string. If `juicer_id()` returns false
 
 _(mixed)_ Either the full Juicer feed API url or `false` if `juicer_id()` returns `false`.
 
+### `juicer_unset_posts()`
+Reset (empty) the `$juicer_posts` global.
+
+This is not completely analagous to `wp_reset_query` or `wp_reset_postdata` in that we're not restoring anything to its previous state, we're _just_ emptying the global (which will ensure that `juicer_have_posts()` will return `false`).
+
+#### Return
+_(array)_ The empty `$juicer_posts` array.
+
+
 ### `get_posts( int $count, int $page )`
 Found in: `api.php`
 
