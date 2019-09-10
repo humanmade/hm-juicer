@@ -97,8 +97,8 @@ function prepare_post_items( array $items ) : array {
  * @return string   The humanized time or the date string.
  */
 function maybe_humanize_time( int $date ) : string {
-	$today     = new DateTime();
-	$post_date = new DateTime( "@$date" );
+	$today     = new \DateTime();
+	$post_date = new \DateTime( "@$date" );
 	$interval  = date_diff( $post_date, $today )->format( '%a' );
 
 	if ( $interval < 35 ) {
