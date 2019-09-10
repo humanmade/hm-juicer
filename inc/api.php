@@ -92,19 +92,19 @@ function prepare_post_items( array $items ) : array {
 /**
  * Humanize time if less than 35 days old. Otherwise, display a formatted date.
  *
- * @param int $date The Unix timestamp to check.
+ * @param int $timestamp The Unix timestamp to check.
  *
  * @return string   The humanized time or the date string.
  */
-function maybe_humanize_time( int $date ) : string {
+function maybe_humanize_time( int $timestamp ) : string {
 	$today     = new \DateTime();
-	$post_date = new \DateTime( "@$date" );
+	$post_date = new \DateTime( "@$timestamp" );
 	$interval  = date_diff( $post_date, $today )->format( '%a' );
 
 	if ( $interval < 35 ) {
 		// Translators: %s is a humanized time (e.g. 5 days).
-		return sprintf( esc_html__( '%s ago', 'hm-juicer' ), human_time_diff( $date, current_time( 'U' ) ) );
+		return sprintf( esc_html__( '%s ago', 'hm-juicer' ), human_time_diff( $timestamp, current_time( 'U' ) ) );
 	}
 
-	return date( 'M j, Y', $date );
+	return date( 'M j, Y', $timestamp );
 }
