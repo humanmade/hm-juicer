@@ -107,16 +107,17 @@ function allowed_html() : array {
 }
 
 function get_author_image( $item ) {
-	$source = $item->source->source;
+	$source     = $item->source->source;
+	$avatar_url = $item->poster_image;
 
 	// Currently we've only tested Facebook.
 	switch ( $source ) {
 		case 'Facebook' :
 			// Try to get the avatar from the object cache.
-			$cached_avatar = wp_cache_get( 'facebook_avatar_url', 'juicer' );
+			$cached_avatar_url = wp_cache_get( 'facebook_avatar_url', 'juicer' );
 
-			if ( $cached_avatar ) {
-				// return $cached_avatar;
+			if ( $cached_avatar_url ) {
+				return esc_url_raw( $cached_avatar_url );
 			}
 
 			/*
@@ -136,16 +137,18 @@ function get_author_image( $item ) {
 			}
 
 			$http_headers = wp_remote_retrieve_headers( $header );
-			$avatar       = $http_headers['location'];
+			$avatar_url   = $http_headers['location'];
 
 			// Cache the avatar and don't expire.
-			wp_cache_set( 'facebook_avatar_url', $avatar, 'juicer' );
+			wp_cache_set( 'facebook_avatar_url', $avatar_url, 'juicer' );
 
-			return esc_url_raw( $avatar );
+			break;
 
 		default :
-			return esc_url_raw( $item->poster_image );
+			break;
 	}
+
+	return esc_url_raw( $avatar_url );
 }
 
 /**
