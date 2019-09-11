@@ -25,12 +25,13 @@
 				<?php juicer_the_humanized_time(); ?>
 			</div>
 		</div>
-		<div class="juicer-post__image">
-			<img src="<?php juicer_the_image_url(); ?>" />
-		</div>
+
+		<img src="<?php juicer_the_image_url(); ?>" class="juicer-post__image" alt="" />
+
 		<div class="juicer-post__content">
 			<?php juicer_the_content(); ?>
 		</div>
+
 		<div class="juicer-post__sharing">
 			<div class="juicer-post__comments">
 				<i class="fas fa-comments"></i>
