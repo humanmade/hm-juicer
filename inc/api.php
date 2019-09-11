@@ -90,7 +90,7 @@ function prepare_post_items( array $items ) : array {
 }
 
 /**
- * Allowed HTML tags for wp_kses. This will strip targets out of <a> tags.
+ * Allowed HTML tags for wp_kses. This will strip targets and classes out of <a> tags.
  *
  * @return array Array of allowed tags.
  */
