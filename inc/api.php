@@ -71,7 +71,7 @@ function prepare_post_items( array $items ) : array {
 		$post->id                  = absint( $item->id );
 		$post->post_date           = strtotime( $item->external_created_at );
 		$post->post_date_humanized = maybe_humanize_time( $post->post_date );
-		$post->post_content        = wp_kses_post( $item->message );
+		$post->post_content        = wp_kses( $item->message, allowed_html() );
 		$post->image_url           = esc_url_raw( $item->image );
 		$post->additional_images   = $item->additional_photos;
 		$post->source              = esc_html( $item->source->source );
@@ -87,6 +87,24 @@ function prepare_post_items( array $items ) : array {
 	}
 
 	return $posts;
+}
+
+/**
+ * Allowed HTML tags for wp_kses. This will strip targets out of <a> tags.
+ *
+ * @return array Array of allowed tags.
+ */
+function allowed_html() : array {
+	return [
+		'a'      => [
+			'href'  => [],
+			'title' => [],
+		],
+		'br'     => [],
+		'p'      => [],
+		'em'     => [],
+		'strong' => [],
+	];
 }
 
 /**
