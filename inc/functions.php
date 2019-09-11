@@ -7,6 +7,8 @@
  * @package HM\Juicer
  */
 
+use HM\Juicer;
+
 /**
  * Display the main Juicer social media feed.
  *
