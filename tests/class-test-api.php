@@ -156,8 +156,20 @@ class Test_API extends \WP_UnitTestCase {
 			$post->author_url
 		);
 
+		/*
+		 * For the purpose of the author image test, we need to use an
+		 * actual query to Facebook's Graph API. We do a single hit for the
+		 * author image based on the URL
+		 * https://graph.facebook.com/20531316728/picture
+		 * which points to Facebook's own Facebook account avatar.
+		 *
+		 * This will slow down unit tests but we only do a single API
+		 * query. In production, once we have this URL, we cache it
+		 * indefinitely, so we never need to make this request again (until
+		 * the cache is cleared).
+		 */
 		$this->assertEquals(
-			'https://graph.facebook.com/99999999999999999/picture',
+			'https://scontent.xx.fbcdn.net/v/t1.0-1/p50x50/58818464_10158354585756729_7126855515920924672_n.png?_nc_cat=1&_nc_oc=AQkgkHA3vbQrkLsvpeTHBgQDpXXLBEvZhkT5BKhTIQjWv3ecLX1eUXoPxtn_wOH8VBk&_nc_ht=scontent.xx&oh=e7456af0f27a9b3f7ad2ce25299c1fa5&oe=5DEFB0DE',
 			$post->author_image
 		);
 	}
