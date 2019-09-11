@@ -25,10 +25,10 @@ function get_posts( $count = 10, $page = 1 ) {
 	// Check for a cached response.
 	if ( ! $feed ) {
 		// If no cached response, make a new API request.
-		$url = juicer_api_url() . '?' . http_build_query( [
+		$url = add_query_arg( [
 			'per'  => $count,
 			'page' => $page,
-		] );
+		], juicer_api_url() );
 
 		$response = wp_safe_remote_get( $url );
 
