@@ -9,6 +9,18 @@
 <li class="juicer-post juicer-grid__item">
 	<div class="juicer-post__inner">
 		<div class="juicer-post__header">
+			<div class="juicer-post__author">
+				<?php
+				echo sprintf(
+					'<a href="%1$s"><img src="%2$s" alt="%3$s %4$s %5$s" />%5$s</a>',
+					juicer_get_author_url(),
+					juicer_get_author_image(),
+					juicer_get_source(),
+					esc_html__( 'profile image for', 'hm-juicer' ),
+					juicer_get_author_name()
+				);
+				?>
+			</div>
 			<div class="juicer-post__date">
 				<?php juicer_the_humanized_time(); ?>
 			</div>
@@ -31,15 +43,6 @@
 		</div>
 		<div class="juicer-post__comments">
 		<?php juicer_the_comment_count(); ?>
-		</div>
-		<div class="juicer-post__author-name">
-		<?php juicer_the_author_name(); ?>
-		</div>
-		<div class="juicer-post__author-url">
-		<?php juicer_the_author_url(); ?>
-		</div>
-		<div class="juicer-post__author-image">
-		<?php juicer_the_author_image(); ?>
 		</div>
 	</div>
 </li>

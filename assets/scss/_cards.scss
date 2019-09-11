@@ -11,8 +11,26 @@
 
 .juicer-post {
 	background: #fff;
+	color: #222;
 
-	&__inner {
-		padding: 1.5em;
+	&__header {
+		display: flex;
+		font-size: 0.9rem;
+		justify-content: space-between;
+		padding: 0.5em;
+	}
+
+	&__author a {
+		display: flex;
+
+		img {
+			height: 2em;
+			overflow: hidden;
+			width: 2em;
+		}
+	}
+
+	&__date {
+		color: #757575;
 	}
 }
