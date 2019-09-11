@@ -143,7 +143,7 @@ class Test_Functions extends \WP_UnitTestCase {
 	 * Test the get_the_content function.
 	 */
 	public function test_get_the_content() {
-		$content = "<p>Juicer Test is ahead of the curve in the post-acute setting in recognizing patients who are at risk for sepsis with Cerner's Sepsis Management solution. Learn how early intervention prevented our patients from becoming septic and/or transferring from our hospitals 77% of the time. <a target=\"_blank\" class=\"auto\" href=\"https://test.site.dev/2zulhdo\">https://test.site.dev/2zulhdo</a></p>";
+		$content = "<p>Juicer Test is ahead of the curve in the post-acute setting in recognizing patients who are at risk for sepsis with Cerner's Sepsis Management solution. Learn how early intervention prevented our patients from becoming septic and/or transferring from our hospitals 77% of the time. <a href=\"https://test.site.dev/2zulhdo\">https://test.site.dev/2zulhdo</a></p>";
 
 		$this->assertEquals(
 			$content,
