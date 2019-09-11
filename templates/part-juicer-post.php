@@ -33,27 +33,42 @@
 		</div>
 
 		<div class="juicer-post__sharing">
-			<div class="juicer-post__comments">
-				<i class="fas fa-comments"></i>
-				<?php juicer_the_comment_count(); ?>
-			</div>
-			<div class="juicer-post__likes">
-				<i class="fas fa-thumbs-up"></i>
-				<?php juicer_the_like_count(); ?>
-			</div>
-			<div class="juicer-post__source">
-				<?php
-				echo sprintf(
-					'<a href="%1$s" class="juicer-icon juicer-icon--facebook">
-						<i class="fab fa-facebook-f fa-2x"></i>
-						<span class="juicer-icon__tooltip screen-reader-text" role="tooltip">%2$s %3$s</span>
-					</a>',
-					juicer_get_sharing_link(),
-					esc_html__( 'Link to original post on', 'hm-juicer' ),
-					juicer_get_source()
-				);
-				?>
-			</div>
+			<?php
+			// Comments icon with comments count and tooltip for accessibility.
+			echo sprintf(
+				'<span class="juicer-post__comments juicer-icon">
+					<i class="fas fa-comments"></i>
+					<span class="comments-count">%1$s</span>
+					<span class="juicer-icon__tooltip screen-reader-text" role="tooltip">%1$s %2$s %3$s</span>
+				</span>',
+				juicer_get_comment_count(),
+				esc_html__( 'comment(s) on', 'hm-juicer' ),
+				juicer_get_source()
+			);
+			
+			// Thumbs up icon with likes count and tooltip for accessibility.
+			echo sprintf(
+				'<span class="juicer-post__likes juicer-icon">
+					<i class="fas fa-thumbs-up"></i>
+					<span class="likes-count">%1$s</span>
+					<span class="juicer-icon__tooltip screen-reader-text" role="tooltip">%1$s %2$s %3$s</span>
+				</span>',
+				juicer_get_like_count(),
+				esc_html__( 'like(s) on', 'hm-juicer' ),
+				juicer_get_source()
+			);
+
+			// Source icon with link to post on social network + tooltip for accessibility.
+			echo sprintf(
+				'<a href="%1$s" class="juicer-post__source juicer-icon">
+					<i class="fab fa-facebook-f fa-2x"></i>
+					<span class="juicer-icon__tooltip screen-reader-text" role="tooltip">%2$s %3$s</span>
+				</a>',
+				juicer_get_sharing_link(),
+				esc_html__( 'View original post on', 'hm-juicer' ),
+				juicer_get_source()
+			);
+			?>
 		</div>
 	</div>
 </li>

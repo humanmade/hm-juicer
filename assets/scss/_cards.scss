@@ -53,8 +53,8 @@
 		flex-grow: 1;
 	}
 	&__likes {
-		flex-grow: 1;
 		margin-left: 1em;
+		margin-right: auto;
 	}
 
 	.svg-inline--fa {
@@ -64,5 +64,50 @@
 
 	.fa-2x {
 		font-size: 1.5em;
+	}
+
+	.juicer-icon {
+		position: relative;
+
+		&:hover,
+		&:focus {
+			.juicer-icon__tooltip {
+				background-color: lighten( $dark, 30% );
+				border-radius: 4px;
+				bottom: calc( 100% + 0.75em );
+				box-shadow: 4px 4px 6px 0 rgba($dark, 0.16);
+				clip: unset;
+				clip-path: unset;
+				color: $light;
+				height: unset;
+				left: -1.5em;
+				overflow: unset;
+				padding: 0.5em;
+				width: max-content;
+
+				&:after {
+					border-width: 5px;
+					border-style: solid;
+					border-color: lighten( $dark, 30% ) transparent transparent transparent;
+					content: "";
+					left: 1.75em;
+					position: absolute;
+					top: 100%;
+				}
+			}
+		}
+
+		&:last-child:hover,
+		&:last-child:focus {
+			.juicer-icon__tooltip {
+				left: unset;
+				right: -1.5em;
+
+				&:after {
+					left: unset;
+					right: 1.75em;
+				}
+			}
+		}
 	}
 }
