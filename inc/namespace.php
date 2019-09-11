@@ -47,7 +47,7 @@ function get_id() {
  * @see get_id()
  * @return mixed Either the full Juicer feed API url or false if juicer_id returns false.
  */
-function api_url() {
+function juicer_api_url() {
 	// Bail if the ID isn't set. This is intended to be an authoritative URL, so it's no help if the feed name doesn't exist.
 	if ( ! get_id() ) {
 		return false;
