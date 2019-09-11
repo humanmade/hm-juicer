@@ -52,6 +52,13 @@
 	&__content {
 		flex-grow: 1;
 	}
+
+	&:not(.juicer-video-post) {
+		.juicer-post__content a:last-child {
+			display: none;
+		}
+	}
+
 	&__likes {
 		margin-left: 1em;
 		margin-right: auto;

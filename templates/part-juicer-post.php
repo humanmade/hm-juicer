@@ -6,7 +6,7 @@
  */
 
 ?>
-<li class="juicer-post juicer-grid__item">
+<li class="juicer-post juicer-grid__item <?php echo juicer_get_video_class(); ?>">
 	<div class="juicer-post__inner">
 		<div class="juicer-post__header">
 			<div class="juicer-post__author">
