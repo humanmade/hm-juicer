@@ -83,4 +83,6 @@ function juicer_enqueue_scripts() {
 		'handle'    => 'hm-juicer',
 		'build_dir' => dirname( __DIR__ ) . '/build',
 	] );
+
+	//TODO: Add Font Awesome package to the plugin.
 }
