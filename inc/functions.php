@@ -94,6 +94,35 @@ function juicer_get_post() : object {
 }
 
 /**
+ * Determine if the post is a Facebook video post by looking at the sharing link.
+ *
+ * @return bool True if the sharing url contains 'videos'. False otherwise.
+ */
+function juicer_is_video() : bool {
+	global $juicer_post;
+
+	if ( strpos( juicer_get_sharing_link(), 'videos' ) ) {
+		return true;
+	}
+	
+	return false;
+}
+
+/**
+ * Output a class based on the results of juicer_is_video.
+ *
+ * @return string 'juicer-video-post' if the sharing url contains 'videos'. '' otherwise.
+ */
+function juicer_get_video_class() : string {
+
+	if ( juicer_is_video() ) {
+		return 'juicer-video-post';
+	}
+	
+	return '';
+}
+
+/**
  * Return the Juicer post date of the current Juicer post.
  *
  * Must be used inside the Juicer Loop
