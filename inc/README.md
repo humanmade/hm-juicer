@@ -206,33 +206,6 @@ Uses [`Juicer\get_posts`](#get_posts).
 
 `$page` _(int)_ (Optional) The page to display.
 
-### `juicer_id()`
-Found in: `functions.php`
-
-Wrapper for `Juicer\get_id` found in `namespace.php`.
-
-Get the Juicer feed name from the constant or CMB2, whichever is defined.
-
-If neither is defined, returns `false`.
-
-#### Return
-_(mixed)_ Either the `JUICER_ID` from the constant defined in `wp-config.php` or options, or `false` if neither is set.
-
-### `juicer_api_url()`
-Found in: `functions.php`
-
-Wrapper for `Juicer\api_url` found in `namespace.php`.
-
-Get the Juicer feed API endpoint URL.
-
-This expects that `juicer_id()` returns a string. If `juicer_id()` returns false, `juicer_api_url()` will return false also.
-
-#### See [juicer_id()](#juicer_id)
-
-#### Return
-
-_(mixed)_ Either the full Juicer feed API url or `false` if `juicer_id()` returns `false`.
-
 ### `juicer_unset_posts()`
 Reset (empty) the `$juicer_posts` global.
 
@@ -241,6 +214,28 @@ This is not completely analagous to `wp_reset_query` or `wp_reset_postdata` in t
 #### Return
 _(array)_ The empty `$juicer_posts` array.
 
+### `get_id()`
+Found in: `namespace.php`
+
+Get the Juicer feed name from the constant or CMB2, whichever is defined.
+
+If neither is defined, returns `false`.
+
+#### Return
+_(mixed)_ Either the `JUICER_ID` from the constant defined in `wp-config.php` or options, or `false` if neither is set.
+
+### `api_url()`
+Found in: `namespace.php`
+
+Get the Juicer feed API endpoint URL.
+
+This expects that `get_id()` returns a string. If `get_id()` returns false, `api_url()` will return false also.
+
+#### See [get_id()](#get_id)
+
+#### Return
+
+_(mixed)_ Either the full Juicer feed API url or `false` if `juicer_id()` returns `false`.
 
 ### `get_posts( int $count, int $page )`
 Found in: `api.php`
