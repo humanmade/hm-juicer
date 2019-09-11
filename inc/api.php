@@ -98,7 +98,6 @@ function allowed_html() : array {
 	return [
 		'a'      => [
 			'href'  => [],
-			'title' => [],
 		],
 		'br'     => [],
 		'p'      => [],
