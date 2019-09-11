@@ -53,5 +53,5 @@ function api_url() {
 		return false;
 	}
 
-	return JUICER_ENDPOINT . juicer_id();
+	return JUICER_ENDPOINT . get_id();
 }
