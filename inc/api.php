@@ -122,8 +122,10 @@ function get_author_image( $item ) {
 
 			/*
 			 * We don't have a cached avatar, so we need to query the Facebook Graph API.
-			 * Querying the URL directly will return the actual image,
-			 * however all the info we need is in the response headers,
+			 * The URL will redirect to the image, but when queried,
+			 * it returns an API endpoint. Hitting the endpoint directly
+			 * will return the actual image in the response body, but
+			 * all the info we need is actually in the response headers,
 			 * so we need to dig into those to get the actual source URL.
 			 */
 
@@ -141,7 +143,6 @@ function get_author_image( $item ) {
 
 			// Cache the avatar and don't expire.
 			wp_cache_set( 'facebook_avatar_url', $avatar_url, 'juicer' );
-
 			break;
 
 		default :
