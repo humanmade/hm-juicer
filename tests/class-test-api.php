@@ -12,7 +12,7 @@ namespace HM\Juicer;
 /**
  * The main test class
  */
-class Test_Api extends \WP_UnitTestCase {
+class Test_API extends \WP_UnitTestCase {
 	/**
 	 * Load the helper functions in the constructor.
 	 */
