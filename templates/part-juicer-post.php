@@ -5,21 +5,12 @@
  * @package HM\Juicer
  */
 
-$todays_date = new DateTime();
-$post_date   = new DateTime( juicer_get_date( 'Y-m-d' ) );
-$interval    = date_diff( $post_date, $todays_date )->format('%a');
 ?>
 <li class="juicer-post juicer-grid__item">
 	<div class="juicer-post__inner">
 		<div class="juicer-post__header">
 			<div class="juicer-post__date">
-				<?php
-				if ( $interval > 21 ) {
-					juicer_the_date( 'M j, Y' );
-				} else {
-					juicer_the_humanized_time();
-				}
-				?>
+				<?php juicer_the_humanized_time(); ?>
 			</div>
 		</div>
 		<div class="juicer-post__image">
