@@ -53,6 +53,12 @@ Found in `functions.php`
 
 Populates the `$juicer_post` global and removes the current post from the `$juicer_posts` array.
 
+### `juicer_in_the_loop()`
+Determine if we're in the Juicer Loop by checking the `$juicer_post` global.
+
+#### Return
+_(bool)_ True if we're in the Juicer Loop. False otherwise.
+
 ### `juicer_get_post()`
 Return the current Juicer post object.
 

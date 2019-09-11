@@ -62,6 +62,18 @@ function juicer_the_post() {
 }
 
 /**
+ * Determine if we're in the Juicer Loop by checking the $juicer_post global.
+ *
+ * @return bool True if we're in the Juicer Loop. False otherwise.
+ */
+function juicer_in_the_loop() : bool {
+	global $juicer_post;
+
+	// Return true if $juicer_post is not empty.
+	return ! is_null( $juicer_post );
+}
+
+/**
  * Return the current Juicer post object.
  *
  * Must be used inside the Juicer Loop.
@@ -71,7 +83,7 @@ function juicer_the_post() {
 function juicer_get_post() : object {
 	global $juicer_post;
 
-	if ( is_null( $juicer_post ) ) {
+	if ( ! juicer_in_the_loop() ) {
 		_doing_it_wrong( 'juicer_get_post()', __( 'The function was called outside the Juicer Loop.', 'hm-juicer' ), '0.1.0' );
 		return '';
 	}
@@ -92,7 +104,7 @@ function juicer_get_post() : object {
 function juicer_get_date( $date_format = 'U' ) : string {
 	global $juicer_post;
 
-	if ( is_null( $juicer_post ) ) {
+	if ( ! juicer_in_the_loop() ) {
 		_doing_it_wrong( 'juicer_get_date()', __( 'The function was called outside the Juicer Loop.', 'hm-juicer' ), '0.1.0' );
 		return '';
 	}
@@ -122,7 +134,7 @@ function juicer_the_date( $date_format = 'U' ) {
 function juicer_get_humanized_time() : string {
 	global $juicer_post;
 
-	if ( is_null( $juicer_post ) ) {
+	if ( ! juicer_in_the_loop() ) {
 		_doing_it_wrong( 'juicer_get_humanized_time()', __( 'The function was called outside the Juicer Loop.', 'hm-juicer' ), '0.1.0' );
 		return '';
 	}
@@ -149,7 +161,7 @@ function juicer_the_humanized_time() {
 function juicer_get_the_content() : string {
 	global $juicer_post;
 
-	if ( is_null( $juicer_post ) ) {
+	if ( ! juicer_in_the_loop() ) {
 		_doing_it_wrong( 'juicer_get_the_content()', __( 'The function was called outside the Juicer Loop.', 'hm-juicer' ), '0.1.0' );
 		return '';
 	}
@@ -181,7 +193,7 @@ function juicer_the_content() {
 function juicer_get_image_url() : string {
 	global $juicer_post;
 
-	if ( is_null( $juicer_post ) ) {
+	if ( ! juicer_in_the_loop() ) {
 		_doing_it_wrong( 'juicer_get_image_url()', __( 'The function was called outside the Juicer Loop.', 'hm-juicer' ), '0.1.0' );
 		return '';
 	}
@@ -208,7 +220,7 @@ function juicer_the_image_url() {
 function juicer_get_source() : string {
 	global $juicer_post;
 
-	if ( is_null( $juicer_post ) ) {
+	if ( ! juicer_in_the_loop() ) {
 		_doing_it_wrong( 'juicer_get_source()', __( 'The function was called outside the Juicer Loop.', 'hm-juicer' ), '0.1.0' );
 		return '';
 	}
@@ -235,7 +247,7 @@ function juicer_the_source() {
 function juicer_get_sharing_link() : string {
 	global $juicer_post;
 
-	if ( is_null( $juicer_post ) ) {
+	if ( ! juicer_in_the_loop() ) {
 		_doing_it_wrong( 'juicer_get_sharing_link()', __( 'The function was called outside the Juicer Loop.', 'hm-juicer' ), '0.1.0' );
 		return '';
 	}
@@ -262,7 +274,7 @@ function juicer_the_sharing_link() {
 function juicer_get_like_count() : int {
 	global $juicer_post;
 
-	if ( is_null( $juicer_post ) ) {
+	if ( ! juicer_in_the_loop() ) {
 		_doing_it_wrong( 'juicer_get_like_count()', __( 'The function was called outside the Juicer Loop.', 'hm-juicer' ), '0.1.0' );
 		return 0;
 	}
@@ -289,7 +301,7 @@ function juicer_the_like_count() {
 function juicer_get_comment_count() : int {
 	global $juicer_post;
 
-	if ( is_null( $juicer_post ) ) {
+	if ( ! juicer_in_the_loop() ) {
 		_doing_it_wrong( 'juicer_get_comment_count()', __( 'The function was called outside the Juicer Loop.', 'hm-juicer' ), '0.1.0' );
 		return 0;
 	}
@@ -316,7 +328,7 @@ function juicer_the_comment_count() {
 function juicer_get_author_name() : string {
 	global $juicer_post;
 
-	if ( is_null( $juicer_post ) ) {
+	if ( ! juicer_in_the_loop() ) {
 		_doing_it_wrong( 'juicer_get_author_name()', __( 'The function was called outside the Juicer Loop.', 'hm-juicer' ), '0.1.0' );
 		return '';
 	}
@@ -343,7 +355,7 @@ function juicer_the_author_name() {
 function juicer_get_author_url() : string {
 	global $juicer_post;
 
-	if ( is_null( $juicer_post ) ) {
+	if ( ! juicer_in_the_loop() ) {
 		_doing_it_wrong( 'juicer_get_author_url()', __( 'The function was called outside the Juicer Loop.', 'hm-juicer' ), '0.1.0' );
 		return '';
 	}
@@ -370,7 +382,7 @@ function juicer_the_author_url() {
 function juicer_get_author_image() : string {
 	global $juicer_post;
 
-	if ( is_null( $juicer_post ) ) {
+	if ( ! juicer_in_the_loop() ) {
 		_doing_it_wrong( 'juicer_get_author_image()', __( 'The function was called outside the Juicer Loop.', 'hm-juicer' ), '0.1.0' );
 		return '';
 	}
