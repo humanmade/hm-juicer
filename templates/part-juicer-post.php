@@ -28,21 +28,31 @@
 		<div class="juicer-post__image">
 			<img src="<?php juicer_the_image_url(); ?>" />
 		</div>
-		
 		<div class="juicer-post__content">
-		<?php juicer_the_content(); ?>
-		</div>
-		<div class="juicer-post__source">
-		<?php juicer_the_source(); ?>
+			<?php juicer_the_content(); ?>
 		</div>
 		<div class="juicer-post__sharing">
-		<?php juicer_the_sharing_link(); ?>
-		</div>
-		<div class="juicer-post__likes">
-		<?php juicer_the_like_count(); ?>
-		</div>
-		<div class="juicer-post__comments">
-		<?php juicer_the_comment_count(); ?>
+			<div class="juicer-post__comments">
+				<i class="fas fa-comments"></i>
+				<?php juicer_the_comment_count(); ?>
+			</div>
+			<div class="juicer-post__likes">
+				<i class="fas fa-thumbs-up"></i>
+				<?php juicer_the_like_count(); ?>
+			</div>
+			<div class="juicer-post__source">
+				<?php
+				echo sprintf(
+					'<a href="%1$s" class="juicer-icon juicer-icon--facebook">
+						<i class="fab fa-facebook-f fa-2x"></i>
+						<span class="juicer-icon__tooltip screen-reader-text" role="tooltip">%2$s %3$s</span>
+					</a>',
+					juicer_get_sharing_link(),
+					esc_html__( 'Link to original post on', 'hm-juicer' ),
+					juicer_get_source()
+				);
+				?>
+			</div>
 		</div>
 	</div>
 </li>
