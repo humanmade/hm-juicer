@@ -115,7 +115,7 @@ function juicer_get_date( $date_format = 'U' ) : string {
 /**
  * Display the Juicer post date of the current Juicer post.
  *
- * Must be used inside the Juicer Loop
+ * Must be used inside the Juicer Loop.
  *
  * @param string $date_format The PHP date format string. Defaults to Unix time.
  * @see date()
@@ -265,7 +265,7 @@ function juicer_the_sharing_link() {
 }
 
 /**
- * The like count for the current social media post.
+ * Return the like count for the current social media post.
  *
  * Must be used inside the Juicer Loop.
  *
@@ -292,7 +292,7 @@ function juicer_the_like_count() {
 }
 
 /**
- * The comment count for the social media post.
+ * Return the comment count for the social media post.
  *
  * Must be used inside the Juicer Loop.
  *
@@ -319,7 +319,9 @@ function juicer_the_comment_count() {
 }
 
 /**
- * The social media account display name or account name.  If display name exists, display name is used, otherwise the account name is used.
+ * Return the social media account display name or account name.
+ * If display name exists, display name is used, otherwise the account name
+ * is used.
  *
  * Must be used inside the Juicer Loop.
  *
@@ -337,7 +339,9 @@ function juicer_get_author_name() : string {
 }
 
 /**
- * Display the social media account display name or account name.  If display name exists, display name is used, otherwise the account name is used.
+ * Display the social media account display name or account name.
+ * If display name exists, display name is used, otherwise the account name
+ * is used.
  *
  * Must be used inside the Juicer Loop.
  */
@@ -400,9 +404,13 @@ function juicer_the_author_image() {
 }
 
 /**
- * Load the Juicer template file. By default, will load the requested template file from the templates directory in the plugin with a prefix of 'part-juicer', but both the path to the template directory and the prefix can be filtered.
+ * Load the Juicer template file. By default, will load the requested
+ * template file from the templates directory in the plugin with a prefix
+ * of 'part-juicer', but both the path to the template directory and the
+ * prefix can be filtered.
  *
- * @param string $template (Required) The template to load (e.g. 'feed' or 'post'), not including the prefix ('part-juicer').
+ * @param string $template (Required) The template to load (e.g. 'feed' or
+ * 'post'), not including the prefix ('part-juicer').
  */
 function juicer_get_template( string $template ) {
 	/**
