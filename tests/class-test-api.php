@@ -220,4 +220,38 @@ class Test_API extends \WP_UnitTestCase {
 			maybe_humanize_time( $two_months )
 		);
 	}
+
+	/**
+	 * Test the get_item_content function.
+	 *
+	 * We do a couple tests here to make sure we're only grabbing the last link in the message and changing the link text there to Read More with a custom class.
+	 */
+	public function test_get_item_content() {
+		$post           = new \stdClass();
+		$post->external = 'http://test.dev/external-link/';
+
+		$content_simple = '<p>It\'s cold, damn cold. Ha, ha, ha, Einstein, you little devil. Einstein\'s clock is exactly one minute behind mine, it\'s still ticking. Like I always told you, if you put your mind to it you could accomplish anything. Yeah, but you\'re uh, you\'re so, you\'re so thin. <a target="_blank" class="auto" href="http://test.dev/external-link/">http://test.dev/external-link/</a></p>';
+
+		$content_link_inside = '<p>Oh, I\'ve been so worried about you ever since you ran off the other night. Are you okay? I\'m sorry I have to go. Isn\'t he a dream boat? <a href="http://test.dev/link-inside/">Another link inside the content.</a> Uh, well, okay Biff, uh, I\'ll finish that on up tonight and I\'ll bring it over first thing tomorrow morning. Now, now, Biff, now, I never noticed any blindspot before when I would drive it. Hi, son. <a target="_blank" class="auto" href="http://test.dev/external-link/">http://test.dev/external-link/</a></p>';
+
+		$content_link_raw = '<p>Back to the future. No no no this sucker\'s electrical, but I need a nuclear reaction to generate the one point twenty-one gigawatts of electricity- http://test.dev/link-raw/ But, what are you blind McFly, it\'s there. How else do you explain that wreck out there? <a target="_blank" class="auto" href="http://test.dev/external-link/">http://test.dev/external-link/</a></p>';
+
+		// Test that the link text is changed to Read More and the source-link class is added.
+		$this->assertEquals(
+			'<p>It\'s cold, damn cold. Ha, ha, ha, Einstein, you little devil. Einstein\'s clock is exactly one minute behind mine, it\'s still ticking. Like I always told you, if you put your mind to it you could accomplish anything. Yeah, but you\'re uh, you\'re so, you\'re so thin. <a href="http://test.dev/external-link/" class="source-link">Read More</a></p>',
+			get_item_content( $content_simple, $post )
+		);
+
+		// Test that the link inside the content is preserved and the final link text is replaced with Read More.
+		$this->assertEquals(
+			'<p>Oh, I\'ve been so worried about you ever since you ran off the other night. Are you okay? I\'m sorry I have to go. Isn\'t he a dream boat? <a href="http://test.dev/link-inside/">Another link inside the content.</a> Uh, well, okay Biff, uh, I\'ll finish that on up tonight and I\'ll bring it over first thing tomorrow morning. Now, now, Biff, now, I never noticed any blindspot before when I would drive it. Hi, son. <a href="http://test.dev/external-link/" class="source-link">Read More</a></p>',
+			get_item_content( $content_link_inside, $post )
+		);
+
+		// Test that a raw URL inside the content is transformed into a link.
+		$this->assertEquals(
+			'<p>Back to the future. No no no this sucker\'s electrical, but I need a nuclear reaction to generate the one point twenty-one gigawatts of electricity- <a href="http://test.dev/link-raw/">http://test.dev/link-raw/</a> But, what are you blind McFly, it\'s there. How else do you explain that wreck out there? <a href="http://test.dev/external-link/" class="source-link">Read More</a></p>',
+			get_item_content( $content_link_raw, $post )
+		);
+	}
 }
