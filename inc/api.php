@@ -89,6 +89,14 @@ function prepare_post_items( array $items ) : array {
 	return $posts;
 }
 
+/**
+ * Filter callback to modify the Juicer post text.
+ *
+ * @param string $message The original message from the Juicer post object.
+ * @param object $item    The full Juicer post object.
+ *
+ * @return string         The filtered Juicer post message.
+ */
 function get_item_content( string $message, $item ) : string {
 	$content = wp_kses( $message, allowed_html() );
 	preg_match( '/<a ?.*>(.*)<\/a>/', $content, $link_matches );
