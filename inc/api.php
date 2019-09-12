@@ -117,7 +117,7 @@ function allowed_html() : array {
  *
  * @return string|WP_Error The author image (avatar) if one could be retrieved or a WP_Error if there was a problem.
  */
-function get_author_image( object $item ) {
+function get_author_image( $item ) {
 	$source     = $item->source->source;
 	$avatar_url = $item->poster_image;
 
