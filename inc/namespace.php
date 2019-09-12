@@ -20,6 +20,8 @@ function bootstrap() {
 		require_once __DIR__ . '/settings.php';
 		Settings\bootstrap();
 	}
+
+	add_filter( 'filter_item_content', __NAMESPACE__ . '\\get_item_content', 10, 2 );
 }
 
 /**

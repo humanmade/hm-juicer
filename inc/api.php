@@ -89,6 +89,14 @@ function prepare_post_items( array $items ) : array {
 	return $posts;
 }
 
+/**
+ * Filter the post content to switch the link text of the final link item to 'Read More'.
+ *
+ * @param string $message The post content attached to this post object.
+ * @param array  $item    The array of the single post object.
+ *
+ * @return string         The modified post content.
+ */
 function get_item_content( string $message, $item ) : string {
 	$content = wp_kses( $message, allowed_html() );
 	preg_match( '/<a ?.*>(.*)<\/a>/', $content, $link_matches );
@@ -101,8 +109,6 @@ function get_item_content( string $message, $item ) : string {
 
 	return $content;
 }
-
-add_filter( 'filter_item_content', __NAMESPACE__ . '\\get_item_content', 10, 2 );
 
 /**
  * Allowed HTML tags for wp_kses. This will strip targets and classes out of <a> tags.
