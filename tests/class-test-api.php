@@ -107,7 +107,7 @@ class Test_API extends \WP_UnitTestCase {
 		);
 
 		$this->assertEquals(
-			"<p>Juicer Test is ahead of the curve in the post-acute setting in recognizing patients who are at risk for sepsis with Cerner's Sepsis Management solution. Learn how early intervention prevented our patients from becoming septic and/or transferring from our hospitals 77% of the time. <a href=\"https://test.site.dev/2zulhdo\">https://test.site.dev/2zulhdo</a></p>",
+			"<p>Juicer Test is ahead of the curve in the post-acute setting in recognizing patients who are at risk for sepsis with Cerner's Sepsis Management solution. Learn how early intervention prevented our patients from becoming septic and/or transferring from our hospitals 77% of the time. <a href=\"https://test.site.dev/2zulhdo\" class=\"source-link\">Read More</a></p>",
 			$post->post_content
 		);
 
@@ -167,10 +167,15 @@ class Test_API extends \WP_UnitTestCase {
 		 * query. In production, once we have this URL, we cache it
 		 * indefinitely, so we never need to make this request again (until
 		 * the cache is cleared).
+		 *
+		 * We also need to strip off everything in the URL after the ?.
+		 * This is because the query string in the Facebook image URL is
+		 * time-sensitive and will change. The source image will not
+		 * (but does not return a working image).
 		 */
 		$this->assertEquals(
-			'https://scontent.xx.fbcdn.net/v/t1.0-1/p50x50/58818464_10158354585756729_7126855515920924672_n.png?_nc_cat=1&_nc_oc=AQkgkHA3vbQrkLsvpeTHBgQDpXXLBEvZhkT5BKhTIQjWv3ecLX1eUXoPxtn_wOH8VBk&_nc_ht=scontent.xx&oh=e7456af0f27a9b3f7ad2ce25299c1fa5&oe=5DEFB0DE',
-			$post->author_image
+			'https://scontent.xx.fbcdn.net/v/t1.0-1/p50x50/58818464_10158354585756729_7126855515920924672_n.png',
+			str_replace( strpbrk( $post->author_image, '?' ), '', $post->author_image )
 		);
 	}
 
