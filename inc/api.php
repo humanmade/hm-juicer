@@ -102,7 +102,7 @@ function get_item_content( string $message, $item ) : string {
 	preg_match( '/<a ?.*>(.*)<\/a>/', $content, $link_matches );
 
 	if ( $item->external === $link_matches[1] ) {
-		$link_text = __( 'Read More' );
+		$link_text = __( 'Read More', 'hm-juicer' );
 		$link_url      = $link_matches[1];
 		$content = str_replace( $link_matches[0], "<a href=\"$link_url\" class=\"source-link\">$link_text</a>", $content );
 	}
