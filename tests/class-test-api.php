@@ -41,7 +41,7 @@ class Test_API extends \WP_UnitTestCase {
 	public function test_api_url() {
 		$this->assertEquals(
 			'https://www.juicer.io/api/feeds/testenv',
-			juicer_api_url()
+			api_url()
 		);
 	}
 

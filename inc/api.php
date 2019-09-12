@@ -28,7 +28,7 @@ function get_posts( $count = 10, $page = 1 ) {
 		$url = add_query_arg( [
 			'per'  => $count,
 			'page' => $page,
-		], juicer_api_url() );
+		], api_url() );
 
 		$response = wp_safe_remote_get( $url );
 
