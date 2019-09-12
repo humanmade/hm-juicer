@@ -106,13 +106,24 @@ function allowed_html() : array {
 	];
 }
 
+/**
+ * Get the author image from the Juicer post item.
+ *
+ * Some sources need special handling to get the original author image (avatar). This function takes care of the special handling or returns the source image if it does not need special handling.
+ *
+ * Currently only supports Facebook.
+ *
+ * @param object $item The Juicer post item.
+ *
+ * @return string|WP_Error The author image (avatar) if one could be retrieved or a WP_Error if there was a problem.
+ */
 function get_author_image( $item ) {
 	$source     = $item->source->source;
 	$avatar_url = $item->poster_image;
 
 	// Currently we've only tested Facebook.
 	switch ( $source ) {
-		case 'Facebook' :
+		case 'Facebook':
 			// Try to get the avatar from the object cache.
 			$cached_avatar_url = wp_cache_get( 'facebook_avatar_url', 'juicer' );
 
@@ -145,7 +156,7 @@ function get_author_image( $item ) {
 			wp_cache_set( 'facebook_avatar_url', $avatar_url, 'juicer' );
 			break;
 
-		default :
+		default:
 			break;
 	}
 
