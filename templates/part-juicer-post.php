@@ -12,14 +12,16 @@
 			<div class="juicer-post__author">
 				<?php
 				echo sprintf(
-					'<a href="%1$s"><img src="%2$s" alt="%3$s %4$s %5$s" />%5$s</a>',
+					'<a href="%1$s" class="juicer-post__author__link"><img src="%2$s" alt="%3$s" class="juicer-post__author__img" /></a>',
 					juicer_get_author_url(),
 					juicer_get_author_image(),
-					juicer_get_source(),
-					esc_html__( 'profile image for', 'hm-juicer' ),
-					juicer_get_author_name()
+					esc_html__( 'Visit ', 'hm-juicer' ) .
+					juicer_get_author_name() .
+					esc_html__( ' on ', 'hm-juicer' ) .
+					juicer_get_source()
 				);
 				?>
+				<span class="juicer-post__author__name"><?php juicer_the_author_name(); ?></span>
 			</div>
 			<div class="juicer-post__date">
 				<?php juicer_the_humanized_time(); ?>
