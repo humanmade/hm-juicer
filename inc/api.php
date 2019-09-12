@@ -89,6 +89,19 @@ function prepare_post_items( array $items ) : array {
 	return $posts;
 }
 
+function get_item_content( $item ) {
+	$content = wp_kses( $item->message, allowed_html() );
+	preg_match( '/<a ?.*>(.*)<\/a>/', $content, $link_matches );
+
+	if ( $item->external === $link_matches[1] ) {
+		$link_text = __( 'Read More' );
+		$link_url      = $link_matches[1];
+		$content = str_replace( $link_matches[0], "<a href=\"$link_url\" class=\"source-link\">$link_text</a>", $content );
+	}
+
+	return $content;
+}
+
 /**
  * Allowed HTML tags for wp_kses. This will strip targets and classes out of <a> tags.
  *
