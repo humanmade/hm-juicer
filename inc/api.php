@@ -71,7 +71,7 @@ function prepare_post_items( array $items ) : array {
 		$post->id                  = absint( $item->id );
 		$post->post_date           = strtotime( $item->external_created_at );
 		$post->post_date_humanized = maybe_humanize_time( $post->post_date );
-		$post->post_content        = wp_kses( $item->message, allowed_html() );
+		$post->post_content        = apply_filters( 'filter_item_content', $item->message, $item );
 		$post->image_url           = esc_url_raw( $item->image );
 		$post->additional_images   = $item->additional_photos;
 		$post->source              = esc_html( $item->source->source );
@@ -89,8 +89,8 @@ function prepare_post_items( array $items ) : array {
 	return $posts;
 }
 
-function get_item_content( $item ) {
-	$content = wp_kses( $item->message, allowed_html() );
+function get_item_content( string $message, $item ) : string {
+	$content = wp_kses( $message, allowed_html() );
 	preg_match( '/<a ?.*>(.*)<\/a>/', $content, $link_matches );
 
 	if ( $item->external === $link_matches[1] ) {
@@ -101,6 +101,8 @@ function get_item_content( $item ) {
 
 	return $content;
 }
+
+add_filter( 'filter_item_content', __NAMESPACE__ . '\\get_item_content', 10, 2 );
 
 /**
  * Allowed HTML tags for wp_kses. This will strip targets and classes out of <a> tags.
