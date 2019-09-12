@@ -143,7 +143,7 @@ class Test_Functions extends \WP_UnitTestCase {
 	 * Test the get_the_content function.
 	 */
 	public function test_get_the_content() {
-		$content = "<p>Juicer Test is ahead of the curve in the post-acute setting in recognizing patients who are at risk for sepsis with Cerner's Sepsis Management solution. Learn how early intervention prevented our patients from becoming septic and/or transferring from our hospitals 77% of the time. <a href=\"https://test.site.dev/2zulhdo\">https://test.site.dev/2zulhdo</a></p>";
+		$content = "<p>Juicer Test is ahead of the curve in the post-acute setting in recognizing patients who are at risk for sepsis with Cerner's Sepsis Management solution. Learn how early intervention prevented our patients from becoming septic and/or transferring from our hospitals 77% of the time. <a href=\"https://test.site.dev/2zulhdo\" class=\"source-link\">Read More</a></p>";
 
 		$this->assertEquals(
 			$content,
@@ -225,9 +225,26 @@ class Test_Functions extends \WP_UnitTestCase {
 	 * Test the get_author_image function.
 	 */
 	public function test_get_author_image() {
+		/*
+		 * For the purpose of the author image test, we need to use an
+		 * actual query to Facebook's Graph API. We do a single hit for the
+		 * author image based on the URL
+		 * https://graph.facebook.com/20531316728/picture
+		 * which points to Facebook's own Facebook account avatar.
+		 *
+		 * This will slow down unit tests but we only do a single API
+		 * query. In production, once we have this URL, we cache it
+		 * indefinitely, so we never need to make this request again (until
+		 * the cache is cleared).
+		 *
+		 * We also need to strip off everything in the URL after the ?.
+		 * This is because the query string in the Facebook image URL is
+		 * time-sensitive and will change. The source image will not
+		 * (but does not return a working image).
+		 */
 		$this->assertEquals(
-			'https://graph.facebook.com/99999999999999999/picture',
-			juicer_get_author_image()
+			'https://scontent.xx.fbcdn.net/v/t1.0-1/p50x50/58818464_10158354585756729_7126855515920924672_n.png',
+			str_replace( strpbrk( juicer_get_author_image(), '?' ), '', juicer_get_author_image() )
 		);
 	}
 }
