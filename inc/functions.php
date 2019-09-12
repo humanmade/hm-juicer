@@ -269,7 +269,36 @@ function juicer_the_source() {
 }
 
 /**
+ * Return the source url for the posted social media object.
+ * Ex. For Facebook, this is the Facebook post.
+ *
+ * Must be used inside the Juicer Loop.
+ *
+ * @return string The social media source url.
+ */
+function juicer_get_source_url() : string {
+	global $juicer_post;
+
+	if ( ! juicer_in_the_loop() ) {
+		_doing_it_wrong( 'juicer_get_source_url()', __( 'The function was called outside the Juicer Loop.', 'hm-juicer' ), '0.1.0' );
+		return '';
+	}
+
+	return $juicer_post->source_url;
+}
+
+/**
+ * Display the source url for the posted social media object.
+ *
+ * Must be used inside the Juicer Loop.
+ */
+function juicer_the_source_url() {
+	echo juicer_get_source_url();
+}
+
+/**
  * Return the sharing link for the posted social media object.
+ * This is the original post URL or content that was shared on the social media platform.
  *
  * Must be used inside the Juicer Loop.
  *
