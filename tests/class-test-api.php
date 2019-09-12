@@ -79,7 +79,7 @@ class Test_API extends \WP_UnitTestCase {
 	 * Test the prepare_post_items function.
 	 */
 	public function test_prepare_post_items() {
-		$mock_data = '[{"id":378483666,"external_id":"1373959692752139","external_created_at":"2019-09-03T11:50:08.000-07:00","full_url":"https://www.facebook.com/99999999999999999/posts/1373959692752139","image":"https://external.xx.fbcdn.net/safe_image.php?d=AQC_cyqDeqv-mmmZ&w=720&h=720&url=https%3A%2F%2Fblog.testenv.com%2Ftachyon%2Fsites%2F4%2F2019%2F06%2FiStock-1003536156.jpg%3Ffit%3D1254%252C836&cfs=1&sx=0&sy=0&sw=836&sh=836&_nc_hash=AQAN9xUHntdGV7gd","external":"https://test.site.dev/2zulhdo","like_count":47,"comment_count":1,"tagged_users":null,"poster_url":"https://facebook.com/profile.php?id=99999999999999999","poster_id":"99999999999999999","location":null,"height":720,"width":720,"edit":null,"position":null,"deleted_at":null,"deleted_by":null,"additional_photos":[],"external_location_id":null,"message":"<p>Juicer Test is ahead of the curve in the post-acute setting in recognizing patients who are at risk for sepsis with Cerner\'s Sepsis Management solution. Learn how early intervention prevented our patients from becoming septic and/or transferring from our hospitals 77% of the time. <a target=\"_blank\" class=\"auto\" href=\"https://test.site.dev/2zulhdo\">https://test.site.dev/2zulhdo</a></p>","unformatted_message":"Juicer Test is ahead of the curve in the post-acute setting in recognizing patients who are at risk for sepsis with Cerner\'s Sepsis Management solution. Learn how early intervention prevented our patients from becoming septic and/or transferring from our hospitals 77% of the time. https://test.site.dev/2zulhdo","description":"35","feed":"testenv","likes":47,"comments":1,"poster_image":"https://graph.facebook.com/99999999999999999/picture","poster_name":"Juicer Test","poster_display_name":"HM Juicer","source":{"id":404340,"term":"testenv","term_type":"username","source":"Facebook","options":"","name":null,"allowed":null,"disallowed":null,"queue":false}}]';
+		$mock_data = '[{"id":378483666,"external_id":"1373959692752139","external_created_at":"2019-09-03T11:50:08.000-07:00","full_url":"https://www.facebook.com/99999999999999999/posts/1373959692752139","image":"https://external.xx.fbcdn.net/safe_image.php?d=AQC_cyqDeqv-mmmZ&w=720&h=720&url=https%3A%2F%2Fblog.testenv.com%2Ftachyon%2Fsites%2F4%2F2019%2F06%2FiStock-1003536156.jpg%3Ffit%3D1254%252C836&cfs=1&sx=0&sy=0&sw=836&sh=836&_nc_hash=AQAN9xUHntdGV7gd","external":"https://test.site.dev/2zulhdo","like_count":47,"comment_count":1,"tagged_users":null,"poster_url":"https://facebook.com/profile.php?id=99999999999999999","poster_id":"99999999999999999","location":null,"height":720,"width":720,"edit":null,"position":null,"deleted_at":null,"deleted_by":null,"additional_photos":[],"external_location_id":null,"message":"<p>Juicer Test is ahead of the curve in the post-acute setting in recognizing patients who are at risk for sepsis with Cerner\'s Sepsis Management solution. Learn how early intervention prevented our patients from becoming septic and/or transferring from our hospitals 77% of the time. <a target=\"_blank\" class=\"auto\" href=\"https://test.site.dev/2zulhdo\">https://test.site.dev/2zulhdo</a></p>","unformatted_message":"Juicer Test is ahead of the curve in the post-acute setting in recognizing patients who are at risk for sepsis with Cerner\'s Sepsis Management solution. Learn how early intervention prevented our patients from becoming septic and/or transferring from our hospitals 77% of the time. https://test.site.dev/2zulhdo","description":"35","feed":"testenv","likes":47,"comments":1,"poster_image":"https://graph.facebook.com/20531316728/picture","poster_name":"Juicer Test","poster_display_name":"HM Juicer","source":{"id":404340,"term":"testenv","term_type":"username","source":"Facebook","options":"","name":null,"allowed":null,"disallowed":null,"queue":false}}]';
 
 		// Prepare the mock data.
 		$prepared_posts = prepare_post_items( json_decode( $mock_data ) );
@@ -156,8 +156,20 @@ class Test_API extends \WP_UnitTestCase {
 			$post->author_url
 		);
 
+		/*
+		 * For the purpose of the author image test, we need to use an
+		 * actual query to Facebook's Graph API. We do a single hit for the
+		 * author image based on the URL
+		 * https://graph.facebook.com/20531316728/picture
+		 * which points to Facebook's own Facebook account avatar.
+		 *
+		 * This will slow down unit tests but we only do a single API
+		 * query. In production, once we have this URL, we cache it
+		 * indefinitely, so we never need to make this request again (until
+		 * the cache is cleared).
+		 */
 		$this->assertEquals(
-			'https://graph.facebook.com/99999999999999999/picture',
+			'https://scontent.xx.fbcdn.net/v/t1.0-1/p50x50/58818464_10158354585756729_7126855515920924672_n.png?_nc_cat=1&_nc_oc=AQkgkHA3vbQrkLsvpeTHBgQDpXXLBEvZhkT5BKhTIQjWv3ecLX1eUXoPxtn_wOH8VBk&_nc_ht=scontent.xx&oh=e7456af0f27a9b3f7ad2ce25299c1fa5&oe=5DEFB0DE',
 			$post->author_image
 		);
 	}

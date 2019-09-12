@@ -42,12 +42,12 @@ function get_id() {
 /**
  * Get the Juicer feed API endpoint URL.
  *
- * This expects that juicer_id returns a string. If juicer_id returns false, juicer_api_url will return false also.
+ * This expects that juicer_id returns a string. If juicer_id returns false, api_url will return false also.
  *
  * @see get_id()
  * @return mixed Either the full Juicer feed API url or false if juicer_id returns false.
  */
-function juicer_api_url() {
+function api_url() {
 	// Bail if the ID isn't set. This is intended to be an authoritative URL, so it's no help if the feed name doesn't exist.
 	if ( ! get_id() ) {
 		return false;

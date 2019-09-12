@@ -81,7 +81,7 @@ function prepare_post_items( array $items ) : array {
 		$post->comments            = absint( $item->comment_count );
 		$post->author_name         = ( $item->poster_display_name ) ? esc_html( $item->poster_display_name ) : esc_html( $item->poster_name );
 		$post->author_url          = esc_url_raw( $item->poster_url );
-		$post->author_image        = esc_url_raw( $item->poster_image );
+		$post->author_image        = get_author_image( $item );
 
 		$posts[ $i ] = $post;
 	}
@@ -104,6 +104,52 @@ function allowed_html() : array {
 		'em'     => [],
 		'strong' => [],
 	];
+}
+
+function get_author_image( $item ) {
+	$source     = $item->source->source;
+	$avatar_url = $item->poster_image;
+
+	// Currently we've only tested Facebook.
+	switch ( $source ) {
+		case 'Facebook' :
+			// Try to get the avatar from the object cache.
+			$cached_avatar_url = wp_cache_get( 'facebook_avatar_url', 'juicer' );
+
+			if ( $cached_avatar_url ) {
+				return esc_url_raw( $cached_avatar_url );
+			}
+
+			/*
+			 * We don't have a cached avatar, so we need to query the Facebook Graph API.
+			 * The URL will redirect to the image, but when queried,
+			 * it returns an API endpoint. Hitting the endpoint directly
+			 * will return the actual image in the response body, but
+			 * all the info we need is actually in the response headers,
+			 * so we need to dig into those to get the actual source URL.
+			 */
+
+			$header = wp_remote_head( $item->poster_image, [
+				'type'     => 'small',
+				'redirect' => false,
+			] );
+
+			if ( empty( $header ) ) {
+				return new \WP_Error( 'juicer_bad_facebook_avatar_url', esc_html__( 'The poster image for the Facebook user we got from Juicer was bad.', 'hm-juicer' ), $item->poster_image );
+			}
+
+			$http_headers = wp_remote_retrieve_headers( $header );
+			$avatar_url   = $http_headers['location'];
+
+			// Cache the avatar and don't expire.
+			wp_cache_set( 'facebook_avatar_url', $avatar_url, 'juicer' );
+			break;
+
+		default :
+			break;
+	}
+
+	return esc_url_raw( $avatar_url );
 }
 
 /**
