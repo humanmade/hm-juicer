@@ -104,7 +104,7 @@ function juicer_is_video() : bool {
 	if ( strpos( juicer_get_sharing_link(), 'videos' ) ) {
 		return true;
 	}
-	
+
 	return false;
 }
 
@@ -118,7 +118,7 @@ function juicer_get_video_class() : string {
 	if ( juicer_is_video() ) {
 		return 'juicer-video-post';
 	}
-	
+
 	return '';
 }
 
