@@ -110,8 +110,6 @@ function get_item_content( string $message, $item ) : string {
 	return $content;
 }
 
-add_filter( 'filter_item_content', __NAMESPACE__ . '\\get_item_content', 10, 2 );
-
 /**
  * Allowed HTML tags for wp_kses. This will strip targets and classes out of <a> tags.
  *
