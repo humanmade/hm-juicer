@@ -256,6 +256,20 @@ Get Juicer feed posts.
  #### Return
 _(mixed)_ WP_Error on API error, `false` if no feed items, an array of item objects if request was successful.
 
+### `get_author_image( object $item )`
+Get the author image from the Juicer post item.
+
+Some sources need special handling to get the original author image (avatar). This function takes care of the special handling or returns the source image if it does not need special handling.
+
+Currently only supports Facebook.
+
+#### Parameters
+`$item` _(object)_ The Juicer post item.
+
+#### Return
+_(string|WP_Error)_ The author image (avatar) if one could be retrieved or a WP_Error if there was a problem.
+/
+
 ### `maybe_humanize_time( int $timestamp )`
 Found in: `api.php`
 
