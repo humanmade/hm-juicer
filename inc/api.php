@@ -71,7 +71,7 @@ function prepare_post_items( array $items ) : array {
 		$post->id                  = absint( $item->id );
 		$post->post_date           = strtotime( $item->external_created_at );
 		$post->post_date_humanized = maybe_humanize_time( $post->post_date );
-		$post->post_content        = apply_filters( 'filter_item_content', $item->message, $item );
+		$post->post_content        = apply_filters( 'juicer_filter_item_content', $item->message, $item );
 		$post->image_url           = esc_url_raw( $item->image );
 		$post->additional_images   = $item->additional_photos;
 		$post->source              = esc_html( $item->source->source );
@@ -109,6 +109,8 @@ function get_item_content( string $message, $item ) : string {
 
 	return $content;
 }
+
+add_filter( 'juicer_filter_item_content', __NAMESPACE__ . '\\get_item_content', 10, 2 );
 
 /**
  * Allowed HTML tags for wp_kses. This will strip targets and classes out of <a> tags.
