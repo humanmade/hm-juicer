@@ -98,7 +98,7 @@ function prepare_post_items( array $items ) : array {
  * @return string         The filtered Juicer post message.
  */
 function get_item_content( string $message, $item ) : string {
-	$content = wp_kses( $message, allowed_html() );
+	$content = wp_kses( make_clickable( $message ), allowed_html() );
 	preg_match( '/<a ?.*>(.*)<\/a>/', $content, $link_matches );
 
 	if ( $item->external === $link_matches[1] ) {
