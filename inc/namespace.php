@@ -84,5 +84,5 @@ function juicer_enqueue_scripts() {
 		'build_dir' => dirname( __DIR__ ) . '/build',
 	] );
 
-	//TODO: Add Font Awesome package to the plugin.
+	// TODO: Add Font Awesome package to the plugin.
 }
