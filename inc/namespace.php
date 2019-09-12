@@ -21,7 +21,7 @@ function bootstrap() {
 		Settings\bootstrap();
 	}
 
-	add_filter( 'filter_item_content', __NAMESPACE__ . '\\get_item_content', 10, 2 );
+	add_filter( 'juicer_filter_item_content', __NAMESPACE__ . '\\get_item_content', 10, 2 );
 }
 
 /**
