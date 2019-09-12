@@ -93,17 +93,30 @@
 		margin-right: auto;
 	}
 
-	.svg-inline--fa {
-		color: lighten( $dark, 55% );
-		margin-right: 0.1em;
-	}
-
-	.fa-2x {
-		font-size: 1.5em;
+	&__source__link {
+		&:before {
+			bottom: 0;
+			content: '';
+			left: 0;
+			position: absolute;
+			right: 0;
+			top: 0;
+		}
 	}
 
 	.juicer-icon {
+		display: block;
 		position: relative;
+		z-index: 1;
+
+		svg {
+			color: lighten( $dark, 55% );
+			margin-right: 0.1em;
+
+			&.fa-2x {
+				font-size: 1.5em;
+			}
+		}
 
 		&:hover,
 		&:focus {

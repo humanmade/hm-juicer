@@ -36,37 +36,46 @@
 
 		<div class="juicer-post__sharing">
 			<?php
+			$comments_count = juicer_get_comment_count();
+			$likes_count    = juicer_get_like_count();
+
 			// Comments icon with comments count and tooltip for accessibility.
 			echo sprintf(
 				'<span class="juicer-post__comments juicer-icon">
 					<i class="fas fa-comments"></i>
 					<span class="comments-count">%1$s</span>
-					<span class="juicer-icon__tooltip screen-reader-text" role="tooltip">%1$s %2$s %3$s</span>
+					<span class="juicer-icon__tooltip screen-reader-text" role="tooltip">' .
+						// Translators: %1$s is a localized number for comments count. %2$s is the social media platform source of the post.
+						_n( '%1$s comment on %2$s', '%1$s comments on %2$s', $comments_count, 'hm-juicer' ) .
+					'</span>
 				</span>',
-				juicer_get_comment_count(),
-				esc_html__( 'comment(s) on', 'hm-juicer' ),
+				number_format_i18n( $comments_count ),
 				juicer_get_source()
 			);
-			
+
 			// Thumbs up icon with likes count and tooltip for accessibility.
 			echo sprintf(
 				'<span class="juicer-post__likes juicer-icon">
 					<i class="fas fa-thumbs-up"></i>
 					<span class="likes-count">%1$s</span>
-					<span class="juicer-icon__tooltip screen-reader-text" role="tooltip">%1$s %2$s %3$s</span>
+					<span class="juicer-icon__tooltip screen-reader-text" role="tooltip">' .
+						// Translators: %1$s is a localized number for likes count. %2$s is the social media platform source of the post.
+						_n( '%1$s like on %2$s', '%1$s likes on %2$s', $likes_count, 'hm-juicer' ) .
+					'</span>
 				</span>',
-				juicer_get_like_count(),
-				esc_html__( 'like(s) on', 'hm-juicer' ),
+				number_format_i18n( $likes_count ),
 				juicer_get_source()
 			);
 
 			// Source icon with link to post on social network + tooltip for accessibility.
 			echo sprintf(
-				'<a href="%1$s" class="juicer-post__source juicer-icon">
-					<i class="fab fa-facebook-f fa-2x"></i>
-					<span class="juicer-icon__tooltip screen-reader-text" role="tooltip">%2$s %3$s</span>
+				'<a href="%1$s" class="juicer-post__source__link">
+					<span class="juicer-post__source juicer-icon">
+						<i class="fab fa-facebook-f fa-2x"></i>
+						<span class="juicer-icon__tooltip screen-reader-text" role="tooltip">%2$s %3$s</span>
+					</span>
 				</a>',
-				juicer_get_sharing_link(),
+				juicer_get_source_url(),
 				esc_html__( 'View original post on', 'hm-juicer' ),
 				juicer_get_source()
 			);
