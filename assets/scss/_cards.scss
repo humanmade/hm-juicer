@@ -14,6 +14,7 @@
 	color: $dark;
 	display: flex;
 	flex-flow: column;
+	position: relative;
 
 	&__header,
 	&__sharing {
@@ -35,6 +36,7 @@
 		a {
 			display: inline-flex;
 			margin-right: 0.75em;
+			z-index: 2;
 
 			&:before {
 				bottom: 0;
@@ -76,11 +78,24 @@
 
 	&__content {
 		margin-bottom: auto;
+
+		a {
+			text-decoration: underline;
+			z-index: 1;
+		}
 	}
 
 	&__sharing-link {
 		display: inline-block;
-		text-decoration: underline;
+
+		&:before {
+			bottom: 0;
+			content: '';
+			left: 0;
+			position: absolute;
+			right: 0;
+			top: 0;
+		}
 
 		&:after {
 			content: "\203A";
@@ -98,7 +113,7 @@
 	.juicer-icon {
 		display: block;
 		position: relative;
-		z-index: 1;
+		z-index: 2;
 
 		svg {
 			color: lighten( $dark, 55% );
