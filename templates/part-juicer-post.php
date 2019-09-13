@@ -69,11 +69,9 @@
 
 			// Source icon with link to post on social network + tooltip for accessibility.
 			echo sprintf(
-				'<a href="%1$s" class="juicer-post__source__link">
-					<span class="juicer-post__source juicer-icon">
-						<i class="fab fa-facebook-f fa-2x"></i>
-						<span class="juicer-icon__tooltip screen-reader-text" role="tooltip">%2$s %3$s</span>
-					</span>
+				'<a href="%1$s" class="juicer-post__source__link juicer-post__source juicer-icon">
+					<i class="fab fa-facebook-f fa-2x"></i>
+					<span class="juicer-icon__tooltip screen-reader-text" role="tooltip">%2$s %3$s</span>
 				</a>',
 				juicer_get_source_url(),
 				esc_html__( 'View original post on', 'hm-juicer' ),

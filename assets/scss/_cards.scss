@@ -98,17 +98,6 @@
 		margin-right: auto;
 	}
 
-	&__source__link {
-		&:before {
-			bottom: 0;
-			content: '';
-			left: 0;
-			position: absolute;
-			right: 0;
-			top: 0;
-		}
-	}
-
 	.juicer-icon {
 		display: block;
 		position: relative;
@@ -125,6 +114,13 @@
 
 		&:hover,
 		&:focus {
+			color: $dark;
+
+			svg {
+				color: lighten( $dark, 30% );
+				transition: color 0.3s ease;
+			}
+
 			.juicer-icon__tooltip {
 				background-color: lighten( $dark, 30% );
 				border-radius: 4px;
@@ -161,6 +157,19 @@
 					left: unset;
 					right: 1.75em;
 				}
+			}
+		}
+	}
+
+	&__source__link.juicer-icon {
+		margin: -0.75em -1em;
+		padding: 0.75em 1em;
+
+		&:last-child:hover,
+		&:last-child:focus {
+			.juicer-icon__tooltip {
+				bottom: calc( 100% + 0.25em );
+				right: -0.5em;
 			}
 		}
 	}
