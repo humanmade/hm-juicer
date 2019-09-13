@@ -104,7 +104,7 @@ function get_item_content( string $message, $item ) : string {
 	if ( $item->external === $link_matches[1] ) {
 		$link_text = __( 'Read More', 'hm-juicer' );
 		$link_url  = $link_matches[1];
-		$content   = str_replace( "<a href=\"$link_url\">$link_url</a>", "<a href=\"$link_url\" class=\"source-link\">$link_text</a>", $content );
+		$content   = str_replace( "<a href=\"$link_url\">$link_url</a>", "<a href=\"$link_url\" class=\"juicer-post__sharing-link\">$link_text</a>", $content );
 	}
 
 	return $content;
