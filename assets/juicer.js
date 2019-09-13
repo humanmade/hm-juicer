@@ -5,13 +5,22 @@
  */
 
 function resizeGridItem( item ) {
+	// Get total height of all children.
+	let itemChildren = item.children,
+		itemTotalHeight = 0;
+	for ( let i = 0; i < itemChildren.length; i++ ) {
+		itemTotalHeight += itemChildren[i].getBoundingClientRect().height;
+	}
+
+	// Get grid styles (row height, row gap), set row span for item based on height of children.
 	const grid = document.getElementsByClassName( 'juicer-grid' )[0],
 		rowHeight = parseInt( window.getComputedStyle( grid ).getPropertyValue( 'grid-auto-rows' ) ),
 		rowGap = parseInt( window.getComputedStyle( grid ).getPropertyValue( 'grid-row-gap' ) ),
-		rowSpan = Math.ceil( ( item.querySelector( '.juicer-post__inner' ).getBoundingClientRect().height + rowGap )/( rowHeight + rowGap ) );
+		rowSpan = Math.ceil( ( itemTotalHeight + rowGap )/( rowHeight + rowGap ) );
 	item.style.gridRowEnd = 'span ' + rowSpan;
 }
 
+// Resize all items.
 function resizeAllGridItems() {
 	let allItems = document.getElementsByClassName( 'juicer-grid__item' );
 	for ( let x=0; x<allItems.length; x++ ) {
@@ -19,15 +28,18 @@ function resizeAllGridItems() {
 	}
 }
 
+// Resize a single item.
 function resizeInstance( instance ) {
 	let item = instance.elements[0];
 	resizeGridItem( item );
 }
 
+// On load or resize, resize the items.
 window.onload = resizeAllGridItems();
 window.addEventListener( 'resize', resizeAllGridItems );
 
+// When images are finished loading, resize each item.
 let allItems = document.getElementsByClassName( 'juicer-grid__item' );
-for ( let x=0; x<allItems.length; x++ ) {
+for ( let x = 0; x < allItems.length; x++ ) {
 	imagesLoaded( allItems[x], resizeInstance );
 }

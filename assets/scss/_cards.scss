@@ -12,12 +12,8 @@
 .juicer-post {
 	background: $light;
 	color: $dark;
-
-	&__inner {
-		display: flex;
-		flex-flow: column;
-		min-height: 100%;
-	}
+	display: flex;
+	flex-flow: column;
 
 	&__header,
 	&__sharing {
@@ -79,7 +75,7 @@
 	}
 
 	&__content {
-		flex-grow: 1;
+		margin-bottom: auto;
 	}
 
 	&__sharing-link {
