@@ -9,11 +9,12 @@ namespace HM\Juicer\LoadMore;
 
 use HM\Asset_Loader;
 
-	// Allow the paged argument to be overridden.
-	if ( ! $page || absint( $page ) === 0 ) {
-		// Bump the paged value by 1. Default to page 2.
-		$page = get_query_var( 'page' ) ? get_query_var( 'page' ) + 1 : 2;
-	}
+function bootstrap() {
+	// TODO: Conditionally enqueue scripts and styles only if the plugin is being used.
+	add_action( 'wp_enqueue_scripts', __NAMESPACE__ . '\\enqueue_scripts' );
+	add_action( 'wp_ajax_juicer_load_more', __NAMESPACE__ . '\\ajax_handler' );
+	add_action( 'wp_ajax_nopriv_juicer_load_more', __NAMESPACE__ . '\\ajax_handler' );
+}
 
 /**
  * HM Juicer 'Load More' AJAX handler.
