@@ -18,7 +18,7 @@ const CustomEvent = require( 'custom-event' );
 		$button.prop( 'disabled', true );
 
 		let data = {
-			action: 'hm_juicer_load_more_handler',
+			action: 'juicer_load_more',
 			args: hmJuicerLoadMore.args
 		};
 
