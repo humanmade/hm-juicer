@@ -18,7 +18,7 @@ use HM\Asset_Loader;
 /**
  * HM Juicer 'Load More' AJAX handler.
  */
-function hm_juicer_load_more_handler() {
+function ajax_handler() {
 
 	// Prepare response.
 	$response = prepare_response();
