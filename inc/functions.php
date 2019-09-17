@@ -15,7 +15,7 @@ use HM\Juicer;
  * @param int $count The number of posts to display.
  * @param int $page  The page to display.
  */
-function juicer_feed( $count = 10, $page = 1 ) {
+function juicer_feed( $count = 10, $page = 1, $load_more = false ) {
 	global $juicer_posts;
 	$juicer_posts = Juicer\get_posts( $count, $page );
 
@@ -31,7 +31,7 @@ function juicer_feed( $count = 10, $page = 1 ) {
 	$feed = apply_filters( 'juicer_filter_feed_template', 'feed' );
 
 	ob_start();
-	juicer_get_template( $feed );
+	juicer_get_template( $feed, $count, $load_more );
 	echo ob_get_clean();
 }
 
@@ -471,8 +471,9 @@ function juicer_the_author_image() {
  *
  * @param string $template (Required) The template to load (e.g. 'feed' or
  * 'post'), not including the prefix ('part-juicer').
+ * @param bool   $load_more Should we display a load more button?
  */
-function juicer_get_template( string $template ) {
+function juicer_get_template( string $template, int $count = 10, bool $load_more = false ) {
 	/**
 	 * Allow the template directory path to be filtered. Defaults to the templates directory in the plugin.
 	 *
@@ -506,6 +507,10 @@ function juicer_get_template( string $template ) {
 			$template_file
 		) );
 	}
+
+	// Set $count and $load_more as query variables to use in the template.
+	set_query_var('post_count', $count );
+	set_query_var('load_more', $load_more );
 
 	// Load the template!
 	load_template( $template_file, false );
