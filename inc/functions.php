@@ -12,8 +12,9 @@ use HM\Juicer;
 /**
  * Display the main Juicer social media feed.
  *
- * @param int $count The number of posts to display.
- * @param int $page  The page to display.
+ * @param int  $count     The number of posts to display.
+ * @param int  $page      The page to display.
+ * @param bool $load_more Whether to include a load more button.
  */
 function juicer_feed( $count = 10, $page = 1, $load_more = false ) {
 	global $juicer_posts;
