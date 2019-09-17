@@ -78,7 +78,7 @@ function juicer_enqueue_scripts() {
 		'build_dir' => dirname( __DIR__ ) . '/build',
 		'in_footer' => true,
 	] );
-	
+
 	// Enqueue custom JS for the HM Juicer layout.
 	Asset_Loader\enqueue_script( [
 		'name'      => 'hm-juicer-js',
