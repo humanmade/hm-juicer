@@ -473,7 +473,7 @@ function juicer_the_author_image() {
  * @param string $template  (Required) The template to load (e.g. 'feed' or
  * 'post'), not including the prefix ('part-juicer').
  * @param int    $count     The number of posts to load.
- * @param bool   $load_more Should we display a load more button?
+ * @param bool   $load_more Whether to display a load more button.
  */
 function juicer_get_template( string $template, int $count = 10, bool $load_more = false ) {
 	/**
