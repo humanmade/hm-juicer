@@ -5,7 +5,7 @@
  * @package HM\Juicer
  */
 
-use HM\Juicer;
+namespace HM\Juicer\LoadMore;
 
 use HM\Asset_Loader;
 
