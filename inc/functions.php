@@ -1,6 +1,6 @@
 <?php
 /**
- * HM Juiicer functions
+ * HM Juicer functions
  *
  * Public helper functions for the HM Juicer plugin.
  *
