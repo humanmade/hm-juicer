@@ -9,6 +9,9 @@ namespace HM\Juicer\LoadMore;
 
 use HM\Asset_Loader;
 
+/**
+ * Kick it off.
+ */
 function bootstrap() {
 	// TODO: Conditionally enqueue scripts and styles only if the plugin is being used.
 	add_action( 'wp_enqueue_scripts', __NAMESPACE__ . '\\enqueue_scripts' );
@@ -31,8 +34,8 @@ function ajax_handler() {
 		wp_send_json_success( $response );
 	}
 
-    // Don't forget to stop execution afterward.
-    wp_die();
+	// Don't forget to stop execution afterward.
+	wp_die();
 }
 
 /**
