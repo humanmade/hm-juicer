@@ -1,3 +1,4 @@
+/* global imagesLoaded */
 /**
  * Masonry-style JS for HM Juicer masonry layout.
  *
