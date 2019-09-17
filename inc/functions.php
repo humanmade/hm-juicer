@@ -511,8 +511,8 @@ function juicer_get_template( string $template, int $count = 10, bool $load_more
 	}
 
 	// Set $count and $load_more as query variables to use in the template.
-	set_query_var('post_count', $count );
-	set_query_var('load_more', $load_more );
+	set_query_var( 'post_count', $count );
+	set_query_var( 'load_more', $load_more );
 
 	// Load the template!
 	load_template( $template_file, false );
