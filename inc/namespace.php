@@ -9,7 +9,6 @@
 
 namespace HM\Juicer;
 
-use HM\Asset_Loader;
 use HM\Juicer\Settings;
 
 /**
@@ -22,10 +21,6 @@ function bootstrap() {
 		Settings\bootstrap();
 	}
 
-	// TODO: Conditionally enqueue scripts and styles only if the plugin is being used.
-	add_action( 'wp_enqueue_scripts', __NAMESPACE__ . '\\juicer_enqueue_scripts' );
-	add_action( 'wp_ajax_hm_juicer_load_more_handler', __NAMESPACE__ . '\\hm_juicer_load_more_handler' );
-	add_action( 'wp_ajax_nopriv_hm_juicer_load_more_handler', __NAMESPACE__ . '\\hm_juicer_load_more_handler' );
 	add_filter( 'juicer_filter_item_content', __NAMESPACE__ . '\\get_item_content', 10, 2 );
 }
 
@@ -61,39 +56,4 @@ function api_url() {
 	}
 
 	return JUICER_ENDPOINT . get_id();
-}
-
-/**
- * Enqueue styles and scripts.
- */
-function juicer_enqueue_scripts() {
-
-	// Enqueue Images Loaded Script.
-	wp_enqueue_script( 'images-loaded', '//cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/4.1.1/imagesloaded.pkgd.min.js', [], null, true );
-
-	// Enqueue custom JS for the HM Juicer layout.
-	Asset_Loader\register_script( [
-		'name'      => 'hm-juicer-load-more',
-		'handle'    => 'hm-juicer-load-more',
-		'build_dir' => dirname( __DIR__ ) . '/build',
-		'in_footer' => true,
-	] );
-
-	// Enqueue custom JS for the HM Juicer layout.
-	Asset_Loader\enqueue_script( [
-		'name'      => 'hm-juicer-js',
-		'handle'    => 'hm-juicer-js',
-		'build_dir' => dirname( __DIR__ ) . '/build',
-		'deps'      => [ 'images-loaded' ],
-		'in_footer' => true,
-	] );
-
-	// Enqueue custom CSS for the HM Juicer layout.
-	Asset_Loader\enqueue_style( [
-		'name'      => 'hm-juicer-style',
-		'handle'    => 'hm-juicer-style',
-		'build_dir' => dirname( __DIR__ ) . '/build',
-	] );
-
-	// TODO: Add Font Awesome package to the plugin.
 }
