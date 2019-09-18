@@ -544,14 +544,15 @@ function juicer_load_more_button( array $args = [] ) {
 		'button_class'     => 'btn-load-more btn btn-large',
 		'container_class'  => '',
 		'list_class'       => '.juicer-feed',
-		'paged_offset'     => 0,
+		'page'             => 1,
+		'post_count'       => 10,
 		'template'         => [
 			'name'            => '',
 			'vars'            => [],
 		],
 	];
 
-	$args = wp_parse_args( $args, array_merge( $query_vars, $default_args ) );
+	$args = wp_parse_args( $args, $default_args );
 
 	// Enqueue 'load more' script.
 	wp_enqueue_script( 'hm-juicer-load-more' );
