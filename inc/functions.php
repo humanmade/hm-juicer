@@ -100,9 +100,7 @@ function juicer_get_post() : object {
  * @return bool True if the sharing url contains 'videos'. False otherwise.
  */
 function juicer_is_video() : bool {
-	global $juicer_post;
-
-	if ( strpos( juicer_get_sharing_link(), 'videos' ) ) {
+	if ( false !== strpos( juicer_get_sharing_link(), 'videos' ) ) {
 		return true;
 	}
 
