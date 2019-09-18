@@ -23,7 +23,6 @@ function bootstrap() {
  * HM Juicer 'Load More' AJAX handler.
  */
 function ajax_handler() {
-
 	// Prepare response.
 	$response = prepare_response();
 
