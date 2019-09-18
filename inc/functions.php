@@ -576,3 +576,12 @@ function juicer_load_more_button( array $args = [] ) {
 		esc_html( $args['button_text'] )
 	);
 }
+
+function juicer_get_wrapper_classes( array $classes = [] ) : string {
+	$classes = apply_filters( 'juicer_filter_wrapper_classes', array_merge( $classes, [
+		'juicer-feed',
+		'juicer-grid',
+	] ) );
+
+	return implode( ' ', $classes );
+}
