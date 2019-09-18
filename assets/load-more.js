@@ -35,9 +35,9 @@ const CustomEvent = require( 'custom-event' );
 				lastChild.next().find( 'a' ).first().focus();
 
 				// Update our page count after loading posts.
-				let lastPage = parseInt( hmJuicerLoadMore.args.paged, 10 );
+				let lastPage = parseInt( hmJuicerLoadMore.args.page, 10 );
 
-				hmJuicerLoadMore.args.paged = ( lastPage > 1 ) ? lastPage + 1 : 2;
+				hmJuicerLoadMore.args.page = ( lastPage > 1 ) ? lastPage + 1 : 2;
 
 				if ( hmJuicerLoadMore.args.paged >= maxNumPages ) {
 					$button.parent().hide();
