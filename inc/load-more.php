@@ -53,10 +53,12 @@ function prepare_response() {
 	juicer_feed( $post_count, $page );
 	$output = str_replace( [ '<ul class="' . juicer_get_wrapper_classes() . '">', '</ul>' ], '', ob_get_clean() );
 
+	$response = new \stdClass();
+	$response->body = $output;
+	$response->page = $page;
+	$response->post_count = $post_count;
 
-	return [
-		'body'          => $output,
-	];
+	return $response;
 }
 
 /**
