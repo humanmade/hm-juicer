@@ -536,26 +536,7 @@ function juicer_unset_posts() : array {
  * @param array $args Array of arguments.
  * @param int   $page The page of posts to display.
  */
-function juicer_load_more_button( array $args = [], $page = 0 ) {
-	global $juicer_posts;
-
-	// Allow the paged argument to be overridden.
-	if ( ! $page || absint( $page ) === 0 ) {
-		// Bump the paged value by 1. Default to page 2.
-		$page = get_query_var( 'page' ) ? get_query_var( 'page' ) + 1 : 2;
-	}
-
-	$query_vars = [
-		'per'  => absint( $args['post_count'] ),
-		'page' => $page,
-	];
-
-	// Ensure anything not set falls back to defaults.
-	foreach ( $query_vars as $key => $val ) {
-		if ( empty( $val ) ) {
-			unset( $query_vars[ $key ] );
-		}
-	}
+function juicer_load_more_button( array $args = [] ) {
 
 	$default_args = [
 		'aria_label'       => __( 'Load more', 'hm-juicer' ),
