@@ -11,7 +11,7 @@
 // Start the Juicer Loop.
 if ( juicer_have_posts() ) :
 
-	echo '<ul class="juicer-feed juicer-grid">';
+	echo '<ul class="' . juicer_get_wrapper_classes() . '">';
 
 	while ( juicer_have_posts() ) :
 		juicer_the_post();
