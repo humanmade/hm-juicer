@@ -48,8 +48,11 @@ function prepare_response() {
 	$page = isset( $args['page'] ) ? absint( $args['page'] ) : 1;
 	$post_count = isset( $args['post_count'] ) ? absint( $args['post_count'] ) : 10;
 
-	// This doesn't work.
-	$output = juicer_feed();
+	// Get the template markup.
+	ob_start();
+	juicer_feed( $post_count, $page );
+	$output = str_replace( [ '<ul class="' . juicer_get_wrapper_classes() . '">', '</ul>' ], '', ob_get_clean() );
+
 
 	return [
 		'body'          => $output,
