@@ -534,7 +534,6 @@ function juicer_unset_posts() : array {
  * HM Juicer 'Load More' button.
  *
  * @param array $args Array of arguments.
- * @param int   $page The page of posts to display.
  */
 function juicer_load_more_button( array $args = [] ) {
 
