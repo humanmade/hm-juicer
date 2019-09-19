@@ -73,7 +73,7 @@ function enqueue_scripts() {
 		'name'      => 'hm-juicer-load-more',
 		'handle'    => 'hm-juicer-load-more',
 		'build_dir' => dirname( __DIR__ ) . '/build',
-		'deps'      => [ 'jquery', 'underscore' ],
+		'deps'      => [ 'jquery', 'underscore', 'hm-juicer-js' ],
 		'in_footer' => true,
 	] );
 
