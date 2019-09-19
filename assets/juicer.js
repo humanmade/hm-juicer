@@ -19,6 +19,7 @@ function resizeGridItem( item ) {
 		rowGap = parseInt( window.getComputedStyle( grid ).getPropertyValue( 'grid-row-gap' ) ),
 		rowSpan = Math.ceil( ( itemTotalHeight + rowGap )/( rowHeight + rowGap ) );
 	item.style.gridRowEnd = 'span ' + rowSpan;
+	item.classList.remove( 'hide' );
 }
 
 // Resize all items.
@@ -40,6 +41,7 @@ export function resizeNewItems() {
 	let allItems = document.getElementsByClassName( 'juicer-grid__item' );
 	for ( let x = 0; x < allItems.length; x++ ) {
 		imagesLoaded( allItems[x], resizeInstance );
+		allItems[x].classList.remove( 'hide' );
 	}
 }
 
