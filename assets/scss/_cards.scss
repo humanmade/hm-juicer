@@ -208,11 +208,12 @@
 		opacity: 0;
 		height: 0px;
 		width: 50px;
-		margin: 1em auto;
+		margin: 0;
 		transition: opacity .50s ease-in-out;
 
 		&.loading {
 			height: 50px;
+			margin: 1em auto;
 			opacity: .5;
 		}
 	}
