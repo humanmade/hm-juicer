@@ -31,28 +31,29 @@ const CustomEvent = require( 'custom-event' );
 
 				// Get last child before we append the next batch of children.
 				let lastChild = $posts.children().last();
-				let maxNumPages = response.data.max_num_pages + hmJuicerLoadMore.args.paged_offset;
 
-				$posts.append( response.data.body );
+				// Only do stuff if the response body has content.
+				if ( response.data.body ) {
+					$posts.append( response.data.body );
 
-				// Find the first 'a' element in the new batch of children and select it.
-				lastChild.next().find( 'a' ).first().focus();
+					// Find the first 'a' element in the new batch of children and select it.
+					lastChild.next().find( 'a' ).first().focus();
 
-				// Update our page count after loading posts.
-				let lastPage = parseInt( hmJuicerLoadMore.args.page, 10 );
+					// Update our page count after loading posts.
+					let lastPage = parseInt( hmJuicerLoadMore.args.page, 10 );
 
-				hmJuicerLoadMore.args.page = ( lastPage > 1 ) ? lastPage + 1 : 2;
+					hmJuicerLoadMore.args.page = ( lastPage > 1 ) ? lastPage + 1 : 2;
 
-				if ( hmJuicerLoadMore.args.paged >= maxNumPages ) {
-					$button.parent().hide();
+					document.dispatchEvent( event );
+
+					// When images are finished loading, resize each item.
+					resizeNewItems();
+
+					// Show the button when we're done.
+					$button.show();
 				}
 
-				document.dispatchEvent( event );
-
-				// When images are finished loading, resize each item.
-				resizeNewItems();
-
-				$button.show();
+				// Done fetcing, remove the loading animation.
 				$loading.removeClass( 'loading' );
 			}
 		} );
