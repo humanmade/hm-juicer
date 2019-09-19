@@ -61,7 +61,6 @@ const CustomEvent = require( 'custom-event' );
 
 	$button.on( 'click', function ( e ) {
 		e.preventDefault();
-
 		loadMorePosts();
 	} );
 
