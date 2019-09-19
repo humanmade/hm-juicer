@@ -50,7 +50,13 @@ function prepare_response() {
 	// Get the template markup.
 	ob_start();
 	juicer_feed( $post_count, $page );
-	$output = str_replace( [ '<ul class="' . juicer_get_wrapper_classes() . '">', '</ul>' ], '', ob_get_clean() );
+	$output = trim( ob_get_clean() );
+
+	if ( '' === $output ) {
+		return new \WP_Error( 'juicer_end_of_feed', __( 'There are no more posts to load.', 'hm-juicer' ) );
+	} else {
+		$output = str_replace( [ '<ul class="' . juicer_get_wrapper_classes() . '">', '</ul>' ], '', $output );
+	}
 
 	$response = new \stdClass();
 	$response->body = $output;
