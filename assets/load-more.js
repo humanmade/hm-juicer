@@ -17,7 +17,7 @@ const CustomEvent = require( 'custom-event' );
 
 	let loadMorePosts = _.throttle( function () {
 
-		$button.prop( 'disabled', true );
+		$button.hide();
 
 		let data = {
 			action: 'juicer_load_more',
@@ -50,7 +50,7 @@ const CustomEvent = require( 'custom-event' );
 				// When images are finished loading, resize each item.
 				resizeNewItems();
 
-				$button.prop( 'disabled', false );
+				$button.show();
 			}
 		} );
 	}, 300 );
