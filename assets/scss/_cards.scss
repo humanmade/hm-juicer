@@ -11,9 +11,11 @@
 	&__item {
 		opacity: 1;
 		transition: opacity 1s ease-in-out;
+		height: auto;
 
 		&.hide {
 			opacity: 0;
+			height: 0;
 		}
 	}
 }
