@@ -72,7 +72,7 @@ function prepare_post_items( array $items ) : array {
 		$post->post_date           = strtotime( $item->external_created_at );
 		$post->post_date_humanized = maybe_humanize_time( $post->post_date );
 		$post->post_content        = apply_filters( 'juicer_filter_item_content', $item->message, $item );
-		$post->image_url           = ! empty( $item->image ) ? esc_url_raw( $item->image ) : '';
+		$post->image_url           = validate_image( $item->image );
 		$post->additional_images   = $item->additional_photos;
 		$post->source              = esc_html( $item->source->source );
 		$post->source_url          = esc_url_raw( $item->full_url );
@@ -125,6 +125,37 @@ function allowed_html() : array {
 		'em'     => [],
 		'strong' => [],
 	];
+}
+
+/**
+ * Validate a remote Juicer item image.
+ *
+ * @param mixed $source_url URL should be a string, but might be empty.
+ *
+ * @return string           The validated image URL or an empty string.
+ */
+function validate_image( $source_url ) : string {
+	if ( empty( $source_url ) ) {
+		return '';
+	}
+
+	$remote_image = wp_remote_get( $source_url );
+
+	if ( 200 !== wp_remote_retrieve_response_code( $remote_image ) ) {
+		return '';
+	}
+
+	// Doublecheck Facebook CDN to make sure the image is actually a valid image.
+	if ( false !== strpos( $source_url, 'fbcdn' ) ) {
+		// error_log( 'facebook cdn image' );
+		$headers = wp_remote_retrieve_headers( $remote_image );
+		// error_log( $headers );
+		if ( isset( $headers['x-error'] ) ) {
+			return '';
+		}
+	}
+
+	return esc_url_raw( $source_url );
 }
 
 /**
