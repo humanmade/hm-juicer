@@ -18,6 +18,7 @@ const CustomEvent = require( 'custom-event' );
 
 	let loadMorePosts = _.throttle( function () {
 
+		// Hide the button when loading more posts and display a loading animation.
 		$button.hide();
 		$loading.addClass( 'loading' );
 
