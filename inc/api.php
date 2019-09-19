@@ -72,11 +72,11 @@ function prepare_post_items( array $items ) : array {
 		$post->post_date           = strtotime( $item->external_created_at );
 		$post->post_date_humanized = maybe_humanize_time( $post->post_date );
 		$post->post_content        = apply_filters( 'juicer_filter_item_content', $item->message, $item );
-		$post->image_url           = esc_url_raw( $item->image );
+		$post->image_url           = ! empty( $item->image ) ? esc_url_raw( $item->image ) : '';
 		$post->additional_images   = $item->additional_photos;
 		$post->source              = esc_html( $item->source->source );
 		$post->source_url          = esc_url_raw( $item->full_url );
-		$post->sharing_link        = esc_url_raw( $item->external );
+		$post->sharing_link        = ! empty( $item->external ) ? esc_url_raw( $item->external ) : '';
 		$post->likes               = absint( $item->like_count );
 		$post->comments            = absint( $item->comment_count );
 		$post->author_name         = ( $item->poster_display_name ) ? esc_html( $item->poster_display_name ) : esc_html( $item->poster_name );
