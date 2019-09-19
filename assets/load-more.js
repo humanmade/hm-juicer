@@ -53,10 +53,9 @@ const CustomEvent = require( 'custom-event' );
 					// Show the button when we're done.
 					$button.show();
 				}
-
-				// Done fetcing, remove the loading animation.
-				$loading.removeClass( 'loading' );
 			}
+			// Done fetcing, remove the loading animation.
+			$loading.removeClass( 'loading' );
 		} );
 	}, 300 );
 
