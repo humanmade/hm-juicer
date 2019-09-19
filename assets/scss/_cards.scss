@@ -191,4 +191,18 @@
 	&__load-more {
 		margin: 1em auto;
 	}
+
+	&__loading {
+		background: url( './svg/loading.svg' ) no-repeat center;
+		opacity: 0;
+		height: 0px;
+		width: 50px;
+		margin: 1em auto;
+		transition: opacity .50s ease-in-out;
+
+		&.loading {
+			height: 50px;
+			opacity: .5;
+		}
+	}
 }
