@@ -24,7 +24,7 @@ function resizeGridItem( item ) {
 // Resize all items.
 export function resizeAllGridItems() {
 	let allItems = document.getElementsByClassName( 'juicer-grid__item' );
-	for ( let x=0; x<allItems.length; x++ ) {
+	for ( let x = 0; x < allItems.length; x++ ) {
 		resizeGridItem( allItems[x] );
 	}
 }
