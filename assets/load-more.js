@@ -13,11 +13,13 @@ const CustomEvent = require( 'custom-event' );
 
 	let event = new CustomEvent( 'hm-juicer-load-more-posts' ),
 		$button = $( '.juicer-feed__load-more' ),
+		$loading = $( '.juicer-feed__loading' ),
 		$posts = $( hmJuicerLoadMore.args.list_class );
 
 	let loadMorePosts = _.throttle( function () {
 
 		$button.hide();
+		$loading.addClass( 'loading' );
 
 		let data = {
 			action: 'juicer_load_more',
@@ -51,6 +53,7 @@ const CustomEvent = require( 'custom-event' );
 				resizeNewItems();
 
 				$button.show();
+				$loading.removeClass( 'loading' );
 			}
 		} );
 	}, 300 );
