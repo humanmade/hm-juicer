@@ -565,8 +565,9 @@ function juicer_load_more_button( array $args = [] ) {
 
 	// Print the button.
 	printf(
-		/* translators: %1$2 becomes the container class. %2$s becomes the button class.  %3$s becomes the Aria label. %4$s becomes the button text. */
+		/* translators: %1$s becomes the container class. %2$s becomes the button class.  %3$s becomes the Aria label. %4$s becomes the button text. */
 		'<div class="centered-load-more-wrapper %1$s">
+			<div class="juicer-feed__loading"></div>
 			<button class="juicer-feed__load-more %2$s" aria-label="%3$s">%4$s</button>
 		</div>',
 		esc_attr( $args['container_class'] ),
