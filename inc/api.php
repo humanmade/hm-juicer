@@ -205,7 +205,7 @@ function get_author_image( $item ) {
 			$avatar_url   = $http_headers['location'];
 
 			// Cache the avatar and don't expire.
-			wp_cache_set( 'facebook_avatar_url', $avatar_url, 'juicer' );
+			wp_cache_set( 'facebook_avatar_url', $avatar_url, 'juicer', WEEK_IN_SECONDS );
 			break;
 
 		default:
