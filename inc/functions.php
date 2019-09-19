@@ -576,6 +576,13 @@ function juicer_load_more_button( array $args = [] ) {
 	);
 }
 
+/**
+ * Returns an array of classes for the Juicer feed wrapper.
+ *
+ * @param array $classes (Optional) An array of additional classes to pass into the wrapper classes function.
+ *
+ * @return string        A string of classes to be added to the class html tag.
+ */
 function juicer_get_wrapper_classes( array $classes = [] ) : string {
 	$classes = apply_filters( 'juicer_filter_wrapper_classes', array_merge( $classes, [
 		'juicer-feed',
