@@ -147,9 +147,7 @@ function validate_image( $source_url ) : string {
 
 	// Doublecheck Facebook CDN to make sure the image is actually a valid image.
 	if ( false !== strpos( $source_url, 'fbcdn' ) ) {
-		// error_log( 'facebook cdn image' );
 		$headers = wp_remote_retrieve_headers( $remote_image );
-		// error_log( $headers );
 		if ( isset( $headers['x-error'] ) ) {
 			return '';
 		}
