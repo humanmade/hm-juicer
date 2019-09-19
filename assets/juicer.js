@@ -22,7 +22,7 @@ function resizeGridItem( item ) {
 }
 
 // Resize all items.
-function resizeAllGridItems() {
+export function resizeAllGridItems() {
 	let allItems = document.getElementsByClassName( 'juicer-grid__item' );
 	for ( let x=0; x<allItems.length; x++ ) {
 		resizeGridItem( allItems[x] );
@@ -30,17 +30,20 @@ function resizeAllGridItems() {
 }
 
 // Resize a single item.
-function resizeInstance( instance ) {
+export function resizeInstance( instance ) {
 	let item = instance.elements[0];
 	resizeGridItem( item );
+}
+
+// When images are finished loading, resize each item.
+export function resizeNewItems() {
+	let allItems = document.getElementsByClassName( 'juicer-grid__item' );
+	for ( let x = 0; x < allItems.length; x++ ) {
+		imagesLoaded( allItems[x], resizeInstance );
+	}
 }
 
 // On load or resize, resize the items.
 window.onload = resizeAllGridItems();
 window.addEventListener( 'resize', resizeAllGridItems );
-
-// When images are finished loading, resize each item.
-let allItems = document.getElementsByClassName( 'juicer-grid__item' );
-for ( let x = 0; x < allItems.length; x++ ) {
-	imagesLoaded( allItems[x], resizeInstance );
-}
+resizeNewItems();
