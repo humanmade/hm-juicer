@@ -39,7 +39,7 @@ function get_posts( $count = 10, $page = 1 ) {
 
 		// Pull out the response body and cache it.
 		$feed = wp_remote_retrieve_body( $response );
-		wp_cache_set( "response_per_$count-page_$page", $feed, 'juicer', DAY_IN_SECONDS );
+		wp_cache_set( "response_per_$count-page_$page", $feed, 'juicer', 6 * HOUR_IN_SECONDS );
 	}
 
 	$feed = json_decode( $feed );
