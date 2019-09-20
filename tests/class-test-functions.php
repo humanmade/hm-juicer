@@ -278,6 +278,23 @@ class Test_Functions extends \WP_UnitTestCase {
 			preg_replace( '/\s+/', '', $button )
 		);
 	}
+
+	/**
+	 * Test the get_wrapper_classes function.
+	 *
+	 * Make sure we get the default classes as well as any additional classes that were passed.
+	 */
+	public function test_get_wrapper_classes() {
+		// Test wrapper classes with default output.
+		$this->assertEquals(
+			'juicer-feed juicer-grid',
+			juicer_get_wrapper_classes()
+		);
+
+		// Test wrapper classes with custom classes passed.
+		$this->assertEquals(
+			'juicer-feed juicer-grid test-class human-made',
+			juicer_get_wrapper_classes( [ 'test-class', 'human-made' ] )
 		);
 	}
 }
