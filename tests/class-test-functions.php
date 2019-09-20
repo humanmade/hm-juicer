@@ -248,4 +248,40 @@ class Test_Functions extends \WP_UnitTestCase {
 			str_replace( strpbrk( juicer_get_author_image(), '?' ), '', juicer_get_author_image() )
 		);
 	}
+
+	/**
+	 * Test the load more button and custom parameters.
+	 */
+	public function test_load_more_button() {
+		ob_start();
+		juicer_load_more_button();
+		$button = ob_get_clean();
+
+		// Test the load more button with default params.
+		$this->assertEquals(
+			'<div class="centered-load-more-wrapper ">
+			<button class="juicer-feed__load-more btn-load-more btn btn-large" aria-label="Load more">Load more</button>
+			<div class="juicer-feed__loading"></div>
+			</div>',
+			$button
+		);
+
+		ob_start();
+		juicer_load_more_button( [
+			'aria_label'       => 'Aria Label',
+			'button_text'      => 'Button Text',
+			'button_class'     => 'button-class',
+			'container_class'  => 'container',
+		] );
+		$button = ob_get_clean();
+
+		// Test the load more button with custom parameters.
+		$this->assertEquals(
+			'<div class="centered-load-more-wrapper container">
+			<button class="juicer-feed__load-more button-class" aria-label="Aria Label">Button Text</button>
+			<div class="juicer-feed__loading"></div>
+			</div>',
+			$button
+		);
+	}
 }
