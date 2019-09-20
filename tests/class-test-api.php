@@ -96,7 +96,7 @@ class Test_API extends \WP_UnitTestCase {
 	 * Test the prepare_post_items function.
 	 */
 	public function test_prepare_post_items() {
-		$mock_data = '[{"id":378483666,"external_id":"1373959692752139","external_created_at":"2019-09-03T11:50:08.000-07:00","full_url":"https://www.facebook.com/99999999999999999/posts/1373959692752139","image":"https://external.xx.fbcdn.net/safe_image.php?d=AQC_cyqDeqv-mmmZ&w=720&h=720&url=https%3A%2F%2Fblog.testenv.com%2Ftachyon%2Fsites%2F4%2F2019%2F06%2FiStock-1003536156.jpg%3Ffit%3D1254%252C836&cfs=1&sx=0&sy=0&sw=836&sh=836&_nc_hash=AQAN9xUHntdGV7gd","external":"https://test.site.dev/2zulhdo","like_count":47,"comment_count":1,"tagged_users":null,"poster_url":"https://facebook.com/profile.php?id=99999999999999999","poster_id":"99999999999999999","location":null,"height":720,"width":720,"edit":null,"position":null,"deleted_at":null,"deleted_by":null,"additional_photos":[],"external_location_id":null,"message":"<p>Juicer Test is ahead of the curve in the post-acute setting in recognizing patients who are at risk for sepsis with Cerner\'s Sepsis Management solution. Learn how early intervention prevented our patients from becoming septic and/or transferring from our hospitals 77% of the time. <a target=\"_blank\" class=\"auto\" href=\"https://test.site.dev/2zulhdo\">https://test.site.dev/2zulhdo</a></p>","unformatted_message":"Juicer Test is ahead of the curve in the post-acute setting in recognizing patients who are at risk for sepsis with Cerner\'s Sepsis Management solution. Learn how early intervention prevented our patients from becoming septic and/or transferring from our hospitals 77% of the time. https://test.site.dev/2zulhdo","description":"35","feed":"testenv","likes":47,"comments":1,"poster_image":"https://graph.facebook.com/20531316728/picture","poster_name":"Juicer Test","poster_display_name":"HM Juicer","source":{"id":404340,"term":"testenv","term_type":"username","source":"Facebook","options":"","name":null,"allowed":null,"disallowed":null,"queue":false}}]';
+		$mock_data = $this->get_single_item();
 
 		// Prepare the mock data.
 		$prepared_posts = prepare_post_items( json_decode( $mock_data ) );
@@ -302,7 +302,46 @@ class Test_API extends \WP_UnitTestCase {
 			'https://humanmade.com/content/themes/humanmade/lib/hm-pattern-library/assets/images/logos/logo-red.svg',
 			validate_image( 'https://humanmade.com/content/themes/humanmade/lib/hm-pattern-library/assets/images/logos/logo-red.svg' )
 		);
+	}
 
+	/**
+	 * Test the get_author_image function.
+	 *
+	 * Make sure we get the author image or a default avatar.
+	 */
+	public function test_get_author_image() {
+		// Build a mock item.
+		$item = new \stdClass();
+		$item->source = new \stdClass();
+		$item->source->source = 'Test';
+		$item->poster_image   = 'https://dev.null/404/';
 
+		// Get the default "mystery man" avatar.
+		$mystery_man = get_avatar_url( 0, [
+			'default'       => 'mystery',
+			'force_default' => true,
+		] );
+
+		// If an avatar could not be found at the URL provided, return a mystery man. Note: this test might fail if Gravatar returns an image from a different server, so we're comparing the position of everything in the URL _after_ the http:// and server subdomain.
+		$this->assertEquals(
+			strpos( $mystery_man, 'gravatar.com/avatar/?s=96&d=mm&f=y&r=g' ),
+			strpos( get_author_image( $item ), 'gravatar.com/avatar/?s=96&d=mm&f=y&r=g' )
+		);
+
+		// Get an actual image from Facebook (Facebook's own avatar).
+		$item->source->source = 'Facebook';
+		$item->poster_image   = 'https://graph.facebook.com/20531316728/picture';
+
+		// This is the image URL before the query variables, at least until they update their avatar.
+		$simplified_url = 'https://scontent.xx.fbcdn.net/v/t1.0-1/p50x50/58818464_10158354585756729_7126855515920924672_n.png';
+
+		// Get the Facebook avatar.
+		$facebook_avatar = get_author_image( $item );
+
+		// Test that when we strip out everything after the ? we get the same URL as the simplified URL.
+		$this->assertEquals(
+			$simplified_url,
+			str_replace( strpbrk( $facebook_avatar, '?' ), '', $facebook_avatar )
+		);
 	}
 }
