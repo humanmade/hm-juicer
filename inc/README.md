@@ -281,6 +281,39 @@ Humanize time if less than 35 days old. Otherwise, display a formatted date.
 #### Return
 _(string)_ The humanized time or the date string.
 
+#### `juicer_load_more_button( array $args )`
+HM Juicer 'Load More' button.
+
+#### Parameters
+`$args` _(array)_ (Optional) Array of arguments.
+
+##### Default `$args`
+
+```php
+[
+	'aria_label'       => __( 'Load more', 'hm-juicer' ),
+	'button_text'      => __( 'Load more', 'hm-juicer' ),
+	'button_class'     => 'btn-load-more btn btn-large',
+	'container_class'  => '',
+	'list_class'       => '.juicer-feed',
+	'page'             => 2,
+	'post_count'       => 10,
+	'template'         => [
+		'name'            => '',
+		'vars'            => [],
+	],
+]
+```
+
+### `juicer_get_wrapper_classes( array $classes )`
+Returns an array of classes for the Juicer feed wrapper.
+
+#### Parameters
+`$classes` _(array)_ (Optional) An array of additional classes to pass into the wrapper classes function.
+
+#### Return
+_(string)_ A string of classes to be added to the class html tag.
+
 ## Filter Reference
 
 ### `apply_filters( 'juicer_filter_feed_template', string $feed_template )`
@@ -324,3 +357,17 @@ add_filter( 'juicer_filter_template_prefix', function() {
 
 #### Parameters
 `$template_prefix` _(string)_ The prefix for the template part.
+
+### `apply_filters( 'juicer_filter_wrapper_classes', array $classes )`
+Filter the Juicer wrapper classes
+
+#### Parameters
+`$classes` _(array)_ An array of classes. Defaults to `"juicer-feed juicer-grid"` plus any classes passed to `juicer_get_wrapper_classes`.
+
+#### Example usage
+
+```php
+add_filter( 'juicer_filter_template_prefix', function( $classes ) {
+	return array_merge( $classes, [ 'custom-class' ] );
+} );
+```
