@@ -174,7 +174,7 @@ function get_author_image( $item ) {
 	if ( '' === $avatar_url ) {
 		// Force the default avatar if a valid avatar image was not found.
 		$avatar_url = get_avatar_url( 0, [
-			'default' => 'mystery',
+			'default'       => 'mystery',
 			'force_default' => true,
 		] );
 	} else {
