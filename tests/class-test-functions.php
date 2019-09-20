@@ -155,8 +155,9 @@ class Test_Functions extends \WP_UnitTestCase {
 	 * Test get_image_url function.
 	 */
 	public function test_get_image_url() {
+		// This image has expired, so it will return an empty string.
 		$this->assertEquals(
-			'https://external.xx.fbcdn.net/safe_image.php?d=AQC_cyqDeqv-mmmZ&w=720&h=720&url=https%3A%2F%2Fblog.testenv.com%2Ftachyon%2Fsites%2F4%2F2019%2F06%2FiStock-1003536156.jpg%3Ffit%3D1254%252C836&cfs=1&sx=0&sy=0&sw=836&sh=836&_nc_hash=AQAN9xUHntdGV7gd',
+			'',
 			juicer_get_image_url()
 		);
 	}
