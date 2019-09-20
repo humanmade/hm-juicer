@@ -585,6 +585,11 @@ function juicer_load_more_button( array $args = [] ) {
  * @return string        A string of classes to be added to the class html tag.
  */
 function juicer_get_wrapper_classes( array $classes = [] ) : string {
+	/**
+	 * Filter the Juicer wrapper classes
+	 *
+	 * @var array An array of classes. Defaults to "juicer-feed juicer-grid" plus any classes passed to juicer_get_wrapper_classes.
+	 */
 	$classes = apply_filters( 'juicer_filter_wrapper_classes', array_merge( [
 		'juicer-feed',
 		'juicer-grid',
