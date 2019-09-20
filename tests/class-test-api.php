@@ -255,4 +255,37 @@ class Test_API extends \WP_UnitTestCase {
 			get_item_content( $content_link_raw, $post )
 		);
 	}
+
+	/**
+	 * Test the validate image function.
+	 *
+	 * Make sure we always get a string back when validating images, and that the images exist.
+	 */
+	public function test_validate_image() {
+		// If a null value was passed, we don't want that, so it should be an empty string.
+		$this->assertEquals(
+			'',
+			validate_image( null )
+		);
+
+		// Test a URL that will certainly fail.
+		$this->assertEquals(
+			'',
+			validate_image( 'https://dev.null/404/' )
+		);
+
+		// Test an expired Facebook image.
+		$this->assertEquals(
+			'',
+			validate_image( 'https://external.xx.fbcdn.net/safe_image.php?d=AQC_cyqDeqv-mmmZ&w=720&h=720&url=https%3A%2F%2Fblog.testenv.com%2Ftachyon%2Fsites%2F4%2F2019%2F06%2FiStock-1003536156.jpg%3Ffit%3D1254%252C836&cfs=1&sx=0&sy=0&sw=836&sh=836&_nc_hash=AQAN9xUHntdGV7gd' )
+		);
+
+		// Test an image url that we know exists.
+		$this->assertEquals(
+			'https://humanmade.com/content/themes/humanmade/lib/hm-pattern-library/assets/images/logos/logo-red.svg',
+			validate_image( 'https://humanmade.com/content/themes/humanmade/lib/hm-pattern-library/assets/images/logos/logo-red.svg' )
+		);
+
+
+	}
 }
