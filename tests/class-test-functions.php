@@ -259,11 +259,8 @@ class Test_Functions extends \WP_UnitTestCase {
 
 		// Test the load more button with default params.
 		$this->assertEquals(
-			'<div class="centered-load-more-wrapper ">
-			<button class="juicer-feed__load-more btn-load-more btn btn-large" aria-label="Load more">Load more</button>
-			<div class="juicer-feed__loading"></div>
-			</div>',
-			$button
+			'<div class="centered-load-more-wrapper "><button class="juicer-feed__load-more btn-load-more btn btn-large" aria-label="Load more">Load more</button><div class="juicer-feed__loading"></div></div>',
+			preg_replace( '/\s+/', '', $button )
 		);
 
 		ob_start();
@@ -277,11 +274,10 @@ class Test_Functions extends \WP_UnitTestCase {
 
 		// Test the load more button with custom parameters.
 		$this->assertEquals(
-			'<div class="centered-load-more-wrapper container">
-			<button class="juicer-feed__load-more button-class" aria-label="Aria Label">Button Text</button>
-			<div class="juicer-feed__loading"></div>
-			</div>',
-			$button
+			'<div class="centered-load-more-wrapper container"><button class="juicer-feed__load-more button-class" aria-label="Aria Label">Button Text</button><div class="juicer-feed__loading"></div></div>',
+			preg_replace( '/\s+/', '', $button )
+		);
+	}
 		);
 	}
 }
