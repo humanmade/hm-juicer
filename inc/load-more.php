@@ -13,7 +13,6 @@ use HM\Asset_Loader;
  * Kick it off.
  */
 function bootstrap() {
-	// TODO: Conditionally enqueue scripts and styles only if the plugin is being used.
 	add_action( 'wp_enqueue_scripts', __NAMESPACE__ . '\\enqueue_scripts' );
 	add_action( 'wp_ajax_juicer_load_more', __NAMESPACE__ . '\\ajax_handler' );
 	add_action( 'wp_ajax_nopriv_juicer_load_more', __NAMESPACE__ . '\\ajax_handler' );
