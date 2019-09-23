@@ -26,8 +26,8 @@ if ( juicer_have_posts() ) :
 	if ( $load_more && $post_count ) {
 		juicer_load_more_button(
 			[
-				'button_text' => __( 'Load more social media posts', 'encompass' ),
-				'aria_label'  => __( 'Load more social media posts', 'encompass' ),
+				'button_text' => __( 'Load more social media posts', 'hm-juicer' ),
+				'aria_label'  => __( 'Load more social media posts', 'hm-juicer' ),
 				'post_count'  => $post_count,
 			]
 		);
