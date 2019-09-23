@@ -82,21 +82,10 @@ function enqueue_scripts() {
 		'in_footer' => true,
 	] );
 
-	// Enqueue custom JS for the HM Juicer layout.
-	Asset_Loader\enqueue_script( [
-		'name'      => 'hm-juicer-js',
-		'handle'    => 'hm-juicer-js',
-		'build_dir' => dirname( __DIR__ ) . '/build',
-		'deps'      => [ 'images-loaded' ],
-		'in_footer' => true,
-	] );
-
 	// Enqueue custom CSS for the HM Juicer layout.
 	Asset_Loader\enqueue_style( [
 		'name'      => 'hm-juicer-style',
 		'handle'    => 'hm-juicer-style',
 		'build_dir' => dirname( __DIR__ ) . '/build',
 	] );
-
-	// TODO: Add Font Awesome package to the plugin.
 }

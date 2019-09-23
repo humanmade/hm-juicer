@@ -9,6 +9,7 @@
 
 namespace HM\Juicer;
 
+use HM\Asset_Loader;
 use HM\Juicer\Settings;
 
 /**
@@ -21,7 +22,25 @@ function bootstrap() {
 		Settings\bootstrap();
 	}
 
+	add_action( 'wp_enqueue_scripts', __NAMESPACE__ . '\\enqueue_scripts' );
 	add_filter( 'juicer_filter_item_content', __NAMESPACE__ . '\\get_item_content', 10, 2 );
+}
+
+
+/**
+ * Enqueue styles and scripts.
+ */
+function enqueue_scripts() {
+	// Enqueue custom JS for the HM Juicer layout.
+	Asset_Loader\enqueue_script( [
+		'name'      => 'hm-juicer-js',
+		'handle'    => 'hm-juicer-js',
+		'build_dir' => dirname( __DIR__ ) . '/build',
+		'deps'      => [ 'images-loaded' ],
+		'in_footer' => true,
+	] );
+
+	// TODO: Add Font Awesome package to the plugin.
 }
 
 /**
