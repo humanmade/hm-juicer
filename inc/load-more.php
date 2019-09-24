@@ -70,7 +70,7 @@ function prepare_response() {
  */
 function enqueue_scripts() {
 	// Enqueue custom JS for the HM Juicer layout.
-	Asset_Loader\enqueue_script( [
+	Asset_Loader\register_script( [
 		'name'      => 'hm-juicer-load-more',
 		'handle'    => 'hm-juicer-load-more',
 		'build_dir' => dirname( __DIR__ ) . '/build',
