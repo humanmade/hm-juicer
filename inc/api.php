@@ -134,24 +134,40 @@ function allowed_html() : array {
  *
  * @return string           The validated image URL or an empty string.
  */
-function validate_image( $source_url ) : string {
+function validate_image( int $item_id, $source_url ) : string {
+	// Check for a cached version of the image. If we find one, return that early.
+	$cached_image = wp_cache_get( "source_image_$item_id", 'juicer' );
+
+	if ( $cached_image ) {
+		return esc_url_raw( $cached_image );
+	}
+
 	if ( empty( $source_url ) ) {
-		return '';
+		$source_url = '';
 	}
 
 	$remote_image = wp_remote_get( $source_url );
 
 	if ( 200 !== wp_remote_retrieve_response_code( $remote_image ) ) {
-		return '';
+		$source_url = '';
 	}
 
 	// Doublecheck Facebook CDN to make sure the image is actually a valid image.
 	if ( false !== strpos( $source_url, 'fbcdn' ) ) {
 		$headers = wp_remote_retrieve_headers( $remote_image );
 		if ( isset( $headers['x-error'] ) ) {
-			return '';
+			$source_url = '';
 		}
 	}
+
+	if ( '' === $source_url ) {
+		// Cache broken/invalid source image urls indefinitely.
+		wp_cache_set( "source_image_$item_id", $source_url, 'juicer' );
+		return $source_url;
+	}
+
+	// Cache valid source URLs for a week. This still opens up the possibility of broken images if we've cached a URL and the cache hasn't been updated yet.
+	wp_cache_set( "source_image_$item_id", $source_url, 'juicer', WEEK_IN_SECONDS );
 
 	return esc_url_raw( $source_url );
 }
