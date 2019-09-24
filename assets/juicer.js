@@ -5,6 +5,11 @@
  * Source: https://medium.com/@andybarefoot/a-masonry-style-layout-using-css-grid-8c663d355ebb
  */
 
+/**
+ * Resize a card.
+ *
+ * @param {object} item
+ */
 function resizeGridItem( item ) {
 	// Get total height of all children.
 	let itemChildren = item.children,
@@ -22,7 +27,9 @@ function resizeGridItem( item ) {
 	item.classList.remove( 'hide' );
 }
 
-// Resize all items.
+/**
+ * Resize all items.
+ */
 export function resizeAllGridItems() {
 	let allItems = document.getElementsByClassName( 'juicer-grid__item' );
 	for ( let x = 0; x < allItems.length; x++ ) {
@@ -30,13 +37,19 @@ export function resizeAllGridItems() {
 	}
 }
 
-// Resize a single item.
+/**
+ * Resize a single item.
+ *
+ * @param {object} instance
+ */
 export function resizeInstance( instance ) {
 	let item = instance.elements[0];
 	resizeGridItem( item );
 }
 
-// When images are finished loading, resize each item.
+/**
+ * When images are finished loading, resize each item.
+ */
 export function resizeNewItems() {
 	let allItems = document.getElementsByClassName( 'juicer-grid__item' );
 	for ( let x = 0; x < allItems.length; x++ ) {
