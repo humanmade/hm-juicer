@@ -2,17 +2,13 @@
 
 import { resizeNewItems } from './juicer.js';
 
-// Use CustomEvent polyfill for IE11 compat.
-const CustomEvent = require( 'custom-event' );
-
 ( function ( window, $ ) {
 
 	if ( typeof hmJuicerLoadMore === 'undefined' ) {
 		return;
 	}
 
-	let event = new CustomEvent( 'hm-juicer-load-more-posts' ),
-		$button = $( '.juicer-feed__load-more' ),
+	let $button = $( '.juicer-feed__load-more' ),
 		$loading = $( '.juicer-feed__loading' ),
 		$posts = $( hmJuicerLoadMore.args.list_class );
 
@@ -44,8 +40,6 @@ const CustomEvent = require( 'custom-event' );
 					let lastPage = parseInt( hmJuicerLoadMore.args.page, 10 );
 
 					hmJuicerLoadMore.args.page = ( lastPage > 1 ) ? lastPage + 1 : 2;
-
-					document.dispatchEvent( event );
 
 					// When images are finished loading, resize each item.
 					resizeNewItems();
