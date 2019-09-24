@@ -18,6 +18,9 @@ use HM\Juicer;
  */
 function juicer_feed( $count = 10, $page = 1, $load_more = false ) {
 	global $juicer_posts;
+
+	wp_enqueue_script( 'hm-juicer-js' );
+
 	$juicer_posts = Juicer\get_posts( $count, $page );
 
 	/**
