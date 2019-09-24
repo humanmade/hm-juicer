@@ -13,8 +13,6 @@ namespace HM\Juicer;
 
 use HM\Juicer\LoadMore;
 
-const JUICER_ENDPOINT = 'https://www.juicer.io/api/feeds/';
-
 require_once __DIR__ . '/inc/namespace.php';
 require_once __DIR__ . '/inc/api.php';
 require_once __DIR__ . '/inc/functions.php';
