@@ -72,7 +72,7 @@ function prepare_post_items( array $items ) : array {
 		$post->post_date           = strtotime( $item->external_created_at );
 		$post->post_date_humanized = maybe_humanize_time( $post->post_date );
 		$post->post_content        = apply_filters( 'juicer_filter_item_content', $item->message, $item );
-		$post->image_url           = validate_image( $item->image );
+		$post->image_url           = validate_image( $item->id, $item->image );
 		$post->additional_images   = $item->additional_photos;
 		$post->source              = esc_html( $item->source->source );
 		$post->source_url          = esc_url_raw( $item->full_url );
@@ -130,6 +130,7 @@ function allowed_html() : array {
 /**
  * Validate a remote Juicer item image.
  *
+ * @param int   $item_id    The unique Juicer item ID.
  * @param mixed $source_url URL should be a string, but might be empty.
  *
  * @return string           The validated image URL or an empty string.
@@ -185,7 +186,7 @@ function validate_image( int $item_id, $source_url ) : string {
  */
 function get_author_image( $item ) {
 	$source     = $item->source->source;
-	$avatar_url = validate_image( $item->poster_image );
+	$avatar_url = validate_image( $item->id, $item->poster_image );
 
 	if ( '' === $avatar_url ) {
 		// Force the default avatar if a valid avatar image was not found.
