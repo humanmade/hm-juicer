@@ -41,7 +41,7 @@
 				<span class="comments-count">%1$s</span>
 				<span class="juicer-icon__tooltip screen-reader-text" role="tooltip">' .
 					// Translators: %1$s is a localized number for comments count. %2$s is the social media platform source of the post.
-					_n( '%1$s comment on %2$s', '%1$s comments on %2$s', $comments_count, 'hm-juicer' ) .
+					esc_html( _n( '%1$s comment on %2$s', '%1$s comments on %2$s', $comments_count, 'hm-juicer' ) ) .
 				'</span>
 			</span>',
 			number_format_i18n( $comments_count ),
@@ -55,7 +55,7 @@
 				<span class="likes-count">%1$s</span>
 				<span class="juicer-icon__tooltip screen-reader-text" role="tooltip">' .
 					// Translators: %1$s is a localized number for likes count. %2$s is the social media platform source of the post.
-					_n( '%1$s like on %2$s', '%1$s likes on %2$s', $likes_count, 'hm-juicer' ) .
+					esc_html( _n( '%1$s like on %2$s', '%1$s likes on %2$s', $likes_count, 'hm-juicer' ) ) .
 				'</span>
 			</span>',
 			number_format_i18n( $likes_count ),
