@@ -6,27 +6,29 @@
  */
 
 ?>
-<li class="juicer-post juicer-grid__item hide <?php echo juicer_get_video_class(); ?>">
+<li class="juicer-post juicer-grid__item hide <?php echo juicer_get_video_class(); // Class has already been sanitized. ?>">
 	<div class="juicer-post__header">
 		<div class="juicer-post__author">
 			<?php
 			echo sprintf(
 				'<a href="%1$s" class="juicer-post__author__link"><img src="%2$s" alt="%3$s" class="juicer-post__author__img" /></a>',
+				juicer_get_author_url(), // Author URL has already been sanitized.
+				juicer_get_author_image(), // Author image URL has already been sanitized.
 				// translators: 1: The author name, 2: the item source.
 				esc_html( sprintf( __( 'Visit %1$s on %2$s', 'hm-juicer' ), juicer_get_author_name(), juicer_get_source() ) )
 			);
 			?>
-			<span class="juicer-post__author__name"><?php juicer_the_author_name(); ?></span>
+			<span class="juicer-post__author__name"><?php juicer_the_author_name(); // Author name has already been sanitized. ?></span>
 		</div>
 		<div class="juicer-post__date">
-			<?php juicer_the_humanized_time(); ?>
+			<?php juicer_the_humanized_time(); // Humanized time has already been sanitized. ?>
 		</div>
 	</div>
 
-	<img src="<?php juicer_the_image_url(); ?>" class="juicer-post__image" alt="" />
+	<img src="<?php juicer_the_image_url(); // Image URL has already been sanitized. ?>" class="juicer-post__image" alt="" />
 
 	<div class="juicer-post__content">
-		<?php juicer_the_content(); ?>
+		<?php juicer_the_content(); // Content has already been sanitized. ?>
 	</div>
 
 	<div class="juicer-post__sharing">
@@ -45,7 +47,7 @@
 				'</span>
 			</span>',
 			number_format_i18n( $comments_count ),
-			juicer_get_source()
+			juicer_get_source() // Source is already sanitized.
 		);
 
 		// Thumbs up icon with likes count and tooltip for accessibility.
@@ -59,15 +61,16 @@
 				'</span>
 			</span>',
 			number_format_i18n( $likes_count ),
-			juicer_get_source()
+			juicer_get_source() // Source is already sanitized.
 		);
 
 		// Source icon with link to post on social network + tooltip for accessibility.
 		echo sprintf(
 			'<a href="%1$s" class="juicer-post__source__link juicer-post__source juicer-icon">
 				<i class="fab fa-facebook-f fa-2x"></i>
-				<span class="juicer-icon__tooltip screen-reader-text" role="tooltip">%2$s %3$s</span>
+				<span class="juicer-icon__tooltip screen-reader-text" role="tooltip">%2$s</span>
 			</a>',
+			juicer_get_source_url(), // Source URL has already been sanitized.
 			// Translators: %s is the original source.
 			esc_html( sprintf( __( 'View original post on %s', 'hm-juicer' ), juicer_get_source() ) )
 		);
