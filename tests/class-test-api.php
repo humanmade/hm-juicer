@@ -312,7 +312,8 @@ class Test_API extends \WP_UnitTestCase {
 	public function test_get_author_image() {
 		// Build a mock item.
 		$item = new \stdClass();
-		$item->source = new \stdClass();
+		$item->source         = new \stdClass();
+		$item->id             = 1;
 		$item->source->source = 'Test';
 		$item->poster_image   = 'https://dev.null/404/';
 
