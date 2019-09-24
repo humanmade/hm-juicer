@@ -268,7 +268,17 @@ Currently only supports Facebook.
 
 #### Return
 _(string|WP_Error)_ The author image (avatar) if one could be retrieved or a WP_Error if there was a problem.
-/
+
+### `validate_image( int $item_id, $source_url )`
+Validate a remote Juicer item image.
+
+#### Parameters
+`$item_id` _(int)_ The unique Juicer item ID.
+
+`$source_url` _(mixed)_  URL should be a string, but might be empty.
+
+#### Return
+_(string)_ The validated image URL or an empty string.
 
 ### `maybe_humanize_time( int $timestamp )`
 Found in: `api.php`
