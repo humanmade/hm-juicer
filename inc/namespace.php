@@ -34,10 +34,10 @@ function bootstrap() {
  */
 function enqueue_scripts() {
 	// Enqueue Images Loaded Script.
-	wp_enqueue_script( 'images-loaded', '//cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/4.1.1/imagesloaded.pkgd.min.js', [], null, true );
+	wp_register_script( 'images-loaded', '//cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/4.1.1/imagesloaded.pkgd.min.js', [], null, true );
 
 	// Enqueue custom JS for the HM Juicer layout.
-	Asset_Loader\enqueue_script( [
+	Asset_Loader\register_script( [
 		'name'      => 'hm-juicer-js',
 		'handle'    => 'hm-juicer-js',
 		'build_dir' => dirname( __DIR__ ) . '/build',
