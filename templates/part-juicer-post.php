@@ -12,12 +12,8 @@
 			<?php
 			echo sprintf(
 				'<a href="%1$s" class="juicer-post__author__link"><img src="%2$s" alt="%3$s" class="juicer-post__author__img" /></a>',
-				juicer_get_author_url(),
-				juicer_get_author_image(),
-				esc_html__( 'Visit ', 'hm-juicer' ) .
-				juicer_get_author_name() .
-				esc_html__( ' on ', 'hm-juicer' ) .
-				juicer_get_source()
+				// translators: 1: The author name, 2: the item source.
+				esc_html( sprintf( __( 'Visit %1$s on %2$s', 'hm-juicer' ), juicer_get_author_name(), juicer_get_source() ) )
 			);
 			?>
 			<span class="juicer-post__author__name"><?php juicer_the_author_name(); ?></span>
@@ -72,9 +68,8 @@
 				<i class="fab fa-facebook-f fa-2x"></i>
 				<span class="juicer-icon__tooltip screen-reader-text" role="tooltip">%2$s %3$s</span>
 			</a>',
-			juicer_get_source_url(),
-			esc_html__( 'View original post on', 'hm-juicer' ),
-			juicer_get_source()
+			// Translators: %s is the original source.
+			esc_html( sprintf( __( 'View original post on %s', 'hm-juicer' ), juicer_get_source() ) )
 		);
 		?>
 	</div>
