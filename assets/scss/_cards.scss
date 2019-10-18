@@ -113,7 +113,11 @@
 
 		a {
 			text-decoration: underline;
-			z-index: 1;
+
+			&:not( .juicer-post__sharing-link ) {
+				position: relative;
+				z-index: 2;
+			}
 		}
 	}
 
