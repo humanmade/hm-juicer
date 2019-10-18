@@ -96,7 +96,7 @@ function prepare_post_items( array $items ) : array {
  * @param string $social_post_src     The social network the post is pulled from.
  * @param string $social_profile_name The profile name of the social network account.
  *
- * @return string         The filtered Juicer post message.
+ * @return string                     The filtered Juicer post message.
  */
 function get_read_more_text( $external_src_link, $social_post_src, $social_profile_name ) {
 	// Get just the host portion of the URL.
