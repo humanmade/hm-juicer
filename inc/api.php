@@ -90,6 +90,108 @@ function prepare_post_items( array $items ) : array {
 }
 
 /**
+ * Get the read more link text, based on the post type and source.
+ *
+ * @param string $external_src_link   The URL of the original post source (photo, video, linked article).
+ * @param string $social_post_src     The social network the post is pulled from.
+ * @param string $social_profile_name The profile name of the social network account.
+ *
+ * @return string         The filtered Juicer post message.
+ */
+function get_read_more_text( $external_src_link, $social_post_src, $social_profile_name ) {
+	// Get just the host portion of the URL.
+	$external_src_href = wp_parse_url( $external_src_link )[ 'host' ];
+	$external_src_href = str_replace( 'www.', '', $external_src_href );
+
+	// If the JUICER_SHORT_URL constant is set in wp-config, get the value.
+	if ( defined( 'JUICER_SHORT_URL' ) ) {
+		$short_url = JUICER_SHORT_URL;
+
+		// If the url doesn't have a scheme, add one for consistency.
+		if ( strpos( $short_url, 'http' ) !== 0 ) {
+			$short_url = 'https://' . $short_url;
+		}
+
+		// Get just the host portion of the URL.
+		$short_url = wp_parse_url( $short_url )[ 'host' ];
+		$short_url = str_replace( 'www.', '', $short_url );
+	}
+
+	// If the JUICER_LONG_URL constant is set in wp-config, get the value.
+	if ( defined( 'JUICER_LONG_URL' ) ) {
+		$long_url = JUICER_LONG_URL;
+
+		// If the url doesn't have a scheme, add one for consistency.
+		if ( strpos( $long_url, 'http' ) !== 0 ) {
+			$long_url = 'https://' . $long_url;
+		}
+
+		// Get just the host portion of the URL.
+		$long_url = wp_parse_url( $long_url )[ 'host' ];
+		$long_url = str_replace( 'www.', '', $long_url );
+	}
+
+	// If the JUICER_SITE_NAME constant is set in wp-config, get the value.
+	if ( defined( 'JUICER_SITE_NAME' ) ) {
+		$site_name = JUICER_SITE_NAME;
+	} else {
+		$site_name = $social_profile_name;
+	}
+
+	/**
+	 * If the original linked article is from one of the URLs provided in the constants,
+	 * use the site name constant or social network profile name.
+	 * 
+	 * If the url contains the social network name and the keyword video or photo,
+	 * set the post type acordingly and use the name of the social network.
+	 * 
+	 * Otherwise, use the host portion of the external_src_link url.
+	 */
+	if ( ( isset( $short_url ) && $short_url === $external_src_href )
+		|| ( isset( $long_url ) && $long_url === $external_src_href ) ) {
+		$post_type     = 'post';
+		$read_more_src = $site_name;
+
+	} elseif ( strpos( $external_src_link, strtolower( $social_post_src ) ) && strpos( $external_src_link, 'video' ) ) {
+		$post_type     = 'video';
+		$read_more_src = $social_post_src;
+
+	} elseif ( strpos( $external_src_link, strtolower( $social_post_src ) ) && preg_match( '(image|photo)', $external_src_link ) ) {
+		$post_type     = 'photo';
+		$read_more_src = $social_post_src;
+
+	} else {
+		$post_type     = 'post';
+		$read_more_src = $external_src_href;
+	}
+
+	// Set text based on post type.
+	if ( 'photo' === $post_type ) {
+		// translators: the item source (Facebook, Twitter, Original Website).
+		$link_text = sprintf(
+			__( 'View the photo on %s', 'hm-juicer' ),
+			esc_html( $read_more_src )
+		);
+
+	} elseif ( 'video' === $post_type ) {
+		// translators: the item source (Facebook, Twitter, Original Website).
+		$link_text = sprintf(
+			__( 'Watch the video on %s', 'hm-juicer' ),
+			esc_html( $read_more_src )
+		);
+
+	} else {
+		// translators: the item source (Facebook, Twitter, Original Website).
+		$link_text = sprintf(
+			__( 'Read original post on %s', 'hm-juicer' ),
+			esc_html( $read_more_src )
+		);
+	}
+
+	return $link_text;
+}
+
+/**
  * Filter callback to modify the Juicer post text.
  *
  * @param string $message The original message from the Juicer post object.
@@ -98,13 +200,25 @@ function prepare_post_items( array $items ) : array {
  * @return string         The filtered Juicer post message.
  */
 function get_item_content( string $message, $item ) : string {
-	$content = wp_kses( make_clickable( $message ), allowed_html() );
-	preg_match( '/<a ?.*>(.*)<\/a>/', $content, $link_matches );
+	$social_profile_name = ( $item->poster_display_name ) ? esc_html( $item->poster_display_name ) : esc_html( $item->poster_name );
+	$social_post_src     = $item->source->source;
+	$external_src_link   = $item->external;
+	$link_text           = get_read_more_text( $external_src_link, $social_post_src, $social_profile_name );
+	$link_url            = $external_src_link;
 
-	if ( isset( $link_matches[1] ) && $item->external === $link_matches[1] ) {
-		$link_text = __( 'Read More', 'hm-juicer' );
-		$link_url  = $link_matches[1];
-		$content   = str_replace( "<a href=\"$link_url\">$link_url</a>", "<a href=\"$link_url\" class=\"juicer-post__sharing-link\">$link_text</a>", $content );
+	// Get message from post.
+	$content = wp_kses( make_clickable( $message ), allowed_html() );
+	// Search content for links.
+	preg_match( '/<a ?.*>(.*)<\/a>/', $content, $link_matches );
+	
+	/**
+	 * If the last link in the content is the same as the external_src_link, replace it.
+	 * Otherwise, add a read more link.
+	 */
+	if ( isset( $link_matches[1] ) && $external_src_link === $link_matches[1] ) {
+		$content = str_replace( "<a href=\"$link_url\">$link_url</a>", "<a href=\"$link_url\" class=\"juicer-post__sharing-link\">$link_text</a>", $content );
+	} else {
+		$content = $content . "<a href=\"$link_url\" class=\"juicer-post__sharing-link\">$link_text</a>";
 	}
 
 	return $content;
