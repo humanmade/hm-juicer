@@ -44,37 +44,17 @@
 		display: flex;
 		font-weight: 700;
 
-		a {
-			display: inline-flex;
-			margin-right: 0.75em;
-			z-index: 2;
-
-			&:before {
-				bottom: 0;
-				content: '';
-				left: 0;
-				position: absolute;
-				right: 0;
-				top: 0;
-			}
-
-			&:hover,
-			&:focus {
-				opacity: 0.7;
-				transition: opacity 0.3s ease;
-
-				+ .juicer-post__author__name {
-					color: lighten( $dark, 30% );
-					transition: color 0.3s ease;
-				}
-			}
-		}
-
 		img {
 			height: 2em;
+			margin-right: 0.75em;
 			overflow: hidden;
 			width: 2em;
 		}
+	}
+
+	&:hover &__author__name {
+		color: lighten( $dark, 30% );
+		transition: color 0.3s ease;
 	}
 
 	&__image {
