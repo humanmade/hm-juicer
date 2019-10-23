@@ -191,6 +191,7 @@ function get_read_more_text( $external_src_link, $social_post_src, $social_profi
  * @return string         The filtered Juicer post message.
  */
 function get_item_content( string $message, $item ) : string {
+	$posted_time         = maybe_humanize_time( strtotime( $item->external_created_at ) );
 	$social_profile_name = ( $item->poster_display_name ) ? esc_html( $item->poster_display_name ) : esc_html( $item->poster_name );
 	$social_post_src     = $item->source->source;
 	$external_src_link   = $item->external;
@@ -202,14 +203,18 @@ function get_item_content( string $message, $item ) : string {
 	// Search content for links.
 	preg_match( '/<a ?.*>(.*)<\/a>/', $content, $link_matches );
 
+	$full_read_more_link = "<a href=\"$link_url\" class=\"juicer-post__sharing-link\" aria-label=\"$link_text, posted $posted_time on $social_post_src\">$link_text <i class=\"fas fa-chevron-right\" aria-hidden=\"true\"></i></a>";
+
 	/**
 	 * If the last link in the content is the same as the external_src_link, replace it.
 	 * Otherwise, add a read more link.
 	 */
 	if ( isset( $link_matches[1] ) && $external_src_link === $link_matches[1] ) {
-		$content = str_replace( "<a href=\"$link_url\">$link_url</a>", "<a href=\"$link_url\" class=\"juicer-post__sharing-link\">$link_text</a>", $content );
+		$content = str_replace(
+			"<a href=\"$link_url\">$link_url</a>", $full_read_more_link, $content
+		);
 	} else {
-		$content = $content . "<a href=\"$link_url\" class=\"juicer-post__sharing-link\">$link_text</a>";
+		$content = $content . $full_read_more_link;
 	}
 
 	return $content;
