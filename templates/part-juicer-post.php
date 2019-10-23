@@ -62,15 +62,14 @@
 			juicer_get_source() // Source is already sanitized.
 		);
 
-		// Source icon with link to post on social network + tooltip for accessibility.
+		// Social network source icon.
 		echo sprintf(
-			'<a href="%1$s" class="juicer-post__source__link juicer-post__source juicer-icon">
-				<i class="fab fa-facebook-f fa-2x"></i>
-				<span class="juicer-icon__tooltip screen-reader-text" role="tooltip">%2$s</span>
-			</a>',
-			juicer_get_source_url(), // Source URL has already been sanitized.
+			'<span class="juicer-post__source juicer-icon">
+				<i class="fab fa-facebook-f fa-2x" aria-hidden="true"></i>
+				<span class="screen-reader-text">%s</span>
+			</span>',
 			// Translators: %s is the original source.
-			esc_html( sprintf( __( 'View original post on %s', 'hm-juicer' ), juicer_get_source() ) )
+			esc_html( sprintf( __( 'Originally shared on %s', 'hm-juicer' ), juicer_get_source() ) )
 		);
 		?>
 	</div>

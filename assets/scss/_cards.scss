@@ -195,33 +195,8 @@
 				}
 			}
 		}
-
-		&:last-child:hover,
-		&:last-child:focus {
-			.juicer-icon__tooltip {
-				bottom: calc( 100% + 0.25em );
-				left: auto;
-				right: -0.5em;
-
-				&:after {
-					left: auto;
-					right: 1.75em;
-				}
-			}
-		}
 	}
 
-	&__source__link.juicer-icon {
-		margin: -0.75em -1em;
-		padding: 0.75em 1em;
-
-		&:last-child:hover,
-		&:last-child:focus {
-			.juicer-icon__tooltip {
-				bottom: calc( 100% + 0.25em );
-				right: -0.5em;
-			}
-		}
 	}
 }
 
