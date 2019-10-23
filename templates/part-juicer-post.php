@@ -17,10 +17,30 @@
 			esc_html( sprintf( __( 'Visit %1$s on %2$s', 'hm-juicer' ), juicer_get_author_name(), juicer_get_source() ) ),
 			juicer_get_author_name() // Author name has already been sanitized.
 		);
+
+		// Only link the date if the read more link doesn't go to the social network post.
+		if ( strpos( juicer_get_sharing_link(), strtolower( juicer_get_source() ) ) ) {
+			echo sprintf(
+				'<span class="juicer-post__date">%s</span>',
+				juicer_get_humanized_time() // Humanized time has already been sanitized.
+			);
+		} else {
+			echo sprintf(
+				'<a href="%1$s" class="juicer-post__date" aria-label="%3$s">
+					%2$s
+				</a>',
+				juicer_get_source_url(), // Source URL has already been sanitized.
+				juicer_get_humanized_time(), // Humanized time has already been sanitized.
+				// Translators: 1: The original source, 2: The date/time posted.
+				esc_html(
+					sprintf( __( '%1$s post from %2$s' ),
+						juicer_get_source(),
+						juicer_get_humanized_time()
+					)
+				)
+			);
+		}
 		?>
-		<div class="juicer-post__date">
-			<?php juicer_the_humanized_time(); // Humanized time has already been sanitized. ?>
-		</div>
 	</div>
 
 	<img src="<?php juicer_the_image_url(); // Image URL has already been sanitized. ?>" class="juicer-post__image" alt="" />
