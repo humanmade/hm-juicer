@@ -67,6 +67,13 @@
 	flex-flow: column;
 	position: relative;
 
+	a:focus {
+		border: 0 none;
+		border-radius: 0.25em;
+		outline: 1px dashed lighten( $dark, 25% );
+		text-decoration: none;
+	}
+
 	&__header,
 	&__sharing {
 		align-items: center;
@@ -76,7 +83,6 @@
 		font-size: 0.9rem;
 		justify-content: space-between;
 		padding: 0.75rem;
-		position: relative;
 	}
 
 	&__author {
@@ -84,24 +90,76 @@
 		color: $dark;
 		display: flex;
 		font-weight: 700;
+		margin: -0.75rem 0 -0.75rem -0.75rem;
+		padding: 0.75rem;
+		z-index: 2;
 
 		img {
 			height: 2em;
 			margin-right: 0.75em;
 			overflow: hidden;
+			transition: opacity 0.3s ease;
 			width: 2em;
+		}
+		
+		&__name {
+			transition: color 0.3s ease;
+		}
+
+		&:after {
+			background-color: rgba( $light, 0.63 );
+			bottom: 0;
+			content: "";
+			height: 3.2em;
+			position: absolute;
+			right: 0;
+			transition: background-color 0.3s ease;
+			width: 3.2em;
+			z-index: 2;
+		}
+
+		&:hover {
+			text-decoration: underline;
+
+			&:after {
+				background-color: transparent;
+			}
+		}
+
+		&:hover,
+		&:focus {
+
+			img {
+				opacity: 0.75;
+			}
+
+			.juicer-post__author__name {
+				color: lighten( $dark, 25% );
+			}			
 		}
 	}
 
-	&:hover &__author__name {
+	a#{&}__date {
 		color: lighten( $dark, 30% );
-		transition: color 0.3s ease;
+		margin: 0 -0.25em;
+		padding: 0 0.25em;
+		z-index: 2;
+
+		&:hover {
+			text-decoration: underline;
+		}
 	}
 
 	&__image {
 		flex-shrink: 0; // Fixes height stretching in IE11.
 		max-width: 100%;
+		transition: opacity 0.3s ease;
 		width: 100%;
+	}
+
+	&:hover &__image,
+	&.in-focus &__image {
+		opacity: 0.75;
 	}
 
 	&__content,
@@ -113,11 +171,18 @@
 		margin-bottom: auto;
 
 		a {
-			text-decoration: underline;
-
 			&:not( .juicer-post__sharing-link ) {
 				position: relative;
 				z-index: 2;
+			}
+
+			&:hover {
+				text-decoration: underline;
+			}
+
+			&:focus {
+				margin: 0 -0.25em;
+				padding: 0 0.25em;
 			}
 		}
 	}
@@ -132,14 +197,18 @@
 			position: absolute;
 			right: 0;
 			top: 0;
+			transition: box-shadow 0.3s ease;
 		}
 
-		&:after {
-			content: "\203A";
-			display: inline-block;
-			line-height: 1;
-			margin-left: 0.2em;
+		.svg-inline--fa {
+			font-size: 0.7em;
+			vertical-align: -0.05em;
 		}
+	}
+
+	&:hover &__sharing-link:before,
+	&.in-focus &__sharing-link:before {
+		box-shadow: 0 0 8px rgba( 0,0,0,0.3 );
 	}
 
 	&__likes {
@@ -148,12 +217,12 @@
 	}
 
 	.juicer-icon {
-		display: block;
+		color: lighten( $dark, 55% );
 		position: relative;
 		z-index: 2;
 
 		svg {
-			color: lighten( $dark, 55% );
+			color: currentColor;
 			margin-right: 0.1em;
 
 			&.fa-2x {
@@ -198,6 +267,9 @@
 		}
 	}
 
+	&__source.juicer-icon {
+		color: lighten( $dark, 30% );
+		z-index: 0;
 	}
 }
 
