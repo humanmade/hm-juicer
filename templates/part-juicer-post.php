@@ -8,17 +8,16 @@
 ?>
 <li class="juicer-post juicer-grid__item hide <?php echo juicer_get_video_class(); // Class has already been sanitized. ?>">
 	<div class="juicer-post__header">
-		<div class="juicer-post__author">
-			<?php
-			echo sprintf(
-				'<img src="%s" alt="%s" class="juicer-post__author__img" />',
-				juicer_get_author_image(), // Author image URL has already been sanitized.
-				// translators: 1: The author name, 2: the item source.
-				esc_html( sprintf( __( '%1$s profile image on %2$s', 'hm-juicer' ), juicer_get_author_name(), juicer_get_source() ) )
-			);
-			?>
-			<span class="juicer-post__author__name"><?php juicer_the_author_name(); // Author name has already been sanitized. ?></span>
-		</div>
+		<?php
+		echo sprintf(
+			'<a href="%1$s" class="juicer-post__author" aria-label="%3$s"><img src="%2$s" alt="" class="juicer-post__author__img" /><span class="juicer-post__author__name">%4$s</span></a>',
+			juicer_get_author_url(), // Author URL has already been sanitized.
+			juicer_get_author_image(), // Author image URL has already been sanitized.
+			// translators: 1: The author name, 2: the item source.
+			esc_html( sprintf( __( 'Visit %1$s on %2$s', 'hm-juicer' ), juicer_get_author_name(), juicer_get_source() ) ),
+			juicer_get_author_name() // Author name has already been sanitized.
+		);
+		?>
 		<div class="juicer-post__date">
 			<?php juicer_the_humanized_time(); // Humanized time has already been sanitized. ?>
 		</div>
