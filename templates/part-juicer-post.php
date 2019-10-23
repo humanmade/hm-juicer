@@ -37,8 +37,8 @@
 		// Comments icon with comments count and tooltip for accessibility.
 		echo sprintf(
 			'<span class="juicer-post__comments juicer-icon">
-				<i class="fas fa-comments"></i>
-				<span class="comments-count">%1$s</span>
+				<i class="fas fa-comments" aria-hidden="true"></i>
+				<span class="comments-count" aria-hidden="true">%1$s</span>
 				<span class="juicer-icon__tooltip screen-reader-text" role="tooltip">' .
 					// Translators: %1$s is a localized number for comments count. %2$s is the social media platform source of the post.
 					esc_html( _n( '%1$s comment on %2$s', '%1$s comments on %2$s', $comments_count, 'hm-juicer' ) ) .
@@ -51,8 +51,8 @@
 		// Thumbs up icon with likes count and tooltip for accessibility.
 		echo sprintf(
 			'<span class="juicer-post__likes juicer-icon">
-				<i class="fas fa-thumbs-up"></i>
-				<span class="likes-count">%1$s</span>
+				<i class="fas fa-thumbs-up" aria-hidden="true"></i>
+				<span class="likes-count" aria-hidden="true">%1$s</span>
 				<span class="juicer-icon__tooltip screen-reader-text" role="tooltip">' .
 					// Translators: %1$s is a localized number for likes count. %2$s is the social media platform source of the post.
 					esc_html( _n( '%1$s like on %2$s', '%1$s likes on %2$s', $likes_count, 'hm-juicer' ) ) .
