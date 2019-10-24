@@ -59,7 +59,7 @@ jobs:
             # Run phpcs
             - run:
                 name: "Run phpcs"
-                command: ./vendor/bin/phpcs -p --extensions=php --standard=./phpcs.ruleset.xml ./ -v -q
+                command: ./vendor/bin/phpcs -p --extensions=php --standard=./phpcs.ruleset.xml ./ -p -s -v -q
 
             # Teardown
             - store_test_results:
