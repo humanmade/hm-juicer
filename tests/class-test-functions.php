@@ -137,6 +137,11 @@ class Test_Functions extends \WP_UnitTestCase {
 			sprintf( '%s ago', $humanized_time_diff ),
 			juicer_get_humanized_time()
 		);
+
+		$this->assertEquals(
+			'Sep 3 2019',
+			juicer_get_humanized_time()
+		);
 	}
 
 	/**
