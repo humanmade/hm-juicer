@@ -66,6 +66,75 @@ function get_id() {
 }
 
 /**
+ * Get the Juicer short url from the constant or CMB2, whichever is defined.
+ *
+ * If neither is defined, returns false.
+ *
+ * @return mixed Either the JUICER_SHORT_URL from the constant defined in wp-config or options, or false if neither is set.
+ */
+function get_short_url() {
+	$short_url = false;
+
+	// Check the JUICER_SHORT_URL constant and return it if it exists.
+	if ( defined( 'JUICER_SHORT_URL' ) ) {
+		$short_url = JUICER_SHORT_URL;
+	} else {
+		// Return the option, if it exists.
+		$short_url = cmb2_get_option( 'juicer_options', 'JUICER_SHORT_URL', false );
+	}
+
+	// If the url doesn't have a scheme, add one for consistency.
+	if ( $short_url && strpos( $short_url, 'http' ) !== 0 ) {
+		$short_url = 'https://' . $short_url;
+	}
+
+	return $short_url;
+}
+
+/**
+ * Get the Juicer long url from the constant or CMB2, whichever is defined.
+ *
+ * If neither is defined, returns false.
+ *
+ * @return mixed Either the JUICER_LONG_URL from the constant defined in wp-config or options, or false if neither is set.
+ */
+function get_long_url() {
+	$long_url = false;
+
+	// Check the JUICER_LONG_URL constant and return it if it exists.
+	if ( defined( 'JUICER_LONG_URL' ) ) {
+		$long_url = JUICER_LONG_URL;
+	} else {
+		// Return the option, if it exists.
+		$long_url = cmb2_get_option( 'juicer_options', 'JUICER_LONG_URL', false );
+	}
+
+	// If the url doesn't have a scheme, add one for consistency.
+	if ( $long_url && strpos( $long_url, 'http' ) !== 0 ) {
+		$long_url = 'https://' . $long_url;
+	}
+
+	return $long_url;
+}
+
+/**
+ * Get the Juicer site name from the constant or CMB2, whichever is defined.
+ *
+ * If neither is defined, returns false.
+ *
+ * @return mixed Either the JUICER_SITE_NAME from the constant defined in wp-config or options, or false if neither is set.
+ */
+function get_site_name() {
+	// Check the JUICER_SITE_NAME constant and return it if it exists.
+	if ( defined( 'JUICER_SITE_NAME' ) ) {
+		return JUICER_SITE_NAME;
+	}
+
+	// Return the option, if it exists.
+	return cmb2_get_option( 'juicer_options', 'JUICER_SITE_NAME', false );
+}
+
+/**
  * Get the Juicer feed API endpoint URL.
  *
  * This expects that juicer_id returns a string. If juicer_id returns false, api_url will return false also.

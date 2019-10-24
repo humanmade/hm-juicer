@@ -103,37 +103,25 @@ function get_read_more_text( $external_src_link, $social_post_src, $social_profi
 	$external_src_href = wp_parse_url( $external_src_link )['host'];
 	$external_src_href = str_replace( 'www.', '', $external_src_href );
 
-	// If the JUICER_SHORT_URL constant is set in wp-config, get the value.
-	if ( defined( 'JUICER_SHORT_URL' ) ) {
-		$short_url = JUICER_SHORT_URL;
-
-		// If the url doesn't have a scheme, add one for consistency.
-		if ( strpos( $short_url, 'http' ) !== 0 ) {
-			$short_url = 'https://' . $short_url;
-		}
-
+	// If the JUICER_SHORT_URL constant is set, get the value.
+	$short_url = get_short_url();
+	if ( $short_url ) {
 		// Get just the host portion of the URL.
 		$short_url = wp_parse_url( $short_url )['host'];
 		$short_url = str_replace( 'www.', '', $short_url );
 	}
 
-	// If the JUICER_LONG_URL constant is set in wp-config, get the value.
-	if ( defined( 'JUICER_LONG_URL' ) ) {
-		$long_url = JUICER_LONG_URL;
-
-		// If the url doesn't have a scheme, add one for consistency.
-		if ( strpos( $long_url, 'http' ) !== 0 ) {
-			$long_url = 'https://' . $long_url;
-		}
-
+	// If the JUICER_LONG_URL constant is set, get the value.
+	$long_url = get_long_url();
+	if ( $long_url ) {
 		// Get just the host portion of the URL.
 		$long_url = wp_parse_url( $long_url )['host'];
 		$long_url = str_replace( 'www.', '', $long_url );
 	}
 
-	// If the JUICER_SITE_NAME constant is set in wp-config, get the value.
-	if ( defined( 'JUICER_SITE_NAME' ) ) {
-		$site_name = JUICER_SITE_NAME;
+	// If the JUICER_SITE_NAME constant is set, get the value.
+	if ( get_site_name() ) {
+		$site_name = get_site_name();
 	} else {
 		$site_name = $social_profile_name;
 	}
@@ -147,8 +135,8 @@ function get_read_more_text( $external_src_link, $social_post_src, $social_profi
 	 *
 	 * Otherwise, use the host portion of the external_src_link url.
 	 */
-	if ( ( isset( $short_url ) && $short_url === $external_src_href )
-		|| ( isset( $long_url ) && $long_url === $external_src_href ) ) {
+	if ( $short_url === $external_src_href
+		|| $long_url === $external_src_href ) {
 		$post_type     = 'post';
 		$read_more_src = $site_name;
 
