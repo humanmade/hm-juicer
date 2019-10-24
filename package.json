@@ -1,0 +1,34 @@
+{
+    "name": "HM Juicer",
+    "version": "0.1.0",
+    "description": "Integrates with Juicer API for social feeds and allows accessible display of social media content.",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/humanmade/hm-juicer.git"
+    },
+    "author": "Human Made Limited",
+    "license": "GPL-3.0-or-later",
+    "bugs": {
+        "url": "https://github.com/humanmade/hm-juicer/issues"
+    },
+    "browserlist": [
+        "ie >= 11",
+		"last 2 Android versions",
+		"last 2 ChromeAndroid versions",
+		"last 2 Chrome versions",
+		"last 2 Firefox versions",
+		"last 2 Safari versions",
+		"last 2 iOS versions",
+		"last 2 Edge versions",
+		"last 2 Opera versions"
+    ],
+    "scripts": {
+        "prebuild": "node .bin/clean-build.js",
+        "build": "webpack --config .webpack/wepback-config-prod.js",
+        "dev": "webpack-dev-server --config .webpack/webpack-config-dev.js",
+        "lint:php": "vendor/bin/phpcs --standard=./phpcs.ruleset.xml -p -s -v --extensions=php",
+        "lint:js": "eslint **/*.js ",
+        "lint": "npm run lint:php && npm run lint:js",
+        "start": "npm run dev"
+    }
+}
