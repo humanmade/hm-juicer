@@ -132,7 +132,7 @@ class Test_Functions extends \WP_UnitTestCase {
 	 */
 	public function test_humanized_time() {
 		$this->assertEquals(
-			'Sep 3 2019',
+			'Sep 3, 2019',
 			juicer_get_humanized_time()
 		);
 	}
