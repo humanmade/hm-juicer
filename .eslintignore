@@ -1,4 +1,4 @@
 **/*.min.js
+**/build/*
+**/dist/*
 **/vendor/**
-**/build/**
-**/dist/**
