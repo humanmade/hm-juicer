@@ -39,6 +39,7 @@ Maintained by [Chris Reynolds](https://github.com/jazzsequence).
 
 Contributors:
 * [Joeleen Kennedy](https://github.com/joeleenk)
+* [Rian Rietveld](https://github.com/rianrietveld)
 
 ## Contributing
 
