@@ -5,6 +5,15 @@ jobs:
         - image: circleci/php:7.2-node-browsers
 
         steps:
+            # Prepare for later installations
+            - run:
+                name: "Update apt"
+                command: sudo apt-get update
+
+            - run:
+                name: "Install svn for WordPress"
+                command: sudo apt-get install subversion
+                
             # Install phpunit
             - run:
                 name: "Install PHPUnit"
