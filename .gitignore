@@ -1,2 +1,7 @@
 # Ignore vendor folder. Vendor libraries will be added via composer.
 vendor/
+
+# Ignore build files.
+build/
+dist/
+
