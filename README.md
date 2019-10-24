@@ -1,4 +1,4 @@
-<img src="https://hmn.md/content/themes/hmnmd/assets/images/hm-logo.svg" width="100" alt="Human Made Logo" />
+<img src="https://humanmade.com/content/themes/humanmade/lib/hm-pattern-library/assets/images/logos/logo-red.svg" width="100" alt="Human Made Logo" />
 
 # HM Juicer
 
