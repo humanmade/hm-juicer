@@ -5,3 +5,9 @@ vendor/
 build/
 dist/
 
+### OS and Software generated files ###
+.DS_Store
+ehthumbs.db
+Thumbs.db
+._*
+.idea/
