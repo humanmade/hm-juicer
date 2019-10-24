@@ -13,7 +13,14 @@ jobs:
             - run:
                 name: "Install svn for WordPress"
                 command: sudo apt-get install subversion
-                
+
+            - run:
+                name: "Install MariaDB"
+                command: |
+                    sudo apt-get install mariadb-server
+                    sudo service mysql status || sudo service mysql start
+                    sudo docker-php-ext-install mysqli
+
             # Install phpunit
             - run:
                 name: "Install PHPUnit"
