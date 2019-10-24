@@ -7,6 +7,10 @@
 		<exclude name="HM.Files.FunctionFileName.WrongFile" />
 	</rule>
 
+	<rule ref="HM.Functions.NamespacedFunctions.MissingNamespace">
+		<exclude-pattern>inc/functions.php</exclude-pattern>
+	</rule>
+
 	<!-- Add PHPDoc rules -->
 	<rule ref="WordPress-Docs" />
 
