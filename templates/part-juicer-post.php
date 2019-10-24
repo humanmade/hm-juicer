@@ -32,12 +32,7 @@
 				juicer_get_source_url(), // Source URL has already been sanitized.
 				juicer_get_humanized_time(), // Humanized time has already been sanitized.
 				// Translators: 1: The original source, 2: The date/time posted.
-				esc_html(
-					sprintf( __( '%1$s post from %2$s' ),
-						juicer_get_source(),
-						juicer_get_humanized_time()
-					)
-				)
+				esc_html( sprintf( __( '%1$s post from %2$s' ), juicer_get_source(), juicer_get_humanized_time() ) )
 			);
 		}
 		?>
