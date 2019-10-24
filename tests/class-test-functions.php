@@ -131,13 +131,6 @@ class Test_Functions extends \WP_UnitTestCase {
 	 * Test the humanized_time function. This uses human_time_diff, and we need that to get the string to test, so this is sort of derivative and not really testing a whole lot.
 	 */
 	public function test_humanized_time() {
-		$humanized_time_diff = human_time_diff( strtotime( '2 days ago' ), time() );
-
-		$this->assertEquals(
-			sprintf( '%s ago', $humanized_time_diff ),
-			juicer_get_humanized_time()
-		);
-
 		$this->assertEquals(
 			'Sep 3 2019',
 			juicer_get_humanized_time()
