@@ -2,14 +2,15 @@
     "name": "humanmade/hm-juicer",
     "description": "Integrates with Juicer API for social feeds and allows accessible display of social media content.",
     "type": "wordpress-plugin",
+    "license": "GPL-3.0-or-later",
     "require": {
+        "php": ">=7.0",
         "cmb2/cmb2": "^2.6"
     },
     "require-dev": {
         "humanmade/coding-standards": "^0.7",
         "phpunit/phpunit": "5.7.*"
     },
-    "license": "GPL-2.0-or-later",
     "authors": [
         {
             "name": "Chris Reynolds",
