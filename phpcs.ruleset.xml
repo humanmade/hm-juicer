@@ -4,7 +4,7 @@
 
 	<!-- Use HM Coding Standards -->
 	<rule ref="vendor/humanmade/coding-standards">
-		<exclude name="HM.Functions.NamespacedFunctions.MissingNamespace" />
+		<exclude name="HM.Files.FunctionFileName.WrongFile" />
 	</rule>
 
 	<!-- Add PHPDoc rules -->
