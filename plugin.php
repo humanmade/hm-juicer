@@ -17,5 +17,10 @@ require_once __DIR__ . '/inc/namespace.php';
 require_once __DIR__ . '/inc/api.php';
 require_once __DIR__ . '/inc/functions.php';
 
+// If the HM Asset Loader does not exist, load it from the helpers folder.
+if ( ! function_exists( '\\HM\\Asset_Loader\\register_script' ) ) {
+    require_once __DIR__ . '/helpers/hm-asset-loader/namespace.php';
+}
+
 // Kick it off.
 bootstrap();
