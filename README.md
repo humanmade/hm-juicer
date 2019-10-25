@@ -37,8 +37,9 @@ Created by Human Made to render and display accessible social media feeds via th
 
 Maintained by [Chris Reynolds](https://github.com/jazzsequence).
 
-Contributors:
-* [Joeleen Kennedy](https://github.com/joeleenk)
+Contributors:  
+* [Joeleen Kennedy](https://github.com/joeleenk)  
+* [Rian Rietveld](https://github.com/rianrietveld)
 
 ## Contributing
 
