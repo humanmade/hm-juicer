@@ -1,6 +1,6 @@
-<img src="https://hmn.md/content/themes/hmnmd/assets/images/hm-logo.svg" width="100" alt="Human Made Logo" />
+<img src="https://humanmade.com/content/themes/humanmade/lib/hm-pattern-library/assets/images/logos/logo-red.svg" width="100" alt="Human Made Logo" />
 
-# HM Juicer
+# <img src="https://avatars3.githubusercontent.com/u/4896003?s=20" alt="Juicer.io logo"> HM Juicer
 
 Integrates with Juicer API for social feeds and allows accessible display of social media content.
 
@@ -37,8 +37,9 @@ Created by Human Made to render and display accessible social media feeds via th
 
 Maintained by [Chris Reynolds](https://github.com/jazzsequence).
 
-Contributors:
-* [Joeleen Kennedy](https://github.com/joeleenk)
+Contributors:  
+* [Joeleen Kennedy](https://github.com/joeleenk)  
+* [Rian Rietveld](https://github.com/rianrietveld)
 
 ## Contributing
 
