@@ -102,7 +102,7 @@ class Test_API extends \WP_UnitTestCase {
 		);
 
 		$this->assertEquals(
-			sprintf( esc_html__( '%s ago', 'hm-juicer' ), human_time_diff( strtotime( '2019-09-03T11:50:08.000-07:00' ), current_time( 'U' ) ) ),
+			'Sep 3, 2019',
 			$post->post_date_humanized
 		);
 
