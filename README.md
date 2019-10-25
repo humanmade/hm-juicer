@@ -1,6 +1,6 @@
 <img src="https://humanmade.com/content/themes/humanmade/lib/hm-pattern-library/assets/images/logos/logo-red.svg" width="100" alt="Human Made Logo" />
 
-# HM Juicer
+# <img src="https://avatars3.githubusercontent.com/u/4896003?s=20" alt="Juicer.io logo"> HM Juicer
 
 Integrates with Juicer API for social feeds and allows accessible display of social media content.
 
