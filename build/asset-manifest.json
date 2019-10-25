@@ -1,0 +1,8 @@
+{
+  "hm-juicer-js.js": "http://localhost:9097/content/plugins-mu/hm-juicer/build/hm-juicer-js.js",
+  "hm-juicer-js.js.map": "http://localhost:9097/content/plugins-mu/hm-juicer/build/hm-juicer-js.js.map",
+  "hm-juicer-load-more.js": "http://localhost:9097/content/plugins-mu/hm-juicer/build/hm-juicer-load-more.js",
+  "hm-juicer-load-more.js.map": "http://localhost:9097/content/plugins-mu/hm-juicer/build/hm-juicer-load-more.js.map",
+  "hm-juicer-style.js": "http://localhost:9097/content/plugins-mu/hm-juicer/build/hm-juicer-style.js",
+  "hm-juicer-style.js.map": "http://localhost:9097/content/plugins-mu/hm-juicer/build/hm-juicer-style.js.map"
+}
