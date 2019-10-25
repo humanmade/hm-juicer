@@ -1,0 +1,2 @@
+# Ignore vendor folder. Vendor libraries will be added via composer.
+vendor/
