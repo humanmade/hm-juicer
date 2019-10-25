@@ -1,6 +1,9 @@
 # Ignore vendor folder. Vendor libraries will be added via composer.
 vendor/
 
+# Ignore npm stuff
+node_modules/
+
 # OS and Software generated files
 .DS_Store
 Thumbs.db
