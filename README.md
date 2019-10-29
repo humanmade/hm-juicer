@@ -47,6 +47,16 @@ If you want to contribute, you'll need to get your local environment setup. We'v
 ```bash
 npm run setup
 ```
+
+In order to run unit tests locally, you'll need to make sure that you have a local version of PHP and MySQL/MariaDB installed (or run inside a virtual machine/Docker container). If your machine meets the requirements, you can run this command to get unit tests set up in your environment:
+
+```bash
+npm run setup:tests
+```
+
+(This is not run as part of the normal setup script because not every environment will support it.)
+
+
 The development process follows [the standard Human Made development process](http://engineering.hmn.md/how-we-work/process/development/).
 
 Here's a quick summary:
