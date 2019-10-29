@@ -18,8 +18,14 @@ const JUICER_ENDPOINT = 'https://www.juicer.io/api/feeds/';
  * Kick everything off.
  */
 function bootstrap() {
-	// If the JUICER ID wasn't defined, load a settings page to set it there.
-	if ( ! defined( 'JUICER_ID' ) ) {
+	if ( 
+		// If none of the Juicer constants are defined...
+		! defined( 'JUICER_ID' ) ||
+		! defined( 'JUICER_SHORT_URL' ) ||
+		! defined( 'JUICER_LONG_URL' ) ||
+		! defined( 'JUICER_SITE_NAME' ) 
+	) {
+		// ...load the settings page.
 		require_once __DIR__ . '/settings.php';
 		Settings\bootstrap();
 	}
