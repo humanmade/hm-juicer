@@ -1,0 +1,27 @@
+{
+    "extends": "humanmade",
+    "env": {
+        "browser": true,
+        "node": true
+    },
+    "globals": {
+        "_": false,
+        "Backbone": false,
+        "jQuery": false,
+        "wp": false
+    },
+    "rules": {
+        "key-spacing": [ "error", { "mode": "minimum" } ],
+        "no-var": 0,
+        "object-curly-newline": 0,
+        "react/react-in-jsx-scope": "off",
+        "space-unary-ops": [ "error", {
+          "words": false,
+          "nonwords": true,
+          "overrides": { "-": false, "--": false, "++": false, ".": false }
+        } ],
+        "comma-dangle": [ "error", "never" ],
+        "semi": [ "error", "always" ],
+        "indent": [ "error", "tab", { "SwitchCase" : 1 } ]
+    }
+}

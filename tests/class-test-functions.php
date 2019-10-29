@@ -131,10 +131,8 @@ class Test_Functions extends \WP_UnitTestCase {
 	 * Test the humanized_time function. This uses human_time_diff, and we need that to get the string to test, so this is sort of derivative and not really testing a whole lot.
 	 */
 	public function test_humanized_time() {
-		$humanized_time_diff = human_time_diff( strtotime( '2019-09-03T11:50:08.000-07:00' ), time() );
-
 		$this->assertEquals(
-			sprintf( '%s ago', $humanized_time_diff ),
+			'Sep 3, 2019',
 			juicer_get_humanized_time()
 		);
 	}
@@ -143,7 +141,7 @@ class Test_Functions extends \WP_UnitTestCase {
 	 * Test the get_the_content function.
 	 */
 	public function test_get_the_content() {
-		$content = "<p>Juicer Test is ahead of the curve in the post-acute setting in recognizing patients who are at risk for sepsis with Cerner's Sepsis Management solution. Learn how early intervention prevented our patients from becoming septic and/or transferring from our hospitals 77% of the time. <a href=\"https://test.site.dev/2zulhdo\" class=\"juicer-post__sharing-link\">Read More</a></p>";
+		$content = "<p>Breakfast. That's a great idea. I'd love to park. Hey, hey, Doc, where are you? What's going on? Where have you been all week? Listen, I gotta go but I wanted to tell you that it's been educational. <a href=\"https://test.site.dev/2zulhdo\" class=\"juicer-post__sharing-link\">Read More</a></p>";
 
 		$this->assertEquals(
 			$content,

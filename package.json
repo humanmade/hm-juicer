@@ -1,0 +1,51 @@
+{
+    "name": "hm-juicer",
+    "version": "0.1.0",
+    "description": "Integrates with Juicer API for social feeds and allows accessible display of social media content.",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/humanmade/hm-juicer.git"
+    },
+    "author": "Human Made Limited",
+    "license": "GPL-3.0-or-later",
+    "bugs": {
+        "url": "https://github.com/humanmade/hm-juicer/issues"
+    },
+    "browserlist": [
+        "ie >= 11",
+        "last 2 Android versions",
+        "last 2 ChromeAndroid versions",
+        "last 2 Chrome versions",
+        "last 2 Firefox versions",
+        "last 2 Safari versions",
+        "last 2 iOS versions",
+        "last 2 Edge versions",
+        "last 2 Opera versions"
+    ],
+    "scripts": {
+        "build": "webpack --config .config/wepback-config-prod.js",
+        "dev": "webpack-dev-server --config .config/webpack-config-dev.js",
+        "lint:php": "vendor/bin/phpcs --standard=./phpcs.ruleset.xml -p -s -v --extensions=php",
+        "lint:js": "eslint **/*.js ",
+        "lint": "npm run lint:php && npm run lint:js",
+        "start": "npm run dev",
+        "setup": "npm install && composer install",
+        "setup:tests": "bash .bin/install-wp-tests.sh \"wp_tests\" \"root\" \"\" \"127.0.0.1\""
+    },
+    "devDependencies": {
+        "@humanmade/webpack-helpers": "^0.5.2",
+        "@wordpress/element": "^2.8.2",
+        "babel-eslint": "^10.0.3",
+        "eslint": "^5.16.0",
+        "eslint-config-humanmade": "^0.7.0",
+        "eslint-config-react-app": "^3.0.8",
+        "eslint-plugin-flowtype": "^3.13.0",
+        "eslint-plugin-import": "^2.18.2",
+        "eslint-plugin-jsx-a11y": "^6.2.3",
+        "eslint-plugin-react": "^7.16.0",
+        "node-sass": "^4.13.0",
+        "webpack": "^4.41.2",
+        "webpack-cli": "^3.3.9",
+        "webpack-dev-server": "^3.9.0"
+    }
+}

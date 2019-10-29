@@ -1,19 +1,13 @@
-<img src="https://hmn.md/content/themes/hmnmd/assets/images/hm-logo.svg" width="100" alt="Human Made Logo" />
+<img src="https://humanmade.com/content/themes/humanmade/lib/hm-pattern-library/assets/images/logos/logo-red.svg" width="100" alt="Human Made Logo" />
 
-# HM Juicer
+# <img src="https://avatars3.githubusercontent.com/u/4896003?s=20" alt="Juicer.io logo"> HM Juicer
 
 Integrates with Juicer API for social feeds and allows accessible display of social media content.
-
-## Dependencies
-
-This plugin expects the following other libraries to exist:
-
-* [CMB2](https://github.com/CMB2/CMB2)
 
 ## Installation
 
 ### Step 1
-Install the plugin via `composer`. (Note, composer integration not implemented yet, so this won't work.  TODO: Update this and remove this note 😅.)
+Install the plugin via `composer`.
 
 ```bash
 composer require humanmade/hm-juicer
@@ -37,10 +31,36 @@ Created by Human Made to render and display accessible social media feeds via th
 
 Maintained by [Chris Reynolds](https://github.com/jazzsequence).
 
-Contributors:
-* [Joeleen Kennedy](https://github.com/joeleenk)
+Contributors:  
+* [Joeleen Kennedy](https://github.com/joeleenk)  
+* [Rian Rietveld](https://github.com/rianrietveld)
+
+This plugin depends on these libraries/technologies by some awesome developers:
+
+* [CMB2/CMB2](https://github.com/CMB2/CMB2)
+* [humanmade/webpack-helpers](https://github.com/humanmade/webpack-helpers)
+* [humanmade/asset-loader](https://github.com/humanmade/asset-loader)
+* [Babel](https://babeljs.io/)
+* [ESLint](https://eslint.org/)
+* [Webpack](https://webpack.js.org/)
+* [Sass](https://sass-lang.com/)
 
 ## Contributing
+
+If you want to contribute, you'll need to get your local environment setup. We've provided an easy setup script to get all the NPM dependencies and any required Composer dependencies installed. Simply run the following command after checking out the repository and `cd`ing into it:
+
+```bash
+npm run setup
+```
+
+In order to run unit tests locally, you'll need to make sure that you have a local version of PHP and MySQL/MariaDB installed (or run inside a virtual machine/Docker container). If your machine meets the requirements, you can run this command to get unit tests set up in your environment:
+
+```bash
+npm run setup:tests
+```
+
+(This is not run as part of the normal setup script because not every environment will support it.)
+
 
 The development process follows [the standard Human Made development process](http://engineering.hmn.md/how-we-work/process/development/).
 
