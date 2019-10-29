@@ -64,3 +64,17 @@ function options_page() {
 		'type' => 'text',
 	] );
 }
+
+/**
+ * Get Juicer option.
+ * 
+ * Wrapper for cmb2_get_option. Since this file is only loaded when CMB2 has already been loaded, we can make sure that we never run into errors with CMB2 functions not being defined.
+ *
+ * @param string $option_name The Juicer option to request.
+ * @param bool   $default     A default value. 
+ * 
+ * @return mixed              The option value.
+ */
+function juicer_get_option( string $option_name, $default = false ) {
+	return cmb2_get_option( 'juicer_options', $option_name, $default );
+}
