@@ -155,15 +155,15 @@ function get_read_more_text( string $external_src_link, string $social_post_src,
 
 	// Set text based on post type.
 	if ( 'photo' === $post_type ) {
-		// translators: the item source (Facebook, Twitter, Original Website).
+		// Translators: %s refers to the item source (Facebook, Twitter, Original Website).
 		$link_text = sprintf( __( 'View the photo on %s', 'hm-juicer' ), esc_html( $read_more_src ) );
 
 	} elseif ( 'video' === $post_type ) {
-		// translators: the item source (Facebook, Twitter, Original Website).
+		// Translators: %s refers to the item source (Facebook, Twitter, Original Website).
 		$link_text = sprintf( __( 'Watch the video on %s', 'hm-juicer' ), esc_html( $read_more_src ) );
 
 	} else {
-		// translators: the item source (Facebook, Twitter, Original Website).
+		// Translators: %s refers to the item source (Facebook, Twitter, Original Website).
 		$link_text = sprintf( __( 'Read original post on %s', 'hm-juicer' ), esc_html( $read_more_src ) );
 	}
 
@@ -191,7 +191,9 @@ function get_item_content( string $message, $item ) : string {
 	// Search content for links.
 	preg_match( '/<a ?.*>(.*)<\/a>/', $content, $link_matches );
 
-	$full_read_more_link = "<a href=\"$link_url\" class=\"juicer-post__sharing-link\" aria-label=\"$link_text, posted $posted_time on $social_post_src\">$link_text <i class=\"fas fa-chevron-right\" aria-hidden=\"true\"></i></a>";
+	// Translators: 1: The link text, 2: The humanized time the link was posted, 3: The social network the link was posted to.
+	$aria_label = sprintf( __( '%1$s, posted %2$s on %3$s', 'hm-juicer' ), $link_text, $posted_time, $social_post_src );
+	$full_read_more_link = "<a href=\"$link_url\" class=\"juicer-post__sharing-link\" aria-label=\"$aria_label\">$link_text <i class=\"fas fa-chevron-right\" aria-hidden=\"true\"></i></a>";
 
 	/**
 	 * If the last link in the content is the same as the external_src_link, replace it.
