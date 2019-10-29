@@ -4,12 +4,6 @@
 
 Integrates with Juicer API for social feeds and allows accessible display of social media content.
 
-## Dependencies
-
-This plugin expects the following other libraries to exist:
-
-* [CMB2](https://github.com/CMB2/CMB2)
-
 ## Installation
 
 ### Step 1
@@ -40,6 +34,16 @@ Maintained by [Chris Reynolds](https://github.com/jazzsequence).
 Contributors:  
 * [Joeleen Kennedy](https://github.com/joeleenk)  
 * [Rian Rietveld](https://github.com/rianrietveld)
+
+This plugin depends on these libraries/technologies by some awesome developers:
+
+* [CMB2/CMB2](https://github.com/CMB2/CMB2)
+* [humanmade/webpack-helpers](https://github.com/humanmade/webpack-helpers)
+* [humanmade/asset-loader](https://github.com/humanmade/asset-loader)
+* [Babel](https://babeljs.io/)
+* [ESLint](https://eslint.org/)
+* [Webpack](https://webpack.js.org/)
+* [Sass](https://sass-lang.com/)
 
 ## Contributing
 
