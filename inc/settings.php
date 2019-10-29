@@ -72,7 +72,7 @@ function options_page() {
  *
  * @param string $option_name The Juicer option to request.
  * @param bool   $default     A default value.
- * 
+ *
  * @return mixed              The option value.
  */
 function juicer_get_option( string $option_name, $default = false ) {
