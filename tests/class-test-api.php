@@ -272,7 +272,7 @@ class Test_API extends \WP_UnitTestCase {
 
 		// Test that a raw URL inside the content is transformed into a link.
 		$this->assertEquals(
-			'<p>Back to the future. No no no this sucker\'s electrical, but I need a nuclear reaction to generate the one point twenty-one gigawatts of electricity- <a href="http://test.dev/link-raw/">http://test.dev/link-raw/</a> But, what are you blind McFly, it\'s there. How else do you explain that wreck out there? <a href="http://test.dev/external-link/" class="juicer-post__sharing-link" aria-label="Read original post on test.dev, posted Aug 26 2019, on Facebook">Read original post on test.dev <i class="fas fa-chevron-right" aria-hidden="true"></i></a></p>',
+			'<p>Back to the future. No no no this sucker\'s electrical, but I need a nuclear reaction to generate the one point twenty-one gigawatts of electricity- <a href="http://test.dev/link-raw/">http://test.dev/link-raw/</a> But, what are you blind McFly, it\'s there. How else do you explain that wreck out there? <a href="http://test.dev/external-link/" class="juicer-post__sharing-link" aria-label="Read original post on test.dev, posted Aug 26, 2019 on Facebook">Read original post on test.dev <i class="fas fa-chevron-right" aria-hidden="true"></i></a></p>',
 			get_item_content( $content_link_raw, $post )
 		);
 	}
