@@ -68,7 +68,7 @@ function get_id() {
 	}
 
 	// Return the option, if it exists.
-	return cmb2_get_option( 'juicer_options', 'juicer_id', false );
+	return Settings\juicer_get_option( 'juicer_id', false );
 }
 
 /**
@@ -86,7 +86,7 @@ function get_short_url() {
 		$short_url = JUICER_SHORT_URL;
 	} else {
 		// Return the option, if it exists.
-		$short_url = cmb2_get_option( 'juicer_options', 'JUICER_SHORT_URL', false );
+		$short_url = Settings\juicer_get_option( 'JUICER_SHORT_URL', false );
 	}
 
 	// If the url doesn't have a scheme, add one for consistency.
@@ -112,7 +112,7 @@ function get_long_url() {
 		$long_url = JUICER_LONG_URL;
 	} else {
 		// Return the option, if it exists.
-		$long_url = cmb2_get_option( 'juicer_options', 'JUICER_LONG_URL', false );
+		$long_url = Settings\juicer_get_option( 'JUICER_LONG_URL', false );
 	}
 
 	// If the url doesn't have a scheme, add one for consistency.
@@ -137,7 +137,7 @@ function get_site_name() {
 	}
 
 	// Return the option, if it exists.
-	return cmb2_get_option( 'juicer_options', 'JUICER_SITE_NAME', false );
+	return Settings\juicer_get_option( 'JUICER_SITE_NAME', false );
 }
 
 /**
