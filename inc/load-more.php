@@ -42,7 +42,7 @@ function ajax_handler() {
  * @return array Response data to send back to the client.
  */
 function prepare_response() {
-	$args       = wp_unslash( $_POST['args'] );
+	$args       = isset( $_POST['args'] ) ? wp_unslash( $_POST['args'] ) : [];
 	$page       = isset( $args['page'] ) ? absint( $args['page'] ) : 1;
 	$post_count = isset( $args['post_count'] ) ? absint( $args['post_count'] ) : 10;
 
