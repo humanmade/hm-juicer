@@ -1,0 +1,68 @@
+version: 2
+jobs:
+    build:
+        docker:
+        - image: circleci/php:7.2-node-browsers
+
+        steps:
+            # Prepare for later installations
+            - run:
+                name: "Update apt"
+                command: sudo apt-get update
+
+            - run:
+                name: "Install svn for WordPress"
+                command: sudo apt-get install subversion
+
+            - run:
+                name: "Install MariaDB"
+                command: |
+                    sudo apt-get install mariadb-server
+                    sudo service mysql status || sudo service mysql start
+                    sudo docker-php-ext-install mysqli
+
+            - run:
+                name: "Prepare test database"
+                command: |
+                    sudo mysql -uroot mysql -e "UPDATE user SET plugin='mysql_native_password' WHERE User='root'; FLUSH PRIVILEGES"
+
+            # Install phpunit
+            - run:
+                name: "Install PHPUnit"
+                command: |
+                    sudo wget -O /usr/local/bin/phpunit https://phar.phpunit.de/phpunit-5.7.27.phar
+                    sudo chmod +x /usr/local/bin/phpunit
+
+            # Check out the code.
+            - checkout
+
+            # Install Composer dependencies
+            - run:
+                name: "Install Composer libraries"
+                command: composer install
+
+            - run:
+                name: "Setup WordPress test environment"
+                command: |
+                    bash bin/install-wp-tests.sh "wp_tests" "root" "" "127.0.0.1"
+
+            - run:
+                name: "Run PHP Lint"
+                command: find -L ./ -name '*.php' -print0 | xargs -0 -n 1 -P 4 php -l > /dev/null
+
+            - run:
+                name: "Run PHPUnit"
+                command: |
+                    mkdir -p ~/phpunit
+                    phpunit --log-junit ~/phpunit/junit.xml
+
+            # Run phpcs
+            - run:
+                name: "Run phpcs"
+                command: ./vendor/bin/phpcs -p --extensions=php --standard=./phpcs.ruleset.xml ./ -p -s -v -q
+
+            # Teardown
+            - store_test_results:
+                path: ~/phpunit
+            - store_artifacts:
+                path: ~/phpunit

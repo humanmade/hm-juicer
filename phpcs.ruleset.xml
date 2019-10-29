@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<ruleset name="hm-juicer">
+	<description>Code sniffing rules for use with HM Juicer plugin</description>
+
+	<!-- Use HM Coding Standards -->
+	<rule ref="vendor/humanmade/coding-standards">
+		<exclude name="HM.Files.FunctionFileName.WrongFile" />
+	</rule>
+
+	<rule ref="HM.Functions.NamespacedFunctions.MissingNamespace">
+		<exclude-pattern>inc/functions.php</exclude-pattern>
+	</rule>
+
+	<!-- Add PHPDoc rules -->
+	<rule ref="WordPress-Docs" />
+
+	<exclude-pattern>php-codesniffer/*</exclude-pattern>
+	<exclude-pattern>**/tests/*</exclude-pattern>
+</ruleset>
