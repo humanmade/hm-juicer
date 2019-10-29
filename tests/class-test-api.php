@@ -245,8 +245,9 @@ class Test_API extends \WP_UnitTestCase {
 	 * We do a couple tests here to make sure we're only grabbing the last link in the message and changing the link text there to Read More with a custom class.
 	 */
 	public function test_get_item_content() {
-		$post           = new \stdClass();
-		$post->external = 'http://test.dev/external-link/';
+		$post                      = new \stdClass();
+		$post->external            = 'http://test.dev/external-link/';
+		$post->external_created_at = "2019-08-26T11:30:11.000-07:00";
 
 		$content_simple = '<p>It\'s cold, damn cold. Ha, ha, ha, Einstein, you little devil. Einstein\'s clock is exactly one minute behind mine, it\'s still ticking. Like I always told you, if you put your mind to it you could accomplish anything. Yeah, but you\'re uh, you\'re so, you\'re so thin. <a target="_blank" class="auto" href="http://test.dev/external-link/">http://test.dev/external-link/</a></p>';
 
