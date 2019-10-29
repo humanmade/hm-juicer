@@ -5,8 +5,15 @@
     "license": "GPL-3.0-or-later",
     "require": {
         "php": ">=7.0",
-        "cmb2/cmb2": "^2.6"
+        "cmb2/cmb2": "^2.6",
+        "humanmade/asset-loader": "^0.3"
     },
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "git@github.com:humanmade/asset-loader.git"
+        }
+    ],
     "require-dev": {
         "humanmade/coding-standards": "^0.7",
         "phpunit/phpunit": "5.7.*"
