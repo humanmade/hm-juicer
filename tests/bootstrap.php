@@ -9,6 +9,7 @@
 defined( 'JUICER_ID' ) or define( 'JUICER_ID', 'testenv' );
 defined( 'JUICER_SHORT_URL' ) or define( 'JUICER_SHORT_URL', 'test.ly' );
 defined( 'JUICER_LONG_URL' ) or define( 'JUICER_LONG_URL', 'test.site.dev' );
+defined( 'JUICER_SITE_NAME' ) or define( 'JUICER_SITE_NAME', 'Juicer Test Site' );
 
 $_tests_dir = getenv( 'WP_TESTS_DIR' );
 
