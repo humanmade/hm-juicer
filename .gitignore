@@ -1,10 +1,21 @@
 # Ignore vendor folder. Vendor libraries will be added via composer.
 vendor/
 
-# Ignore npm stuff
+# Ignore node modules.
 node_modules/
 
-# OS and Software generated files
+# Ignore build files.
+build/
+dist/
+
+### OS and Software generated files ###
 .DS_Store
+ehthumbs.db
 Thumbs.db
 ._*
+.vscode
+.idea/
+
+### Sass generated files ###
+*.map
+.sass-cache
