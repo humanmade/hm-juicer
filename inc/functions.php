@@ -16,7 +16,7 @@ use HM\Juicer;
  * @param int  $page      The page to display.
  * @param bool $load_more Whether to include a load more button.
  */
-function juicer_feed( $count = 10, $page = 1, $load_more = false ) {
+function juicer_feed( int $count = 10, int $page = 1, bool $load_more = false ) {
 	global $juicer_posts;
 
 	wp_enqueue_script( 'hm-juicer-js' );

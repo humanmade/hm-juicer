@@ -98,7 +98,7 @@ function prepare_post_items( array $items ) : array {
  *
  * @return string                     The filtered Juicer post message.
  */
-function get_read_more_text( $external_src_link, $social_post_src, $social_profile_name ) {
+function get_read_more_text( string $external_src_link, string $social_post_src, string $social_profile_name ) : string {
 	// Get just the host portion of the URL.
 	$external_src_href = wp_parse_url( $external_src_link )['host'];
 	$external_src_href = str_replace( 'www.', '', $external_src_href );
