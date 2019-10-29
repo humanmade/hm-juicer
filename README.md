@@ -42,6 +42,11 @@ Contributors:
 
 ## Contributing
 
+If you want to contribute, you'll need to get your local environment setup. We've provided an easy setup script to get all the NPM dependencies and any required Composer dependencies installed. Simply run the following command after checking out the repository and `cd`ing into it:
+
+```bash
+npm run setup
+```
 The development process follows [the standard Human Made development process](http://engineering.hmn.md/how-we-work/process/development/).
 
 Here's a quick summary:
