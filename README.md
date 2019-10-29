@@ -7,7 +7,7 @@ Integrates with Juicer API for social feeds and allows accessible display of soc
 ## Installation
 
 ### Step 1
-Install the plugin via `composer`. (Note, composer integration not implemented yet, so this won't work.  TODO: Update this and remove this note 😅.)
+Install the plugin via `composer`.
 
 ```bash
 composer require humanmade/hm-juicer
