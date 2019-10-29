@@ -266,7 +266,7 @@ class Test_API extends \WP_UnitTestCase {
 
 		// Test that the link inside the content is preserved and the final link text is replaced with Read More.
 		$this->assertEquals(
-			'<p>Oh, I\'ve been so worried about you ever since you ran off the other night. Are you okay? I\'m sorry I have to go. Isn\'t he a dream boat? <a href="http://test.dev/link-inside/">Another link inside the content.</a> Uh, well, okay Biff, uh, I\'ll finish that on up tonight and I\'ll bring it over first thing tomorrow morning. Now, now, Biff, now, I never noticed any blindspot before when I would drive it. Hi, son. <a href="http://test.dev/external-link/" class="juicer-post__sharing-link">Read More</a></p>',
+			'<p>Oh, I\'ve been so worried about you ever since you ran off the other night. Are you okay? I\'m sorry I have to go. Isn\'t he a dream boat? <a href="http://test.dev/link-inside/">Another link inside the content.</a> Uh, well, okay Biff, uh, I\'ll finish that on up tonight and I\'ll bring it over first thing tomorrow morning. Now, now, Biff, now, I never noticed any blindspot before when I would drive it. Hi, son. <a href="http://test.dev/external-link/" class="juicer-post__sharing-link" aria-label="Read original post on test.dev, posted Aug 26, 2019 on Facebook">Read original post on test.dev <i class="fas fa-chevron-right" aria-hidden="true"></i></a></p>',
 			get_item_content( $content_link_inside, $post )
 		);
 
