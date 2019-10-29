@@ -4,12 +4,6 @@
 
 Integrates with Juicer API for social feeds and allows accessible display of social media content.
 
-## Dependencies
-
-This plugin expects the following other libraries to exist:
-
-* [CMB2](https://github.com/CMB2/CMB2)
-
 ## Installation
 
 ### Step 1
