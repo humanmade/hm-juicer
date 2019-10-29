@@ -260,7 +260,7 @@ class Test_API extends \WP_UnitTestCase {
 
 		// Test that the link text is changed to Read More and the juicer-post__sharing-link class is added.
 		$this->assertEquals(
-			'<p>It\'s cold, damn cold. Ha, ha, ha, Einstein, you little devil. Einstein\'s clock is exactly one minute behind mine, it\'s still ticking. Like I always told you, if you put your mind to it you could accomplish anything. Yeah, but you\'re uh, you\'re so, you\'re so thin. <a href="http://test.dev/external-link/" class="juicer-post__sharing-link">Read More</a></p>',
+			'<p>It\'s cold, damn cold. Ha, ha, ha, Einstein, you little devil. Einstein\'s clock is exactly one minute behind mine, it\'s still ticking. Like I always told you, if you put your mind to it you could accomplish anything. Yeah, but you\'re uh, you\'re so, you\'re so thin. <a href="http://test.dev/external-link/" class="juicer-post__sharing-link" aria-label="Read original post on test.dev, posted Aug 26, 2019 on Facebook">Read original post on test.dev <i class="fas fa-chevron-right" aria-hidden="true"></i></a></p>',
 			get_item_content( $content_simple, $post )
 		);
 
