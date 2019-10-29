@@ -30,7 +30,7 @@
         "lint": "npm run lint:php && npm run lint:js",
         "start": "npm run dev",
         "setup": "npm install && composer install",
-        "setup:tests": "bash .bin/install-wp-tests.sh"
+        "setup:tests": "bash .bin/install-wp-tests.sh \"wp_tests\" \"root\" \"\" \"127.0.0.1\""
     },
     "devDependencies": {
         "@humanmade/webpack-helpers": "^0.5.2",
