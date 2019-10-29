@@ -124,7 +124,7 @@ class Test_API extends \WP_UnitTestCase {
 		);
 
 		$this->assertEquals(
-			"<p>Juicer Test is ahead of the curve in the post-acute setting in recognizing patients who are at risk for sepsis with Cerner's Sepsis Management solution. Learn how early intervention prevented our patients from becoming septic and/or transferring from our hospitals 77% of the time. <a href=\"https://test.site.dev/2zulhdo\" class=\"juicer-post__sharing-link\">Read More</a></p>",
+			"<p>Juicer Test is ahead of the curve in the post-acute setting in recognizing patients who are at risk for sepsis with Cerner's Sepsis Management solution. Learn how early intervention prevented our patients from becoming septic and/or transferring from our hospitals 77% of the time. <a href=\"https://test.site.dev/2zulhdo\" class=\"juicer-post__sharing-link\" aria-label=\"Read original post on Juicer Test Site, posted Sep 3, 2019 on Facebook\">Read original post on Juicer Test Site <i class=\"fas fa-chevron-right\" aria-hidden=\"true\"></i></a></p>",
 			$post->post_content
 		);
 
