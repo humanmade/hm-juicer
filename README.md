@@ -35,6 +35,15 @@ Contributors:
 * [Joeleen Kennedy](https://github.com/joeleenk)  
 * [Rian Rietveld](https://github.com/rianrietveld)
 
+This plugin depends on these libraries/technologies by some awesome developers:
+
+* [CMB2/CMB2](https://github.com/CMB2/CMB2)
+* [humanmade/webpack-helpers](https://github.com/humanmade/webpack-helpers)
+* [humanmade/asset-loader](https://github.com/humanmade/asset-loader)
+* [Babel](https://babeljs.io/)
+* [ESLint](https://eslint.org/)
+* [Webpack](https://webpack.js.org/)
+
 ## Contributing
 
 The development process follows [the standard Human Made development process](http://engineering.hmn.md/how-we-work/process/development/).
