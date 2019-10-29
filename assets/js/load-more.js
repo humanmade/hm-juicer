@@ -1,4 +1,4 @@
-/* global hmJuicerLoadMore */
+/* global hmJuicerLoadMore jQuery */
 
 import { resizeNewItems } from './juicer.js';
 
