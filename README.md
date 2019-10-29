@@ -43,6 +43,7 @@ This plugin depends on these libraries/technologies by some awesome developers:
 * [Babel](https://babeljs.io/)
 * [ESLint](https://eslint.org/)
 * [Webpack](https://webpack.js.org/)
+* [Sass](https://sass-lang.com/)
 
 ## Contributing
 
