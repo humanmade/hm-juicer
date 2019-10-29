@@ -13,6 +13,7 @@ dist/
 ehthumbs.db
 Thumbs.db
 ._*
+.vscode
 .idea/
 
 ### Sass generated files ###
