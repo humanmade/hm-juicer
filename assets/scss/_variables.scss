@@ -1,0 +1,28 @@
+/**
+ * Variable definitions for HM Juicer plugin.
+ */
+
+// Colors
+$light: #fff;
+$dark: #222;
+
+/**
+ * Breakpoints
+ * 1) Breakpoint widths are based on the 12 column grid in use in designs.
+ * 2) The main breakpoints are $bp-s $bp-m and $bp-l, with the additional
+ *    suffixed breakpoints for more granular control where needed.
+ */
+$bp-s-s:  21em; // 336px
+$bp-s:    28em; // 448px - 4 Columns
+$bp-s-l:  35em; // 560px
+$bp-m-s:  42em; // 672px
+$bp-m:    49em; // 784px - 8 Columns
+$bp-m-l:  56em; // 896px
+$bp-l-s:  64em; // 1024px
+$bp-l:    70em; // 1120px - 12 Columns
+$bp-l-l:  77em; // 1232px
+$bp-xl-s: 84em; // 1344px
+$bp-xl:   91em; // 1456px - 16 Columns
+$bp-xl-l: 98em; // 1568px
+
+$bp-wp-admin-bar: 782px;

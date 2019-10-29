@@ -12,11 +12,15 @@ use HM\Juicer;
 /**
  * Display the main Juicer social media feed.
  *
- * @param int $count The number of posts to display.
- * @param int $page  The page to display.
+ * @param int  $count     The number of posts to display.
+ * @param int  $page      The page to display.
+ * @param bool $load_more Whether to include a load more button.
  */
-function juicer_feed( $count = 10, $page = 1 ) {
+function juicer_feed( int $count = 10, int $page = 1, bool $load_more = false ) {
 	global $juicer_posts;
+
+	wp_enqueue_script( 'hm-juicer-js' );
+
 	$juicer_posts = Juicer\get_posts( $count, $page );
 
 	/**
@@ -31,7 +35,7 @@ function juicer_feed( $count = 10, $page = 1 ) {
 	$feed = apply_filters( 'juicer_filter_feed_template', 'feed' );
 
 	ob_start();
-	juicer_get_template( $feed );
+	juicer_get_template( $feed, $count, $load_more );
 	echo ob_get_clean();
 }
 
@@ -99,9 +103,7 @@ function juicer_get_post() : object {
  * @return bool True if the sharing url contains 'videos'. False otherwise.
  */
 function juicer_is_video() : bool {
-	global $juicer_post;
-
-	if ( strpos( juicer_get_sharing_link(), 'videos' ) ) {
+	if ( false !== strpos( juicer_get_sharing_link(), 'videos' ) ) {
 		return true;
 	}
 
@@ -469,10 +471,12 @@ function juicer_the_author_image() {
  * of 'part-juicer', but both the path to the template directory and the
  * prefix can be filtered.
  *
- * @param string $template (Required) The template to load (e.g. 'feed' or
+ * @param string $template  (Required) The template to load (e.g. 'feed' or
  * 'post'), not including the prefix ('part-juicer').
+ * @param int    $count     The number of posts to load.
+ * @param bool   $load_more Whether to display a load more button.
  */
-function juicer_get_template( string $template ) {
+function juicer_get_template( string $template, int $count = 10, bool $load_more = false ) {
 	/**
 	 * Allow the template directory path to be filtered. Defaults to the templates directory in the plugin.
 	 *
@@ -507,6 +511,10 @@ function juicer_get_template( string $template ) {
 		) );
 	}
 
+	// Set $count and $load_more as query variables to use in the template.
+	set_query_var( 'post_count', $count );
+	set_query_var( 'load_more', $load_more );
+
 	// Load the template!
 	load_template( $template_file, false );
 }
@@ -522,4 +530,73 @@ function juicer_unset_posts() : array {
 	$juicer_posts = [];
 
 	return $juicer_posts;
+}
+
+
+/**
+ * HM Juicer 'Load More' button.
+ *
+ * @param array $args Array of arguments.
+ */
+function juicer_load_more_button( array $args = [] ) {
+
+	$default_args = [
+		'aria_label'       => __( 'Load more', 'hm-juicer' ),
+		'button_text'      => __( 'Load more', 'hm-juicer' ),
+		'button_class'     => 'btn-load-more btn btn-large',
+		'container_class'  => '',
+		'list_class'       => '.juicer-feed',
+		'page'             => 2,
+		'post_count'       => 10,
+		'template'         => [
+			'name'            => '',
+			'vars'            => [],
+		],
+	];
+
+	$args = wp_parse_args( $args, $default_args );
+
+	// Enqueue 'load more' script.
+	wp_enqueue_script( 'hm-juicer-load-more' );
+
+	wp_localize_script(
+		'hm-juicer-load-more', 'hmJuicerLoadMore', [
+			'ajaxurl' => admin_url( 'admin-ajax.php' ),
+			'args'    => $args,
+		]
+	);
+
+	// Print the button.
+	printf(
+		/* translators: %1$s becomes the container class. %2$s becomes the button class.  %3$s becomes the Aria label. %4$s becomes the button text. */
+		'<div class="centered-load-more-wrapper %1$s">
+			<button class="juicer-feed__load-more %2$s" aria-label="%3$s">%4$s</button>
+			<div class="juicer-feed__loading"></div>
+		</div>',
+		esc_attr( $args['container_class'] ),
+		esc_attr( $args['button_class'] ),
+		esc_attr( $args['aria_label'] ),
+		esc_html( $args['button_text'] )
+	);
+}
+
+/**
+ * Returns an array of classes for the Juicer feed wrapper.
+ *
+ * @param array $classes (Optional) An array of additional classes to pass into the wrapper classes function.
+ *
+ * @return string        A string of classes to be added to the class html tag.
+ */
+function juicer_get_wrapper_classes( array $classes = [] ) : string {
+	/**
+	 * Filter the Juicer wrapper classes
+	 *
+	 * @var array An array of classes. Defaults to "juicer-feed juicer-grid" plus any classes passed to juicer_get_wrapper_classes.
+	 */
+	$classes = apply_filters( 'juicer_filter_wrapper_classes', array_merge( [
+		'juicer-feed',
+		'juicer-grid',
+	], $classes ) );
+
+	return implode( ' ', $classes );
 }

@@ -39,7 +39,7 @@ function get_posts( $count = 10, $page = 1 ) {
 
 		// Pull out the response body and cache it.
 		$feed = wp_remote_retrieve_body( $response );
-		wp_cache_set( "response_per_$count-page_$page", $feed, 'juicer', DAY_IN_SECONDS );
+		wp_cache_set( "response_per_$count-page_$page", $feed, 'juicer', 6 * HOUR_IN_SECONDS );
 	}
 
 	$feed = json_decode( $feed );
@@ -72,11 +72,11 @@ function prepare_post_items( array $items ) : array {
 		$post->post_date           = strtotime( $item->external_created_at );
 		$post->post_date_humanized = maybe_humanize_time( $post->post_date );
 		$post->post_content        = apply_filters( 'juicer_filter_item_content', $item->message, $item );
-		$post->image_url           = esc_url_raw( $item->image );
+		$post->image_url           = validate_image( $item->id, $item->image );
 		$post->additional_images   = $item->additional_photos;
 		$post->source              = esc_html( $item->source->source );
 		$post->source_url          = esc_url_raw( $item->full_url );
-		$post->sharing_link        = esc_url_raw( $item->external );
+		$post->sharing_link        = ! empty( $item->external ) ? esc_url_raw( $item->external ) : '';
 		$post->likes               = absint( $item->like_count );
 		$post->comments            = absint( $item->comment_count );
 		$post->author_name         = ( $item->poster_display_name ) ? esc_html( $item->poster_display_name ) : esc_html( $item->poster_name );
@@ -90,6 +90,87 @@ function prepare_post_items( array $items ) : array {
 }
 
 /**
+ * Get the read more link text, based on the post type and source.
+ *
+ * @param string $external_src_link   The URL of the original post source (photo, video, linked article).
+ * @param string $social_post_src     The social network the post is pulled from.
+ * @param string $social_profile_name The profile name of the social network account.
+ *
+ * @return string                     The filtered Juicer post message.
+ */
+function get_read_more_text( string $external_src_link, string $social_post_src, string $social_profile_name ) : string {
+	// Get just the host portion of the URL.
+	$external_src_href = wp_parse_url( $external_src_link )['host'];
+	$external_src_href = str_replace( 'www.', '', $external_src_href );
+
+	// If the JUICER_SHORT_URL constant is set, get the value.
+	$short_url = get_short_url();
+	if ( $short_url ) {
+		// Get just the host portion of the URL.
+		$short_url = wp_parse_url( $short_url )['host'];
+		$short_url = str_replace( 'www.', '', $short_url );
+	}
+
+	// If the JUICER_LONG_URL constant is set, get the value.
+	$long_url = get_long_url();
+	if ( $long_url ) {
+		// Get just the host portion of the URL.
+		$long_url = wp_parse_url( $long_url )['host'];
+		$long_url = str_replace( 'www.', '', $long_url );
+	}
+
+	// If the JUICER_SITE_NAME constant is set, get the value.
+	if ( get_site_name() ) {
+		$site_name = get_site_name();
+	} else {
+		$site_name = $social_profile_name;
+	}
+
+	/**
+	 * If the original linked article is from one of the URLs provided in the constants,
+	 * use the site name constant or social network profile name.
+	 *
+	 * If the url contains the social network name and the keyword video or photo,
+	 * set the post type acordingly and use the name of the social network.
+	 *
+	 * Otherwise, use the host portion of the external_src_link url.
+	 */
+	if ( $short_url === $external_src_href
+		|| $long_url === $external_src_href ) {
+		$post_type     = 'post';
+		$read_more_src = $site_name;
+
+	} elseif ( strpos( $external_src_link, strtolower( $social_post_src ) ) && strpos( $external_src_link, 'video' ) ) {
+		$post_type     = 'video';
+		$read_more_src = $social_post_src;
+
+	} elseif ( strpos( $external_src_link, strtolower( $social_post_src ) ) && preg_match( '(image|photo)', $external_src_link ) ) {
+		$post_type     = 'photo';
+		$read_more_src = $social_post_src;
+
+	} else {
+		$post_type     = 'post';
+		$read_more_src = $external_src_href;
+	}
+
+	// Set text based on post type.
+	if ( 'photo' === $post_type ) {
+		// Translators: %s refers to the item source (Facebook, Twitter, Original Website).
+		$link_text = sprintf( __( 'View the photo on %s', 'hm-juicer' ), esc_html( $read_more_src ) );
+
+	} elseif ( 'video' === $post_type ) {
+		// Translators: %s refers to the item source (Facebook, Twitter, Original Website).
+		$link_text = sprintf( __( 'Watch the video on %s', 'hm-juicer' ), esc_html( $read_more_src ) );
+
+	} else {
+		// Translators: %s refers to the item source (Facebook, Twitter, Original Website).
+		$link_text = sprintf( __( 'Read original post on %s', 'hm-juicer' ), esc_html( $read_more_src ) );
+	}
+
+	return $link_text;
+}
+
+/**
  * Filter callback to modify the Juicer post text.
  *
  * @param string $message The original message from the Juicer post object.
@@ -98,13 +179,32 @@ function prepare_post_items( array $items ) : array {
  * @return string         The filtered Juicer post message.
  */
 function get_item_content( string $message, $item ) : string {
+	$posted_time         = maybe_humanize_time( strtotime( $item->external_created_at ) );
+	$social_profile_name = ( $item->poster_display_name ) ? esc_html( $item->poster_display_name ) : esc_html( $item->poster_name );
+	$social_post_src     = $item->source->source;
+	$external_src_link   = $item->external;
+	$link_text           = get_read_more_text( $external_src_link, $social_post_src, $social_profile_name );
+	$link_url            = $external_src_link;
+
+	// Get message from post.
 	$content = wp_kses( make_clickable( $message ), allowed_html() );
+	// Search content for links.
 	preg_match( '/<a ?.*>(.*)<\/a>/', $content, $link_matches );
 
-	if ( $item->external === $link_matches[1] ) {
-		$link_text = __( 'Read More', 'hm-juicer' );
-		$link_url  = $link_matches[1];
-		$content   = str_replace( "<a href=\"$link_url\">$link_url</a>", "<a href=\"$link_url\" class=\"juicer-post__sharing-link\">$link_text</a>", $content );
+	// Translators: 1: The link text, 2: The humanized time the link was posted, 3: The social network the link was posted to.
+	$aria_label = sprintf( __( '%1$s, posted %2$s on %3$s', 'hm-juicer' ), $link_text, $posted_time, $social_post_src );
+	$full_read_more_link = "<a href=\"$link_url\" class=\"juicer-post__sharing-link\" aria-label=\"$aria_label\">$link_text <i class=\"fas fa-chevron-right\" aria-hidden=\"true\"></i></a>";
+
+	/**
+	 * If the last link in the content is the same as the external_src_link, replace it.
+	 * Otherwise, add a read more link.
+	 */
+	if ( isset( $link_matches[1] ) && $external_src_link === $link_matches[1] ) {
+		$content = str_replace(
+			"<a href=\"$link_url\">$link_url</a>", $full_read_more_link, $content
+		);
+	} else {
+		$content = $content . $full_read_more_link;
 	}
 
 	return $content;
@@ -128,6 +228,52 @@ function allowed_html() : array {
 }
 
 /**
+ * Validate a remote Juicer item image.
+ *
+ * @param int   $item_id    The unique Juicer item ID.
+ * @param mixed $source_url URL should be a string, but might be empty.
+ *
+ * @return string           The validated image URL or an empty string.
+ */
+function validate_image( int $item_id, $source_url ) : string {
+	// Check for a cached version of the image. If we find one, return that early.
+	$cached_image = wp_cache_get( "source_image_$item_id", 'juicer' );
+
+	if ( $cached_image ) {
+		return esc_url_raw( $cached_image );
+	}
+
+	if ( empty( $source_url ) ) {
+		$source_url = '';
+	}
+
+	$remote_image = wp_remote_get( $source_url );
+
+	if ( 200 !== wp_remote_retrieve_response_code( $remote_image ) ) {
+		$source_url = '';
+	}
+
+	// Doublecheck Facebook CDN to make sure the image is actually a valid image.
+	if ( false !== strpos( $source_url, 'fbcdn' ) ) {
+		$headers = wp_remote_retrieve_headers( $remote_image );
+		if ( isset( $headers['x-error'] ) ) {
+			$source_url = '';
+		}
+	}
+
+	if ( '' === $source_url ) {
+		// Cache broken/invalid source image urls indefinitely.
+		wp_cache_set( "source_image_$item_id", $source_url, 'juicer' );
+		return $source_url;
+	}
+
+	// Cache valid source URLs for a week. This still opens up the possibility of broken images if we've cached a URL and the cache hasn't been updated yet.
+	wp_cache_set( "source_image_$item_id", $source_url, 'juicer', WEEK_IN_SECONDS );
+
+	return esc_url_raw( $source_url );
+}
+
+/**
  * Get the author image from the Juicer post item.
  *
  * Some sources need special handling to get the original author image (avatar). This function takes care of the special handling or returns the source image if it does not need special handling.
@@ -140,45 +286,53 @@ function allowed_html() : array {
  */
 function get_author_image( $item ) {
 	$source     = $item->source->source;
-	$avatar_url = $item->poster_image;
+	$avatar_url = validate_image( $item->id, $item->poster_image );
 
-	// Currently we've only tested Facebook.
-	switch ( $source ) {
-		case 'Facebook':
-			// Try to get the avatar from the object cache.
-			$cached_avatar_url = wp_cache_get( 'facebook_avatar_url', 'juicer' );
+	if ( '' === $avatar_url ) {
+		// Force the default avatar if a valid avatar image was not found.
+		$avatar_url = get_avatar_url( 0, [
+			'default'       => 'mystery',
+			'force_default' => true,
+		] );
+	} else {
+		// Currently we've only tested Facebook.
+		switch ( $source ) {
+			case 'Facebook':
+				// Try to get the avatar from the object cache.
+				$cached_avatar_url = wp_cache_get( 'facebook_avatar_url', 'juicer' );
 
-			if ( $cached_avatar_url ) {
-				return esc_url_raw( $cached_avatar_url );
-			}
+				if ( $cached_avatar_url ) {
+					return esc_url_raw( $cached_avatar_url );
+				}
 
-			/*
-			 * We don't have a cached avatar, so we need to query the Facebook Graph API.
-			 * The URL will redirect to the image, but when queried,
-			 * it returns an API endpoint. Hitting the endpoint directly
-			 * will return the actual image in the response body, but
-			 * all the info we need is actually in the response headers,
-			 * so we need to dig into those to get the actual source URL.
-			 */
+				/*
+				* We don't have a cached avatar, so we need to query the Facebook Graph API.
+				* The URL will redirect to the image, but when queried,
+				* it returns an API endpoint. Hitting the endpoint directly
+				* will return the actual image in the response body, but
+				* all the info we need is actually in the response headers,
+				* so we need to dig into those to get the actual source URL.
+				*/
 
-			$header = wp_remote_head( $item->poster_image, [
-				'type'     => 'small',
-				'redirect' => false,
-			] );
+				$header = wp_remote_head( $item->poster_image, [
+					'type'     => 'small',
+					'redirect' => false,
+				] );
 
-			if ( empty( $header ) ) {
-				return new \WP_Error( 'juicer_bad_facebook_avatar_url', esc_html__( 'The poster image for the Facebook user we got from Juicer was bad.', 'hm-juicer' ), $item->poster_image );
-			}
+				if ( empty( $header ) ) {
+					return new \WP_Error( 'juicer_bad_facebook_avatar_url', esc_html__( 'The poster image for the Facebook user we got from Juicer was bad.', 'hm-juicer' ), $item->poster_image );
+				}
 
-			$http_headers = wp_remote_retrieve_headers( $header );
-			$avatar_url   = $http_headers['location'];
+				$http_headers = wp_remote_retrieve_headers( $header );
+				$avatar_url   = $http_headers['location'];
 
-			// Cache the avatar and don't expire.
-			wp_cache_set( 'facebook_avatar_url', $avatar_url, 'juicer' );
-			break;
+				// Cache the avatar and don't expire.
+				wp_cache_set( 'facebook_avatar_url', $avatar_url, 'juicer', WEEK_IN_SECONDS );
+				break;
 
-		default:
-			break;
+			default:
+				break;
+		}
 	}
 
 	return esc_url_raw( $avatar_url );

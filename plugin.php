@@ -11,14 +11,16 @@
 
 namespace HM\Juicer;
 
-const JUICER_ENDPOINT = 'https://www.juicer.io/api/feeds/';
+use HM\Juicer\LoadMore;
 
 require_once __DIR__ . '/inc/namespace.php';
 require_once __DIR__ . '/inc/api.php';
 require_once __DIR__ . '/inc/functions.php';
+require_once __DIR__ . '/inc/load-more.php';
 
 // Require the Asset Loader package.
 require_once __DIR__ . '/vendor/humanmade/asset-loader/asset-loader.php';
 
 // Kick it off.
 bootstrap();
+LoadMore\bootstrap();

@@ -268,7 +268,17 @@ Currently only supports Facebook.
 
 #### Return
 _(string|WP_Error)_ The author image (avatar) if one could be retrieved or a WP_Error if there was a problem.
-/
+
+### `validate_image( int $item_id, $source_url )`
+Validate a remote Juicer item image.
+
+#### Parameters
+`$item_id` _(int)_ The unique Juicer item ID.
+
+`$source_url` _(mixed)_  URL should be a string, but might be empty.
+
+#### Return
+_(string)_ The validated image URL or an empty string.
 
 ### `maybe_humanize_time( int $timestamp )`
 Found in: `api.php`
@@ -280,6 +290,39 @@ Humanize time if less than 35 days old. Otherwise, display a formatted date.
 
 #### Return
 _(string)_ The humanized time or the date string.
+
+#### `juicer_load_more_button( array $args )`
+HM Juicer 'Load More' button.
+
+#### Parameters
+`$args` _(array)_ (Optional) Array of arguments.
+
+##### Default `$args`
+
+```php
+[
+	'aria_label'       => __( 'Load more', 'hm-juicer' ),
+	'button_text'      => __( 'Load more', 'hm-juicer' ),
+	'button_class'     => 'btn-load-more btn btn-large',
+	'container_class'  => '',
+	'list_class'       => '.juicer-feed',
+	'page'             => 2,
+	'post_count'       => 10,
+	'template'         => [
+		'name'            => '',
+		'vars'            => [],
+	],
+]
+```
+
+### `juicer_get_wrapper_classes( array $classes )`
+Returns an array of classes for the Juicer feed wrapper.
+
+#### Parameters
+`$classes` _(array)_ (Optional) An array of additional classes to pass into the wrapper classes function.
+
+#### Return
+_(string)_ A string of classes to be added to the class html tag.
 
 ## Filter Reference
 
@@ -324,3 +367,17 @@ add_filter( 'juicer_filter_template_prefix', function() {
 
 #### Parameters
 `$template_prefix` _(string)_ The prefix for the template part.
+
+### `apply_filters( 'juicer_filter_wrapper_classes', array $classes )`
+Filter the Juicer wrapper classes
+
+#### Parameters
+`$classes` _(array)_ An array of classes. Defaults to `"juicer-feed juicer-grid"` plus any classes passed to `juicer_get_wrapper_classes`.
+
+#### Example usage
+
+```php
+add_filter( 'juicer_filter_template_prefix', function( $classes ) {
+	return array_merge( $classes, [ 'custom-class' ] );
+} );
+```

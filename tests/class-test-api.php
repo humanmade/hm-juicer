@@ -23,6 +23,23 @@ class Test_API extends \WP_UnitTestCase {
 	}
 
 	/**
+	 * Helper function to get a single mock item.
+	 *
+	 * @param bool $decoded Whether the item should be json_decoded.
+	 *
+	 * @return mixed        The original item string if not decoded, otherwise an item object.
+	 */
+	private function get_single_item( bool $decoded = false ) {
+		$mock_data = '[{"id":378483666,"external_id":"1373959692752139","external_created_at":"2019-09-03T11:50:08.000-07:00","full_url":"https://www.facebook.com/99999999999999999/posts/1373959692752139","image":"https://external.xx.fbcdn.net/safe_image.php?d=AQC_cyqDeqv-mmmZ&w=720&h=720&url=https%3A%2F%2Fblog.testenv.com%2Ftachyon%2Fsites%2F4%2F2019%2F06%2FiStock-1003536156.jpg%3Ffit%3D1254%252C836&cfs=1&sx=0&sy=0&sw=836&sh=836&_nc_hash=AQAN9xUHntdGV7gd","external":"https://test.site.dev/2zulhdo","like_count":47,"comment_count":1,"tagged_users":null,"poster_url":"https://facebook.com/profile.php?id=99999999999999999","poster_id":"99999999999999999","location":null,"height":720,"width":720,"edit":null,"position":null,"deleted_at":null,"deleted_by":null,"additional_photos":[],"external_location_id":null,"message":"<p>Juicer Test is ahead of the curve in the post-acute setting in recognizing patients who are at risk for sepsis with Cerner\'s Sepsis Management solution. Learn how early intervention prevented our patients from becoming septic and/or transferring from our hospitals 77% of the time. <a target=\"_blank\" class=\"auto\" href=\"https://test.site.dev/2zulhdo\">https://test.site.dev/2zulhdo</a></p>","unformatted_message":"Juicer Test is ahead of the curve in the post-acute setting in recognizing patients who are at risk for sepsis with Cerner\'s Sepsis Management solution. Learn how early intervention prevented our patients from becoming septic and/or transferring from our hospitals 77% of the time. https://test.site.dev/2zulhdo","description":"35","feed":"testenv","likes":47,"comments":1,"poster_image":"https://graph.facebook.com/20531316728/picture","poster_name":"Juicer Test","poster_display_name":"HM Juicer","source":{"id":404340,"term":"testenv","term_type":"username","source":"Facebook","options":"","name":null,"allowed":null,"disallowed":null,"queue":false}}]';
+
+			if ( ! $decoded ) {
+				return $mock_data;
+			}
+
+			return json_decode( $mock_data );
+	}
+
+	/**
 	 * Test that the juicer_id function returns the correct ID.
 	 *
 	 * JUICER_ID is set in the testing environment's bootstrap.php.
@@ -79,7 +96,7 @@ class Test_API extends \WP_UnitTestCase {
 	 * Test the prepare_post_items function.
 	 */
 	public function test_prepare_post_items() {
-		$mock_data = '[{"id":378483666,"external_id":"1373959692752139","external_created_at":"2019-09-03T11:50:08.000-07:00","full_url":"https://www.facebook.com/99999999999999999/posts/1373959692752139","image":"https://external.xx.fbcdn.net/safe_image.php?d=AQC_cyqDeqv-mmmZ&w=720&h=720&url=https%3A%2F%2Fblog.testenv.com%2Ftachyon%2Fsites%2F4%2F2019%2F06%2FiStock-1003536156.jpg%3Ffit%3D1254%252C836&cfs=1&sx=0&sy=0&sw=836&sh=836&_nc_hash=AQAN9xUHntdGV7gd","external":"https://test.site.dev/2zulhdo","like_count":47,"comment_count":1,"tagged_users":null,"poster_url":"https://facebook.com/profile.php?id=99999999999999999","poster_id":"99999999999999999","location":null,"height":720,"width":720,"edit":null,"position":null,"deleted_at":null,"deleted_by":null,"additional_photos":[],"external_location_id":null,"message":"<p>Juicer Test is ahead of the curve in the post-acute setting in recognizing patients who are at risk for sepsis with Cerner\'s Sepsis Management solution. Learn how early intervention prevented our patients from becoming septic and/or transferring from our hospitals 77% of the time. <a target=\"_blank\" class=\"auto\" href=\"https://test.site.dev/2zulhdo\">https://test.site.dev/2zulhdo</a></p>","unformatted_message":"Juicer Test is ahead of the curve in the post-acute setting in recognizing patients who are at risk for sepsis with Cerner\'s Sepsis Management solution. Learn how early intervention prevented our patients from becoming septic and/or transferring from our hospitals 77% of the time. https://test.site.dev/2zulhdo","description":"35","feed":"testenv","likes":47,"comments":1,"poster_image":"https://graph.facebook.com/20531316728/picture","poster_name":"Juicer Test","poster_display_name":"HM Juicer","source":{"id":404340,"term":"testenv","term_type":"username","source":"Facebook","options":"","name":null,"allowed":null,"disallowed":null,"queue":false}}]';
+		$mock_data = $this->get_single_item();
 
 		// Prepare the mock data.
 		$prepared_posts = prepare_post_items( json_decode( $mock_data ) );
@@ -107,12 +124,13 @@ class Test_API extends \WP_UnitTestCase {
 		);
 
 		$this->assertEquals(
-			"<p>Juicer Test is ahead of the curve in the post-acute setting in recognizing patients who are at risk for sepsis with Cerner's Sepsis Management solution. Learn how early intervention prevented our patients from becoming septic and/or transferring from our hospitals 77% of the time. <a href=\"https://test.site.dev/2zulhdo\" class=\"juicer-post__sharing-link\">Read More</a></p>",
+			"<p>Juicer Test is ahead of the curve in the post-acute setting in recognizing patients who are at risk for sepsis with Cerner's Sepsis Management solution. Learn how early intervention prevented our patients from becoming septic and/or transferring from our hospitals 77% of the time. <a href=\"https://test.site.dev/2zulhdo\" class=\"juicer-post__sharing-link\" aria-label=\"Read original post on Juicer Test Site, posted Sep 3, 2019 on Facebook\">Read original post on Juicer Test Site <i class=\"fas fa-chevron-right\" aria-hidden=\"true\"></i></a></p>",
 			$post->post_content
 		);
 
+		// This image has timed out, so it should return an empty string.
 		$this->assertEquals(
-			'https://external.xx.fbcdn.net/safe_image.php?d=AQC_cyqDeqv-mmmZ&w=720&h=720&url=https%3A%2F%2Fblog.testenv.com%2Ftachyon%2Fsites%2F4%2F2019%2F06%2FiStock-1003536156.jpg%3Ffit%3D1254%252C836&cfs=1&sx=0&sy=0&sw=836&sh=836&_nc_hash=AQAN9xUHntdGV7gd',
+			'',
 			$post->image_url
 		);
 
@@ -227,8 +245,12 @@ class Test_API extends \WP_UnitTestCase {
 	 * We do a couple tests here to make sure we're only grabbing the last link in the message and changing the link text there to Read More with a custom class.
 	 */
 	public function test_get_item_content() {
-		$post           = new \stdClass();
-		$post->external = 'http://test.dev/external-link/';
+		$post                      = new \stdClass();
+		$post->external            = 'http://test.dev/external-link/';
+		$post->external_created_at = '2019-08-26T11:30:11.000-07:00';
+		$post->poster_display_name = 'Juicer Test Site';
+		$post->source              = new \stdClass();
+		$post->source->source      = 'Facebook';
 
 		$content_simple = '<p>It\'s cold, damn cold. Ha, ha, ha, Einstein, you little devil. Einstein\'s clock is exactly one minute behind mine, it\'s still ticking. Like I always told you, if you put your mind to it you could accomplish anything. Yeah, but you\'re uh, you\'re so, you\'re so thin. <a target="_blank" class="auto" href="http://test.dev/external-link/">http://test.dev/external-link/</a></p>';
 
@@ -238,20 +260,93 @@ class Test_API extends \WP_UnitTestCase {
 
 		// Test that the link text is changed to Read More and the juicer-post__sharing-link class is added.
 		$this->assertEquals(
-			'<p>It\'s cold, damn cold. Ha, ha, ha, Einstein, you little devil. Einstein\'s clock is exactly one minute behind mine, it\'s still ticking. Like I always told you, if you put your mind to it you could accomplish anything. Yeah, but you\'re uh, you\'re so, you\'re so thin. <a href="http://test.dev/external-link/" class="juicer-post__sharing-link">Read More</a></p>',
+			'<p>It\'s cold, damn cold. Ha, ha, ha, Einstein, you little devil. Einstein\'s clock is exactly one minute behind mine, it\'s still ticking. Like I always told you, if you put your mind to it you could accomplish anything. Yeah, but you\'re uh, you\'re so, you\'re so thin. <a href="http://test.dev/external-link/" class="juicer-post__sharing-link" aria-label="Read original post on test.dev, posted Aug 26, 2019 on Facebook">Read original post on test.dev <i class="fas fa-chevron-right" aria-hidden="true"></i></a></p>',
 			get_item_content( $content_simple, $post )
 		);
 
 		// Test that the link inside the content is preserved and the final link text is replaced with Read More.
 		$this->assertEquals(
-			'<p>Oh, I\'ve been so worried about you ever since you ran off the other night. Are you okay? I\'m sorry I have to go. Isn\'t he a dream boat? <a href="http://test.dev/link-inside/">Another link inside the content.</a> Uh, well, okay Biff, uh, I\'ll finish that on up tonight and I\'ll bring it over first thing tomorrow morning. Now, now, Biff, now, I never noticed any blindspot before when I would drive it. Hi, son. <a href="http://test.dev/external-link/" class="juicer-post__sharing-link">Read More</a></p>',
+			'<p>Oh, I\'ve been so worried about you ever since you ran off the other night. Are you okay? I\'m sorry I have to go. Isn\'t he a dream boat? <a href="http://test.dev/link-inside/">Another link inside the content.</a> Uh, well, okay Biff, uh, I\'ll finish that on up tonight and I\'ll bring it over first thing tomorrow morning. Now, now, Biff, now, I never noticed any blindspot before when I would drive it. Hi, son. <a href="http://test.dev/external-link/" class="juicer-post__sharing-link" aria-label="Read original post on test.dev, posted Aug 26, 2019 on Facebook">Read original post on test.dev <i class="fas fa-chevron-right" aria-hidden="true"></i></a></p>',
 			get_item_content( $content_link_inside, $post )
 		);
 
 		// Test that a raw URL inside the content is transformed into a link.
 		$this->assertEquals(
-			'<p>Back to the future. No no no this sucker\'s electrical, but I need a nuclear reaction to generate the one point twenty-one gigawatts of electricity- <a href="http://test.dev/link-raw/">http://test.dev/link-raw/</a> But, what are you blind McFly, it\'s there. How else do you explain that wreck out there? <a href="http://test.dev/external-link/" class="juicer-post__sharing-link">Read More</a></p>',
+			'<p>Back to the future. No no no this sucker\'s electrical, but I need a nuclear reaction to generate the one point twenty-one gigawatts of electricity- <a href="http://test.dev/link-raw/">http://test.dev/link-raw/</a> But, what are you blind McFly, it\'s there. How else do you explain that wreck out there? <a href="http://test.dev/external-link/" class="juicer-post__sharing-link" aria-label="Read original post on test.dev, posted Aug 26, 2019 on Facebook">Read original post on test.dev <i class="fas fa-chevron-right" aria-hidden="true"></i></a></p>',
 			get_item_content( $content_link_raw, $post )
+		);
+	}
+
+	/**
+	 * Test the validate image function.
+	 *
+	 * Make sure we always get a string back when validating images, and that the images exist.
+	 */
+	public function test_validate_image() {
+		// If a null value was passed, we don't want that, so it should be an empty string.
+		$this->assertEquals(
+			'',
+			validate_image( 1, null )
+		);
+
+		// Test a URL that will certainly fail.
+		$this->assertEquals(
+			'',
+			validate_image( 1, 'https://dev.null/404/' )
+		);
+
+		// Test an expired Facebook image.
+		$this->assertEquals(
+			'',
+			validate_image( 1, 'https://external.xx.fbcdn.net/safe_image.php?d=AQC_cyqDeqv-mmmZ&w=720&h=720&url=https%3A%2F%2Fblog.testenv.com%2Ftachyon%2Fsites%2F4%2F2019%2F06%2FiStock-1003536156.jpg%3Ffit%3D1254%252C836&cfs=1&sx=0&sy=0&sw=836&sh=836&_nc_hash=AQAN9xUHntdGV7gd' )
+		);
+
+		// Test an image url that we know exists.
+		$this->assertEquals(
+			'https://humanmade.com/content/themes/humanmade/lib/hm-pattern-library/assets/images/logos/logo-red.svg',
+			validate_image( 1, 'https://humanmade.com/content/themes/humanmade/lib/hm-pattern-library/assets/images/logos/logo-red.svg' )
+		);
+	}
+
+	/**
+	 * Test the get_author_image function.
+	 *
+	 * Make sure we get the author image or a default avatar.
+	 */
+	public function test_get_author_image() {
+		// Build a mock item.
+		$item = new \stdClass();
+		$item->source         = new \stdClass();
+		$item->id             = 1;
+		$item->source->source = 'Test';
+		$item->poster_image   = 'https://dev.null/404/';
+
+		// Get the default "mystery man" avatar.
+		$mystery_man = get_avatar_url( 0, [
+			'default'       => 'mystery',
+			'force_default' => true,
+		] );
+
+		// If an avatar could not be found at the URL provided, return a mystery man. Note: this test might fail if Gravatar returns an image from a different server, so we're comparing the position of everything in the URL _after_ the http:// and server subdomain.
+		$this->assertEquals(
+			strpos( $mystery_man, 'gravatar.com/avatar/?s=96&d=mm&f=y&r=g' ),
+			strpos( get_author_image( $item ), 'gravatar.com/avatar/?s=96&d=mm&f=y&r=g' )
+		);
+
+		// Get an actual image from Facebook (Facebook's own avatar).
+		$item->source->source = 'Facebook';
+		$item->poster_image   = 'https://graph.facebook.com/20531316728/picture';
+
+		// This is the image URL before the query variables, at least until they update their avatar.
+		$simplified_url = 'https://scontent.xx.fbcdn.net/v/t1.0-1/p50x50/58818464_10158354585756729_7126855515920924672_n.png';
+
+		// Get the Facebook avatar.
+		$facebook_avatar = get_author_image( $item );
+
+		// Test that when we strip out everything after the ? we get the same URL as the simplified URL.
+		$this->assertEquals(
+			$simplified_url,
+			str_replace( strpbrk( $facebook_avatar, '?' ), '', $facebook_avatar )
 		);
 	}
 }

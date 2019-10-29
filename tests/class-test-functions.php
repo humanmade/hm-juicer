@@ -141,7 +141,7 @@ class Test_Functions extends \WP_UnitTestCase {
 	 * Test the get_the_content function.
 	 */
 	public function test_get_the_content() {
-		$content = "<p>Breakfast. That's a great idea. I'd love to park. Hey, hey, Doc, where are you? What's going on? Where have you been all week? Listen, I gotta go but I wanted to tell you that it's been educational. <a href=\"https://test.site.dev/2zulhdo\" class=\"juicer-post__sharing-link\">Read More</a></p>";
+		$content = "<p>Breakfast. That's a great idea. I'd love to park. Hey, hey, Doc, where are you? What's going on? Where have you been all week? Listen, I gotta go but I wanted to tell you that it's been educational. <a href=\"https://test.site.dev/2zulhdo\" class=\"juicer-post__sharing-link\" aria-label=\"Read original post on Juicer Test Site, posted Sep 3, 2019 on Facebook\">Read original post on Juicer Test Site <i class=\"fas fa-chevron-right\" aria-hidden=\"true\"></i></a></p>";
 
 		$this->assertEquals(
 			$content,
@@ -153,8 +153,9 @@ class Test_Functions extends \WP_UnitTestCase {
 	 * Test get_image_url function.
 	 */
 	public function test_get_image_url() {
+		// This image has expired, so it will return an empty string.
 		$this->assertEquals(
-			'https://external.xx.fbcdn.net/safe_image.php?d=AQC_cyqDeqv-mmmZ&w=720&h=720&url=https%3A%2F%2Fblog.testenv.com%2Ftachyon%2Fsites%2F4%2F2019%2F06%2FiStock-1003536156.jpg%3Ffit%3D1254%252C836&cfs=1&sx=0&sy=0&sw=836&sh=836&_nc_hash=AQAN9xUHntdGV7gd',
+			'',
 			juicer_get_image_url()
 		);
 	}
@@ -243,6 +244,55 @@ class Test_Functions extends \WP_UnitTestCase {
 		$this->assertEquals(
 			'https://scontent.xx.fbcdn.net/v/t1.0-1/p50x50/58818464_10158354585756729_7126855515920924672_n.png',
 			str_replace( strpbrk( juicer_get_author_image(), '?' ), '', juicer_get_author_image() )
+		);
+	}
+
+	/**
+	 * Test the load more button and custom parameters.
+	 */
+	public function test_load_more_button() {
+		ob_start();
+		juicer_load_more_button();
+		$button = ob_get_clean();
+
+		// Test the load more button with default params.
+		$this->assertEquals(
+			'<div class="centered-load-more-wrapper "><button class="juicer-feed__load-more btn-load-more btn btn-large" aria-label="Load more">Load more</button><div class="juicer-feed__loading"></div></div>',
+			preg_replace( '/\r|\n|\t+/', '', $button )
+		);
+
+		ob_start();
+		juicer_load_more_button( [
+			'aria_label'       => 'Aria Label',
+			'button_text'      => 'Button Text',
+			'button_class'     => 'button-class',
+			'container_class'  => 'container',
+		] );
+		$button = ob_get_clean();
+
+		// Test the load more button with custom parameters.
+		$this->assertEquals(
+			'<div class="centered-load-more-wrapper container"><button class="juicer-feed__load-more button-class" aria-label="Aria Label">Button Text</button><div class="juicer-feed__loading"></div></div>',
+			preg_replace( '/\r|\n|\t+/', '', $button )
+		);
+	}
+
+	/**
+	 * Test the get_wrapper_classes function.
+	 *
+	 * Make sure we get the default classes as well as any additional classes that were passed.
+	 */
+	public function test_get_wrapper_classes() {
+		// Test wrapper classes with default output.
+		$this->assertEquals(
+			'juicer-feed juicer-grid',
+			juicer_get_wrapper_classes()
+		);
+
+		// Test wrapper classes with custom classes passed.
+		$this->assertEquals(
+			'juicer-feed juicer-grid test-class human-made',
+			juicer_get_wrapper_classes( [ 'test-class', 'human-made' ] )
 		);
 	}
 }
