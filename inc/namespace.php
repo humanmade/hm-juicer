@@ -10,7 +10,7 @@
 namespace HM\Juicer;
 
 use Altis;
-use HM\Asset_Loader;
+use Asset_Loader;
 use HM\Juicer\Settings;
 
 const JUICER_ENDPOINT = 'https://www.juicer.io/api/feeds/';
