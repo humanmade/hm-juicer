@@ -4,9 +4,6 @@
     "type": "wordpress-plugin",
     "license": "GPL-3.0-or-later",
     "require": {
-        "cmb2/cmb2": "^2.6",
-        "composer/installers": "^1.7",
-        "humanmade/asset-loader": "^0.3",
         "php": ">=7.0"
     },
     "repositories": [
@@ -16,6 +13,8 @@
         }
     ],
     "require-dev": {
+        "cmb2/cmb2": "^2.6",
+        "humanmade/asset-loader": "^0.3",
         "humanmade/coding-standards": "^0.7",
         "phpunit/phpunit": "5.7.*"
     },
@@ -32,11 +31,5 @@
           "name": "Human Made",
           "email": "hello@humanmade.com"
         }
-    ],
-    "extra": {
-        "installer-paths": {
-            "vendor/humanmade/{$name}/": [ "humanmade/asset-loader" ],
-            "vendor/cmb2/{$name}": [ "cmb2/cmb2" ]
-        }
-    }
+    ]
 }
