@@ -65,6 +65,12 @@ function enqueue_scripts() {
  * @return mixed Either the JUICER_ID from the constant defined in wp-config or options, or false if neither is set.
  */
 function get_id() {
+	// Check Altis config first.
+	$juicer_id = Altis\get_config()['hm-juicer']['juicer-id'];
+	if ( ! empty( $juicer_id ) ) {
+		return $juicer_id;
+	}
+
 	// Check the JUICER_ID constant and return it if it exists.
 	if ( defined( 'JUICER_ID' ) ) {
 		return JUICER_ID;
@@ -82,14 +88,17 @@ function get_id() {
  * @return mixed Either the JUICER_SHORT_URL from the constant defined in wp-config or options, or false if neither is set.
  */
 function get_short_url() {
-	$short_url = false;
+	// Get Altis config first.
+	$short_url = Altis\get_config()['hm-juicer']['juicer-short-url'];
 
-	// Check the JUICER_SHORT_URL constant and return it if it exists.
-	if ( defined( 'JUICER_SHORT_URL' ) ) {
-		$short_url = JUICER_SHORT_URL;
-	} else {
-		// Return the option, if it exists.
-		$short_url = Settings\juicer_get_option( 'JUICER_SHORT_URL', false );
+	// If the Altis setting is not defined, check the JUICER_SHORT_URL constant and use that if it exists.
+	if ( empty( $short_url ) ) {
+		if ( defined( 'JUICER_SHORT_URL' ) ) {
+			$short_url = JUICER_SHORT_URL;
+		} else {
+			// Return the option, if it exists.
+			$short_url = Settings\juicer_get_option( 'JUICER_SHORT_URL', false );
+		}
 	}
 
 	// If the url doesn't have a scheme, add one for consistency.
@@ -108,14 +117,16 @@ function get_short_url() {
  * @return mixed Either the JUICER_LONG_URL from the constant defined in wp-config or options, or false if neither is set.
  */
 function get_long_url() {
-	$long_url = false;
+	$long_url = Altis\get_config()['hm-juicer']['juicer-long-url'];
 
-	// Check the JUICER_LONG_URL constant and return it if it exists.
-	if ( defined( 'JUICER_LONG_URL' ) ) {
-		$long_url = JUICER_LONG_URL;
-	} else {
-		// Return the option, if it exists.
-		$long_url = Settings\juicer_get_option( 'JUICER_LONG_URL', false );
+	// If the Altis setting is not defined, check the JUICER_LONG_URL constant and use that if it exists.
+	if ( empty( $long_url ) ) {
+		if ( defined( 'JUICER_LONG_URL' ) ) {
+			$long_url = JUICER_LONG_URL;
+		} else {
+			// Return the option, if it exists.
+			$long_url = Settings\juicer_get_option( 'JUICER_LONG_URL', false );
+		}
 	}
 
 	// If the url doesn't have a scheme, add one for consistency.
@@ -134,6 +145,12 @@ function get_long_url() {
  * @return mixed Either the JUICER_SITE_NAME from the constant defined in wp-config or options, or false if neither is set.
  */
 function get_site_name() {
+	// Check the Altis config first.
+	$site_name = Altis\get_config()['hm-juicer']['juicer-site-name'];
+	if ( ! empty( $site_name ) ) {
+		return $site_name;
+	}
+
 	// Check the JUICER_SITE_NAME constant and return it if it exists.
 	if ( defined( 'JUICER_SITE_NAME' ) ) {
 		return JUICER_SITE_NAME;
