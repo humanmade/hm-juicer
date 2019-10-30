@@ -15,7 +15,7 @@ namespace HM\Juicer\Settings;
 function bootstrap() {
 	// Load CMB2 if it's not loaded.
 	if ( ! defined( 'CMB2_LOADED' ) ) {
-		require_once dirname( __FILE__ ) . '/vendor/cmb2/cmb2/init.php';
+		require_once dirname( __FILE__, 2 ) . '/vendor/cmb2/cmb2/init.php';
 	}
 
 	// CMB2 exists, we can create the options page.
