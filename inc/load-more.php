@@ -7,7 +7,7 @@
 
 namespace HM\Juicer\LoadMore;
 
-use HM\Asset_Loader;
+use Asset_Loader;
 
 /**
  * Kick it off.
@@ -70,18 +70,13 @@ function prepare_response() {
  */
 function enqueue_scripts() {
 	// Enqueue custom JS for the HM Juicer layout.
-	Asset_Loader\register_script( [
-		'name'      => 'hm-juicer-load-more',
-		'handle'    => 'hm-juicer-load-more',
-		'build_dir' => dirname( __DIR__ ) . '/build',
-		'deps'      => [ 'jquery', 'underscore', 'hm-juicer-js' ],
-		'in_footer' => true,
+	Asset_Loader\autoregister( dirname( __DIR__ ) . '/build', 'hm-juicer-load-more', [
+		'handle'  => 'hm-juicer-load-more',
+		'scripts' => [ 'jquery', 'underscore', 'hm-juicer-js' ],
 	] );
 
 	// Enqueue custom CSS for the HM Juicer layout.
-	Asset_Loader\enqueue_style( [
-		'name'      => 'hm-juicer-style',
+	Asset_Loader\autoenqueue( dirname( __DIR__ ) . '/build', 'hm-juicer-style', [
 		'handle'    => 'hm-juicer-style',
-		'build_dir' => dirname( __DIR__ ) . '/build',
 	] );
 }
