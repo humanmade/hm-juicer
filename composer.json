@@ -4,6 +4,7 @@
     "type": "wordpress-plugin",
     "license": "GPL-3.0-or-later",
     "require": {
+        "composer/installers": "^1.7",
         "php": ">=7.0"
     },
     "repositories": [
@@ -31,5 +32,11 @@
           "name": "Human Made",
           "email": "hello@humanmade.com"
         }
-    ]
+    ],
+    "extra": {
+        "installer-paths": {
+            "vendor/cmb2/{$name}": [ "cmb2/cmb2" ],
+            "vendor/humanmade/{$name}/": [ "humanmade/asset-loader" ]
+        }
+    }
 }
