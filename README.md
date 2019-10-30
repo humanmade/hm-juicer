@@ -6,21 +6,73 @@ Integrates with Juicer API for social feeds and allows accessible display of soc
 
 ## Installation
 
-### Step 1
+### With Git
+
+#### Step 1
+`cd` into your desired directory (either `wp-content/plugins` or `wp-content/mu-plugins`) and clone the repository locally.
+
+```bash
+git clone git@github.com:humanmade/hm-juicer.git
+```
+
+### With Composer
+
+At this time, `humanmade/hm-juicer` does not exist in packagist, so you will need to edit your `composer.json` file to add it as a repository. Vendor packages are installed as WordPress plugins and will need to be activated manually from the Plugins page (or explicitly loaded if installing as a `mu-plugin`).
+
+#### Step 1
+Add the `humanmade/hm-juicer` GitHub repository as a repository in your `composer.json`.
+
+```json
+"repositories": [
+	{
+		"type": "vcs",
+		"url": "git@github.com:humanmade/hm-juicer.git"
+	}
+]
+```
+
+#### Step 2
 Install the plugin via `composer`.
 
 ```bash
 composer require humanmade/hm-juicer
 ```
 
-### Step 2
+### For both: Configure environment
+You may want to define environment variables that define your Juicer account and your site name and URLs. All of these are optional, but if any of them are not defined, a Settings page will appear in your admin to define these settings.
+
+#### Step 1
 Add the Juicer feed name to the `wp-config.php` file via the `JUICER_ID` constant.
 
 ```php
-const JUICER_ID = 'myaccountname';
+define( 'JUICER_ID', 'myaccountname' );
 ```
 
-Alternately, if no `JUICER_ID` is set, the feed name can be set via a settings page that appears if this constant does not exist.
+This is the ID that is used in your Juicer feed URL, e.g. `https://www.juicer.io/feeds/myaccountname`.
+
+#### Step 2
+Define your site name. This will affect how linke appear in the Juicer feed.
+
+```php
+define( 'JUICER_SITE_NAME', 'My Cool Site' );
+```
+
+#### Step 3
+Add the Juicer long and short URLs. This is used to determine links that are coming from your site. 
+
+Note: While the short URL is intended for URL shorteners like a custom URL or a service like bit.ly, this can be any URL that links back to your site.
+
+```php
+define( 'JUICER_SHORT_URL', 'short.url' );
+define( 'JUICER_LONG_URL', 'mydomain.com' );
+```
+
+### For both: Install dependencies
+There are a number of dependencies that need to be installed if you are going to be using the Juicer plugin for development. At this time, this also needs to be done if you are not defining the constants above. To do this, `cd` into the directory and run the setup command.
+
+```bash
+npm run setup
+```
 
 ## Usage
 To add the Juicer feed to a page, simply use the function `juicer_feed` in your template with the correct number of posts to display (and optionally, the page to display from). Documentation on the `juicer_feed` function is available in the [`inc/README.md`](inc/README.md) file.
