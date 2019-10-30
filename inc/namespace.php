@@ -46,12 +46,9 @@ function enqueue_scripts() {
 	wp_register_script( 'images-loaded', '//cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/4.1.1/imagesloaded.pkgd.min.js', [], null, true );
 
 	// Enqueue custom JS for the HM Juicer layout.
-	Asset_Loader\autoregister( [
-		'name'      => 'hm-juicer-js',
+	Asset_Loader\autoregister( dirname( __DIR__ ) . '/build', 'hm-juicer-js', [
 		'handle'    => 'hm-juicer-js',
-		'build_dir' => dirname( __DIR__ ) . '/build',
-		'deps'      => [ 'images-loaded' ],
-		'in_footer' => true,
+		'scripts'   => [ 'images-loaded' ]
 	] );
 
 	// TODO: Add Font Awesome package to the plugin.
