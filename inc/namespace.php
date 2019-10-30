@@ -9,6 +9,7 @@
 
 namespace HM\Juicer;
 
+use Altis;
 use HM\Asset_Loader;
 use HM\Juicer\Settings;
 
