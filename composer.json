@@ -6,7 +6,8 @@
     "require": {
         "php": ">=7.0",
         "cmb2/cmb2": "^2.6",
-        "humanmade/asset-loader": "^0.3"
+        "humanmade/asset-loader": "^0.3",
+        "php": ">=7.0"
     },
     "repositories": [
         {
