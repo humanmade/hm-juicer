@@ -51,7 +51,7 @@ define( 'JUICER_ID', 'myaccountname' );
 This is the ID that is used in your Juicer feed URL, e.g. `https://www.juicer.io/feeds/myaccountname`.
 
 #### Step 2
-Define your site name. This will affect how linke appear in the Juicer feed.
+Define your site name. This will affect how links appear in the Juicer feed.
 
 ```php
 define( 'JUICER_SITE_NAME', 'My Cool Site' );
