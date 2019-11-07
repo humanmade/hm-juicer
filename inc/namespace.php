@@ -79,7 +79,7 @@ function has_altis_config() : bool {
  */
 function get_id() {
 	// Check Altis config first.
-	$juicer_id = Altis\get_config()['hm-juicer']['juicer-id'];
+	$juicer_id = has_altis_config() ? Altis\get_config()['hm-juicer']['juicer-id'] : false;
 	if ( ! empty( $juicer_id ) ) {
 		return $juicer_id;
 	}
@@ -102,7 +102,7 @@ function get_id() {
  */
 function get_short_url() {
 	// Get Altis config first.
-	$short_url = Altis\get_config()['hm-juicer']['juicer-short-url'];
+	$short_url = has_altis_config() ? Altis\get_config()['hm-juicer']['juicer-short-url'] : false;
 
 	// If the Altis setting is not defined, check the JUICER_SHORT_URL constant and use that if it exists.
 	if ( empty( $short_url ) ) {
@@ -130,7 +130,7 @@ function get_short_url() {
  * @return mixed Either the JUICER_LONG_URL from the constant defined in wp-config or options, or false if neither is set.
  */
 function get_long_url() {
-	$long_url = Altis\get_config()['hm-juicer']['juicer-long-url'];
+	$long_url = has_altis_config() ? Altis\get_config()['hm-juicer']['juicer-long-url'] : false;
 
 	// If the Altis setting is not defined, check the JUICER_LONG_URL constant and use that if it exists.
 	if ( empty( $long_url ) ) {
@@ -159,7 +159,7 @@ function get_long_url() {
  */
 function get_site_name() {
 	// Check the Altis config first.
-	$site_name = Altis\get_config()['hm-juicer']['juicer-site-name'];
+	$site_name = has_altis_config() ? Altis\get_config()['hm-juicer']['juicer-site-name'] : false;
 	if ( ! empty( $site_name ) ) {
 		return $site_name;
 	}
