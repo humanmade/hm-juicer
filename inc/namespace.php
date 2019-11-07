@@ -62,7 +62,7 @@ function has_altis_config() : bool {
 	if ( ! function_exists( 'Altis\\get_config' ) ) {
 		return false;
 	}
-	
+
 	if ( ! isset( Altis\get_config()['hm-juicer'] ) ) {
 		return false;
 	}
