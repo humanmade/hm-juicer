@@ -25,8 +25,8 @@ function bootstrap() {
 			! defined( 'JUICER_ID' ) ||
 			! defined( 'JUICER_SHORT_URL' ) ||
 			! defined( 'JUICER_LONG_URL' ) ||
-			! defined( 'JUICER_SITE_NAME' ) 
-		) &&  ! isset( Altis\get_config()['hm-juicer'] )
+			! defined( 'JUICER_SITE_NAME' )
+		) && ! isset( Altis\get_config()['hm-juicer'] )
 	) {
 		// ...load the settings page.
 		require_once __DIR__ . '/settings.php';
@@ -48,7 +48,7 @@ function enqueue_scripts() {
 	// Enqueue custom JS for the HM Juicer layout.
 	Asset_Loader\autoregister( dirname( __DIR__ ) . '/build', 'hm-juicer-js', [
 		'handle'    => 'hm-juicer-js',
-		'scripts'   => [ 'images-loaded' ]
+		'scripts'   => [ 'images-loaded' ],
 	] );
 
 	// TODO: Add Font Awesome package to the plugin.
