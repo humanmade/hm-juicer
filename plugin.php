@@ -20,9 +20,9 @@ require_once __DIR__ . '/inc/load-more.php';
 
 // Require the Asset Loader package.
 if ( file_exists( __DIR__ . '/vendor/humanmade/asset-loader/asset-loader.php' ) ) {
-    require_once __DIR__ . '/vendor/humanmade/asset-loader/asset-loader.php';
+	require_once __DIR__ . '/vendor/humanmade/asset-loader/asset-loader.php';
 } else {
-    wp_die( __( 'Dependencies required for HM Juicer were not found. Did you run <code>npm run setup</code>?', 'hm-juicer' ), __( 'Plugin depenencies not found', 'hm-juicer' ) );
+	wp_die( __( 'Dependencies required for HM Juicer were not found. Did you run <code>npm run setup</code>?', 'hm-juicer' ), __( 'Plugin depenencies not found', 'hm-juicer' ) );
 }
 
 // Kick it off.
