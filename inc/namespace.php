@@ -20,12 +20,12 @@ const JUICER_ENDPOINT = 'https://www.juicer.io/api/feeds/';
  */
 function bootstrap() {
 	if (
-			// If none of the Juicer constants are defined...
-			! defined( 'JUICER_ID' ) ||
-			! defined( 'JUICER_SHORT_URL' ) ||
-			! defined( 'JUICER_LONG_URL' ) ||
-			! defined( 'JUICER_SITE_NAME' ) ||
-			! has_altis_config()
+		// If none of the Juicer constants are defined...
+		! defined( 'JUICER_ID' ) ||
+		! defined( 'JUICER_SHORT_URL' ) ||
+		! defined( 'JUICER_LONG_URL' ) ||
+		! defined( 'JUICER_SITE_NAME' ) ||
+		! has_altis_config()
 	) {
 		// ...load the settings page.
 		require_once __DIR__ . '/settings.php';
