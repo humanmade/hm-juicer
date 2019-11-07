@@ -55,6 +55,23 @@ function enqueue_scripts() {
 }
 
 /**
+ * Check for an Altis configuration option.
+ *
+ * @return bool True if an Altis config option exists. False if we're not on Altis or the config option doesn't exist for Juicer.
+ */
+function has_altis_config() : bool {
+	if ( ! function_exists( 'Altis\\get_config' ) ) {
+		return false;
+	}
+	
+	if ( ! isset( Altis\get_config()['hm-juicer'] ) ) {
+		return false;
+	}
+
+	return true;
+}
+
+/**
  * Get the Juicer feed name from the constant or CMB2, whichever is defined.
  *
  * If neither is defined, returns false.
