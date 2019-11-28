@@ -23,7 +23,7 @@
         "last 2 Opera versions"
     ],
     "scripts": {
-        "build": "webpack --config .config/wepback-config-prod.js",
+        "build": "webpack --config .config/webpack-config-prod.js",
         "dev": "webpack-dev-server --config .config/webpack-config-dev.js",
         "lint:php": "vendor/bin/phpcs --standard=./phpcs.ruleset.xml -p -s -v --extensions=php",
         "lint:js": "eslint **/*.js ",
