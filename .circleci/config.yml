@@ -31,8 +31,8 @@ jobs:
             - run:
                 name: "Check out WP PHP Unit libraries"
                 command: |
-                    mkdir ~/wordpress-dev && mkdir ~/wordpress-dev/tests && mkdir ~/wordpress-dev/tests/phpunit
-                    git clone https://github.com/wp-phpunit/wp-phpunit.git ~/wordpress-dev/tests/phpunit
+                    mkdir /tmp/wordpress-tests-lib
+                    git clone https://github.com/wp-phpunit/wp-phpunit.git /tmp/wordpress-tests-lib
 
             # Check out the code.
             - checkout
