@@ -202,6 +202,7 @@ class Test_API extends \WP_UnitTestCase {
 	 */
 	public function test_maybe_humanize_time() {
 		$now        = current_time( 'U' );
+		$one_minute = $now - MINUTE_IN_SECONDS;
 		$yesterday  = $now - DAY_IN_SECONDS;
 		$two_weeks  = $now - ( 2 * WEEK_IN_SECONDS );
 		$a_month    = $now - MONTH_IN_SECONDS;
@@ -211,8 +212,13 @@ class Test_API extends \WP_UnitTestCase {
 		 * All of these tests will make sure the humanized time is used.
 		 */
 		$this->assertEquals(
-			'1 min ago',
+			'1 second ago',
 			maybe_humanize_time( $now )
+		);
+
+		$this->assertEquals(
+			'1 min ago',
+			maybe_humanize_time( $one_minute )
 		);
 
 		$this->assertEquals(
