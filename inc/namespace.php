@@ -12,6 +12,7 @@ namespace HM\Juicer;
 use Altis;
 use Asset_Loader;
 use HM\Juicer\Settings;
+use HM\Juicer as Plugin;
 
 const JUICER_ENDPOINT = 'https://www.juicer.io/api/feeds/';
 
@@ -45,9 +46,9 @@ function enqueue_scripts() {
 	wp_register_script( 'images-loaded', '//cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/4.1.1/imagesloaded.pkgd.min.js', [], null, true );
 
 	// Enqueue custom JS for the HM Juicer layout.
-	Asset_Loader\autoregister( dirname( __DIR__ ) . '/build', 'hm-juicer-js', [
-		'handle'    => 'hm-juicer-js',
-		'scripts'   => [ 'images-loaded' ],
+	Asset_Loader\autoenqueue( Plugin\ROOT_DIR . '/build', 'hm-juicer-js', [
+		'handle'  => 'hm-juicer-js',
+		'scripts' => [ 'images-loaded' ],
 	] );
 
 	// TODO: Add Font Awesome package to the plugin.
