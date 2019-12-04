@@ -6,8 +6,7 @@
     "require": {
         "composer/installers": "^1.7",
         "php": ">=7.0",
-        "cmb2/cmb2": "^2.6",
-        "humanmade/asset-loader": "^0.3"
+        "cmb2/cmb2": "^2.6"
     },
     "repositories": [
         {
@@ -16,6 +15,7 @@
         }
     ],
     "require-dev": {
+        "humanmade/asset-loader": "^0.3",
         "humanmade/coding-standards": "^0.7",
         "phpunit/phpunit": "5.7.*"
     },
