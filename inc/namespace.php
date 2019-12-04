@@ -46,6 +46,7 @@ function enqueue_scripts() {
 	wp_register_script( 'images-loaded', '//cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/4.1.1/imagesloaded.pkgd.min.js', [], null, true );
 
 	// Enqueue custom JS for the HM Juicer layout.
+
 	Asset_Loader\autoenqueue( Plugin\ROOT_DIR . '/build', 'hm-juicer-js', [
 		'handle'  => 'hm-juicer-js',
 		'scripts' => [ 'images-loaded' ],
