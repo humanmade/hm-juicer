@@ -69,14 +69,22 @@ function prepare_response() {
  * Enqueue styles and scripts.
  */
 function enqueue_scripts() {
-	// Enqueue custom JS for the HM Juicer layout.
-	Asset_Loader\autoregister( dirname( __DIR__ ) . '/build', 'hm-juicer-load-more', [
-		'handle'  => 'hm-juicer-load-more',
-		'scripts' => [ 'jquery', 'underscore', 'hm-juicer-js' ],
-	] );
+	if ( function_exists( 'Asset_Loader\\autoenqueue' ) ) {
+		// Developent mode. Use Asset Loader to manage Webpack assets.
 
-	// Enqueue custom CSS for the HM Juicer layout.
-	Asset_Loader\autoenqueue( dirname( __DIR__ ) . '/build', 'hm-juicer-style', [
-		'handle'    => 'hm-juicer-style',
-	] );
+		// JS.
+		Asset_Loader\autoregister( dirname( __DIR__ ) . '/build', 'hm-juicer-load-more', [
+			'handle'  => 'hm-juicer-load-more',
+			'scripts' => [ 'jquery', 'underscore', 'hm-juicer-js' ],
+		] );
+
+		// CSS.
+		Asset_Loader\autoenqueue( dirname( __DIR__ ) . '/build', 'hm-juicer-style', [
+			'handle' => 'hm-juicer-style',
+		] );
+
+	} else {
+		// Production mode. Use standard WordPress enqueueing for built assets.
+
+	}
 }

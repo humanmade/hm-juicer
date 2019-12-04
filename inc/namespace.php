@@ -45,12 +45,20 @@ function enqueue_scripts() {
 	// Enqueue Images Loaded Script.
 	wp_register_script( 'images-loaded', '//cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/4.1.1/imagesloaded.pkgd.min.js', [], null, true );
 
-	// Enqueue custom JS for the HM Juicer layout.
+	// Enqueue custom assets for HM Juicer.
+	if ( function_exists( 'Asset_Loader\\autoenqueue' ) ) {
+		// Developent mode. Use Asset Loader to manage Webpack assets.
 
-	Asset_Loader\autoenqueue( Plugin\ROOT_DIR . '/build', 'hm-juicer-js', [
-		'handle'  => 'hm-juicer-js',
-		'scripts' => [ 'images-loaded' ],
-	] );
+		// JS.
+		Asset_Loader\autoenqueue( Plugin\ROOT_DIR . '/build', 'hm-juicer-js', [
+			'handle'  => 'hm-juicer-js',
+			'scripts' => [ 'images-loaded' ],
+		] );
+
+	} else {
+		// Production mode. Use standard WordPress enqueueing for built assets.
+
+	}
 
 	// TODO: Add Font Awesome package to the plugin.
 }
