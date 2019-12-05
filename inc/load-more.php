@@ -73,13 +73,13 @@ function enqueue_scripts() {
 		// Developent mode. Use Asset Loader to manage Webpack assets.
 
 		// JS.
-		Asset_Loader\autoregister( dirname( __DIR__ ) . '/build', 'hm-juicer-load-more', [
+		Asset_Loader\autoregister( plugins_url( '/build', dirname( __FILE__ ) ), 'load-more.js', [
 			'handle'  => 'hm-juicer-load-more',
 			'scripts' => [ 'jquery', 'underscore', 'hm-juicer-js' ],
 		] );
 
 		// CSS.
-		Asset_Loader\autoenqueue( dirname( __DIR__ ) . '/build', 'hm-juicer-style', [
+		Asset_Loader\autoenqueue( plugins_url( '/build', dirname( __FILE__ ) ), 'hm-juicer-style', [
 			'handle' => 'hm-juicer-style',
 		] );
 

@@ -12,7 +12,6 @@ namespace HM\Juicer;
 use Altis;
 use Asset_Loader;
 use HM\Juicer\Settings;
-use HM\Juicer as Plugin;
 
 const JUICER_ENDPOINT = 'https://www.juicer.io/api/feeds/';
 
@@ -50,7 +49,7 @@ function enqueue_scripts() {
 		// Developent mode. Use Asset Loader to manage Webpack assets.
 
 		// JS.
-		Asset_Loader\autoenqueue( Plugin\ROOT_DIR . '/build', 'hm-juicer-js', [
+		Asset_Loader\autoenqueue( plugins_url( '/build', dirname( __FILE__ ) ), 'juicer.js', [
 			'handle'  => 'hm-juicer-js',
 			'scripts' => [ 'images-loaded' ],
 		] );
