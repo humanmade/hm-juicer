@@ -69,13 +69,16 @@ function prepare_response() {
  * Enqueue styles and scripts.
  */
 function enqueue_scripts() {
+	$handle = 'hm-juicer-load-more';
+	$dependencies = [ 'jquery', 'underscore', 'hm-juicer-js' ];
+
 	if ( function_exists( 'Asset_Loader\\autoenqueue' ) ) {
 		// Developent mode. Use Asset Loader to manage Webpack assets.
 
 		// JS.
-		Asset_Loader\autoregister( plugins_url( '/build', dirname( __FILE__ ) ), 'load-more.js', [
-			'handle'  => 'hm-juicer-load-more',
-			'scripts' => [ 'jquery', 'underscore', 'hm-juicer-js' ],
+		Asset_Loader\autoregister( plugins_url( '/build', dirname( __FILE__ ) ), 'load_more.js', [
+			'handle'  => $handle,
+			'scripts' => $dependencies,
 		] );
 
 		// CSS.
@@ -86,5 +89,13 @@ function enqueue_scripts() {
 	} else {
 		// Production mode. Use standard WordPress enqueueing for built assets.
 
+		// JS.
+		wp_enqueue_script(
+			$handle,
+			plugins_url( '/build/load_more.js', dirname( __FILE__ ) ),
+			$dependencies,
+			'0.0.1', // TODO: use plugin version.
+			true
+		);
 	}
 }

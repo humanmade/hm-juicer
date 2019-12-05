@@ -36,7 +36,6 @@ function bootstrap() {
 	add_filter( 'juicer_filter_item_content', __NAMESPACE__ . '\\get_item_content', 10, 2 );
 }
 
-
 /**
  * Enqueue styles and scripts.
  */
@@ -45,18 +44,29 @@ function enqueue_scripts() {
 	wp_register_script( 'images-loaded', '//cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/4.1.1/imagesloaded.pkgd.min.js', [], null, true );
 
 	// Enqueue custom assets for HM Juicer.
+	$handle = 'hm-juicer-js';
+	$dependencies = [ 'images-loaded' ];
+
 	if ( function_exists( 'Asset_Loader\\autoenqueue' ) ) {
 		// Developent mode. Use Asset Loader to manage Webpack assets.
 
 		// JS.
 		Asset_Loader\autoenqueue( plugins_url( '/build', dirname( __FILE__ ) ), 'juicer.js', [
-			'handle'  => 'hm-juicer-js',
-			'scripts' => [ 'images-loaded' ],
+			'handle'  => $handle,
+			'scripts' => $dependencies,
 		] );
 
 	} else {
 		// Production mode. Use standard WordPress enqueueing for built assets.
 
+		// JS.
+		wp_enqueue_script(
+			$handle,
+			plugins_url( '/build/juicer.js', dirname( __FILE__ ) ),
+			$dependencies,
+			'0.0.1', // TODO: use plugin version.
+			true
+		);
 	}
 
 	// TODO: Add Font Awesome package to the plugin.
