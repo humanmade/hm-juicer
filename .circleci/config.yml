@@ -11,10 +11,6 @@ jobs:
                 command: sudo apt-get update
 
             - run:
-                name: "Install svn for WordPress"
-                command: sudo apt-get install subversion
-
-            - run:
                 name: "Install MariaDB"
                 command: |
                     sudo apt-get install mariadb-server
@@ -32,6 +28,11 @@ jobs:
                 command: |
                     sudo wget -O /usr/local/bin/phpunit https://phar.phpunit.de/phpunit-5.7.27.phar
                     sudo chmod +x /usr/local/bin/phpunit
+            - run:
+                name: "Check out WP PHP Unit libraries"
+                command: |
+                    mkdir /tmp/wordpress-tests-lib
+                    git clone https://github.com/wp-phpunit/wp-phpunit.git /tmp/wordpress-tests-lib
 
             # Check out the code.
             - checkout
