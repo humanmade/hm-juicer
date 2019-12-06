@@ -76,7 +76,7 @@ function enqueue_scripts() {
 		// Developent mode. Use Asset Loader to manage Webpack assets.
 
 		// JS.
-		Asset_Loader\autoregister( plugins_url( '/build', dirname( __FILE__ ) ), 'load_more.js', [
+		Asset_Loader\autoregister( plugins_url( '/build/dev', dirname( __FILE__ ) ), 'load_more.js', [
 			'handle'  => $handle,
 			'scripts' => $dependencies,
 		] );
@@ -87,7 +87,7 @@ function enqueue_scripts() {
 		// JS.
 		wp_enqueue_script(
 			$handle,
-			plugins_url( '/build/load_more.js', dirname( __FILE__ ) ),
+			plugins_url( '/build/prod/load_more.js', dirname( __FILE__ ) ),
 			$dependencies,
 			'0.0.1', // TODO: use plugin version.
 			true

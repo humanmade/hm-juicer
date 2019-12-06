@@ -52,13 +52,13 @@ function enqueue_scripts() {
 		// Developent mode. Use Asset Loader to manage Webpack assets.
 
 		// JS.
-		Asset_Loader\autoenqueue( plugins_url( '/build', dirname( __FILE__ ) ), 'juicer.js', [
+		Asset_Loader\autoenqueue( plugins_url( '/build/dev', dirname( __FILE__ ) ), 'juicer.js', [
 			'handle'  => $js_handle,
 			'scripts' => $js_dependencies,
 		] );
 
 		// CSS.
-		Asset_Loader\autoenqueue( plugins_url( '/build', dirname( __FILE__ ) ), 'styles.css', [
+		Asset_Loader\autoenqueue( plugins_url( '/build/dev', dirname( __FILE__ ) ), 'styles.css', [
 			'handle' => $css_handle,
 		] );
 
@@ -68,7 +68,7 @@ function enqueue_scripts() {
 		// JS.
 		wp_enqueue_script(
 			$js_handle,
-			plugins_url( '/build/juicer.js', dirname( __FILE__ ) ),
+			plugins_url( '/build/prod/juicer.js', dirname( __FILE__ ) ),
 			$js_dependencies,
 			'0.0.1', // TODO: use plugin version.
 			true
@@ -77,7 +77,7 @@ function enqueue_scripts() {
 		// CSS.
 		wp_enqueue_style(
 			$css_handle,
-			plugins_url( '/build/styles.css', dirname( __FILE__ ) ),
+			plugins_url( '/build/prod/styles.css', dirname( __FILE__ ) ),
 			[],
 			'0.0.1' // TODO: use plugin version.
 		);

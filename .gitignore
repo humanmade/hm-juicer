@@ -4,9 +4,8 @@ vendor/
 # Ignore node modules.
 node_modules/
 
-# Ignore build files.
-build/
-dist/
+# Ignore built files while developing.
+build/dev
 
 ### OS and Software generated files ###
 .DS_Store

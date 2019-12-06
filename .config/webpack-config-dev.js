@@ -22,7 +22,7 @@ module.exports = choosePort( 8080 ).then( port => [
 			styles: filePath( 'assets/style.scss' ),
 		},
 		output: {
-			path: filePath( 'build' ),
+			path: filePath( 'build/dev' ),
 			publicPath: `https://localhost:${ port }/`
 		},
  	} ),

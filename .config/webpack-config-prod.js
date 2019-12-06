@@ -13,6 +13,6 @@ module.exports = presets.production( {
 		styles: filePath( 'assets/style.scss' ),
 	},
 	output: {
-		path: filePath( 'build' ),
+		path: filePath( 'build/prod' ),
 	},
  } );
