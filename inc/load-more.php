@@ -73,7 +73,9 @@ function enqueue_scripts() {
 	$dependencies = [ 'jquery', 'underscore', 'hm-juicer-js' ];
 
 	if ( function_exists( 'Asset_Loader\\autoenqueue' ) ) {
-		// Developent mode. Use Asset Loader to manage Webpack assets.
+		/**
+		 *  Developent mode. Use Asset Loader to manage Webpack assets.
+		 */
 
 		// JS.
 		Asset_Loader\autoregister( plugins_url( '/build/dev', dirname( __FILE__ ) ), 'load_more.js', [
@@ -82,7 +84,9 @@ function enqueue_scripts() {
 		] );
 
 	} else {
-		// Production mode. Use standard WordPress enqueueing for built assets.
+		/**
+		 * Production mode. Use standard WordPress enqueueing for built assets.
+		 */
 
 		// JS.
 		wp_enqueue_script(
