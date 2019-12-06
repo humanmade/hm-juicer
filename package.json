@@ -29,7 +29,9 @@
         "lint:js": "eslint **/*.js ",
         "lint": "npm run lint:php && npm run lint:js",
         "start": "npm run dev",
-        "setup": "npm install && composer install",
+        "setup": "setup:npm && setup:composer",
+        "setup:composer": "composer install",
+        "setup:npm": "npm install",
         "setup:tests": "bash .bin/install-wp-tests.sh \"wp_tests\" \"root\" \"\" \"127.0.0.1\""
     },
     "devDependencies": {

@@ -4,8 +4,178 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "fb285dcb8e431c43d2fca51a39a29891",
+    "content-hash": "5b004c82f7c67a437bfeecaddee4de80",
     "packages": [
+        {
+            "name": "composer/installers",
+            "version": "v1.7.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/composer/installers.git",
+                "reference": "141b272484481432cda342727a427dc1e206bfa0"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/composer/installers/zipball/141b272484481432cda342727a427dc1e206bfa0",
+                "reference": "141b272484481432cda342727a427dc1e206bfa0",
+                "shasum": ""
+            },
+            "require": {
+                "composer-plugin-api": "^1.0"
+            },
+            "replace": {
+                "roundcube/plugin-installer": "*",
+                "shama/baton": "*"
+            },
+            "require-dev": {
+                "composer/composer": "1.0.*@dev",
+                "phpunit/phpunit": "^4.8.36"
+            },
+            "type": "composer-plugin",
+            "extra": {
+                "class": "Composer\\Installers\\Plugin",
+                "branch-alias": {
+                    "dev-master": "1.0-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Composer\\Installers\\": "src/Composer/Installers"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Kyle Robinson Young",
+                    "email": "kyle@dontkry.com",
+                    "homepage": "https://github.com/shama"
+                }
+            ],
+            "description": "A multi-framework Composer library installer",
+            "homepage": "https://composer.github.io/installers/",
+            "keywords": [
+                "Craft",
+                "Dolibarr",
+                "Eliasis",
+                "Hurad",
+                "ImageCMS",
+                "Kanboard",
+                "Lan Management System",
+                "MODX Evo",
+                "Mautic",
+                "Maya",
+                "OXID",
+                "Plentymarkets",
+                "Porto",
+                "RadPHP",
+                "SMF",
+                "Thelia",
+                "Whmcs",
+                "WolfCMS",
+                "agl",
+                "aimeos",
+                "annotatecms",
+                "attogram",
+                "bitrix",
+                "cakephp",
+                "chef",
+                "cockpit",
+                "codeigniter",
+                "concrete5",
+                "croogo",
+                "dokuwiki",
+                "drupal",
+                "eZ Platform",
+                "elgg",
+                "expressionengine",
+                "fuelphp",
+                "grav",
+                "installer",
+                "itop",
+                "joomla",
+                "known",
+                "kohana",
+                "laravel",
+                "lavalite",
+                "lithium",
+                "magento",
+                "majima",
+                "mako",
+                "mediawiki",
+                "modulework",
+                "modx",
+                "moodle",
+                "osclass",
+                "phpbb",
+                "piwik",
+                "ppi",
+                "puppet",
+                "pxcms",
+                "reindex",
+                "roundcube",
+                "shopware",
+                "silverstripe",
+                "sydes",
+                "symfony",
+                "typo3",
+                "wordpress",
+                "yawik",
+                "zend",
+                "zikula"
+            ],
+            "time": "2019-08-12T15:00:31+00:00"
+        }
+    ],
+    "packages-dev": [
+        {
+            "name": "automattic/vipwpcs",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Automattic/VIP-Coding-Standards.git",
+                "reference": "8544a94c32f990b6669f2c7f034d4ba75ccbb558"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Automattic/VIP-Coding-Standards/zipball/8544a94c32f990b6669f2c7f034d4ba75ccbb558",
+                "reference": "8544a94c32f990b6669f2c7f034d4ba75ccbb558",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.6",
+                "squizlabs/php_codesniffer": "^3.2.3",
+                "wp-coding-standards/wpcs": "1.*"
+            },
+            "require-dev": {
+                "dealerdirect/phpcodesniffer-composer-installer": "^0.5",
+                "phpcompatibility/php-compatibility": "^9",
+                "phpunit/phpunit": "^5 || ^6 || ^7"
+            },
+            "suggest": {
+                "dealerdirect/phpcodesniffer-composer-installer": "^0.5 || This Composer plugin will sort out the PHPCS 'installed_paths' automatically."
+            },
+            "type": "phpcodesniffer-standard",
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Contributors",
+                    "homepage": "https://github.com/Automattic/VIP-Coding-Standards/graphs/contributors"
+                }
+            ],
+            "description": "PHP_CodeSniffer rules (sniffs) to enforce WordPress VIP minimum coding conventions",
+            "keywords": [
+                "phpcs",
+                "standards",
+                "wordpress"
+            ],
+            "time": "2019-04-24T21:34:09+00:00"
+        },
         {
             "name": "cmb2/cmb2",
             "version": "v2.6.0",
@@ -58,79 +228,6 @@
                 "wordpress"
             ],
             "time": "2019-01-21T04:30:08+00:00"
-        },
-        {
-            "name": "humanmade/asset-loader",
-            "version": "v0.3.3",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/humanmade/asset-loader.git",
-                "reference": "9db9243b84a522d96395d42603101b472dfe1c70"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/humanmade/asset-loader/zipball/9db9243b84a522d96395d42603101b472dfe1c70",
-                "reference": "9db9243b84a522d96395d42603101b472dfe1c70",
-                "shasum": ""
-            },
-            "require-dev": {
-                "humanmade/coding-standards": "^0.6.0"
-            },
-            "type": "wordpress-plugin",
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "GPL-2.0-or-later"
-            ],
-            "description": "Utilities to seamlessly consume Webpack-bundled assets in WordPress themes & plugins.",
-            "time": "2019-08-29T02:19:00+00:00"
-        }
-    ],
-    "packages-dev": [
-        {
-            "name": "automattic/vipwpcs",
-            "version": "1.0.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/Automattic/VIP-Coding-Standards.git",
-                "reference": "8544a94c32f990b6669f2c7f034d4ba75ccbb558"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/Automattic/VIP-Coding-Standards/zipball/8544a94c32f990b6669f2c7f034d4ba75ccbb558",
-                "reference": "8544a94c32f990b6669f2c7f034d4ba75ccbb558",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.6",
-                "squizlabs/php_codesniffer": "^3.2.3",
-                "wp-coding-standards/wpcs": "1.*"
-            },
-            "require-dev": {
-                "dealerdirect/phpcodesniffer-composer-installer": "^0.5",
-                "phpcompatibility/php-compatibility": "^9",
-                "phpunit/phpunit": "^5 || ^6 || ^7"
-            },
-            "suggest": {
-                "dealerdirect/phpcodesniffer-composer-installer": "^0.5 || This Composer plugin will sort out the PHPCS 'installed_paths' automatically."
-            },
-            "type": "phpcodesniffer-standard",
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Contributors",
-                    "homepage": "https://github.com/Automattic/VIP-Coding-Standards/graphs/contributors"
-                }
-            ],
-            "description": "PHP_CodeSniffer rules (sniffs) to enforce WordPress VIP minimum coding conventions",
-            "keywords": [
-                "phpcs",
-                "standards",
-                "wordpress"
-            ],
-            "time": "2019-04-24T21:34:09+00:00"
         },
         {
             "name": "dealerdirect/phpcodesniffer-composer-installer",
@@ -299,6 +396,39 @@
                 "cs"
             ],
             "time": "2019-07-30T11:13:07+00:00"
+        },
+        {
+            "name": "humanmade/asset-loader",
+            "version": "v0.3.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/humanmade/asset-loader.git",
+                "reference": "9db9243b84a522d96395d42603101b472dfe1c70"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/humanmade/asset-loader/zipball/9db9243b84a522d96395d42603101b472dfe1c70",
+                "reference": "9db9243b84a522d96395d42603101b472dfe1c70",
+                "shasum": ""
+            },
+            "require-dev": {
+                "humanmade/coding-standards": "^0.6.0"
+            },
+            "type": "wordpress-plugin",
+            "scripts": {
+                "lint": [
+                    "phpcs --standard=vendor/humanmade/coding-standards ."
+                ]
+            },
+            "license": [
+                "GPL-2.0-or-later"
+            ],
+            "description": "Utilities to seamlessly consume Webpack-bundled assets in WordPress themes & plugins.",
+            "support": {
+                "source": "https://github.com/humanmade/asset-loader/tree/v0.3.3",
+                "issues": "https://github.com/humanmade/asset-loader/issues"
+            },
+            "time": "2019-08-29T02:19:00+00:00"
         },
         {
             "name": "humanmade/coding-standards",
@@ -1926,6 +2056,8 @@
     "stability-flags": [],
     "prefer-stable": false,
     "prefer-lowest": false,
-    "platform": [],
+    "platform": {
+        "php": ">=7.0"
+    },
     "platform-dev": []
 }

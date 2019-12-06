@@ -13,9 +13,9 @@ namespace HM\Juicer\Settings;
  * Kick it off.
  */
 function bootstrap() {
-	// Die if CMB2 does not exist.
+	// Load CMB2 if it's not loaded.
 	if ( ! defined( 'CMB2_LOADED' ) ) {
-		wp_die( __( 'No Juicer feed name set and CMB2 was not found. The HM Juicer plugin expects either a JUICER_ID constant to be set in your wp-config.php file or CMB2 to be available in your project to load a settings page.', 'hm-juicer' ), __( 'Plugin dependencies not found', 'hm-juicer' ) );
+		require_once dirname( __FILE__, 2 ) . '/vendor/cmb2/cmb2/init.php';
 	}
 
 	// CMB2 exists, we can create the options page.
