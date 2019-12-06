@@ -44,16 +44,22 @@ function enqueue_scripts() {
 	wp_register_script( 'images-loaded', '//cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/4.1.1/imagesloaded.pkgd.min.js', [], null, true );
 
 	// Enqueue custom assets for HM Juicer.
-	$handle = 'hm-juicer-js';
-	$dependencies = [ 'images-loaded' ];
+	$js_handle = 'hm-juicer-js';
+	$js_dependencies = [ 'images-loaded' ];
+	$css_handle = 'hm-juicer-css';
 
 	if ( function_exists( 'Asset_Loader\\autoenqueue' ) ) {
 		// Developent mode. Use Asset Loader to manage Webpack assets.
 
 		// JS.
 		Asset_Loader\autoenqueue( plugins_url( '/build', dirname( __FILE__ ) ), 'juicer.js', [
-			'handle'  => $handle,
-			'scripts' => $dependencies,
+			'handle'  => $js_handle,
+			'scripts' => $js_dependencies,
+		] );
+
+		// CSS.
+		Asset_Loader\autoenqueue( plugins_url( '/build', dirname( __FILE__ ) ), 'hm-juicer-style', [
+			'handle' => $css_handle,
 		] );
 
 	} else {
@@ -61,11 +67,19 @@ function enqueue_scripts() {
 
 		// JS.
 		wp_enqueue_script(
-			$handle,
+			$js_handle,
 			plugins_url( '/build/juicer.js', dirname( __FILE__ ) ),
-			$dependencies,
+			$js_dependencies,
 			'0.0.1', // TODO: use plugin version.
 			true
+		);
+
+		// CSS.
+		wp_enqueue_style(
+			$css_handle,
+			plugins_url( '/build/styles.css', dirname( __FILE__ ) ),
+			[],
+			'0.0.1' // TODO: use plugin version.
 		);
 	}
 

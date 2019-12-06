@@ -81,11 +81,6 @@ function enqueue_scripts() {
 			'scripts' => $dependencies,
 		] );
 
-		// CSS.
-		Asset_Loader\autoenqueue( plugins_url( '/build', dirname( __FILE__ ) ), 'hm-juicer-style', [
-			'handle' => 'hm-juicer-style',
-		] );
-
 	} else {
 		// Production mode. Use standard WordPress enqueueing for built assets.
 

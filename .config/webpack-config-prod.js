@@ -10,6 +10,7 @@ module.exports = presets.production( {
 	entry: {
 		juicer: filePath( 'assets/js/juicer.js' ),
 		load_more: filePath( 'assets/js/load-more.js' ),
+		styles: filePath( 'assets/style.scss' ),
 	},
 	output: {
 		path: filePath( 'build' ),
