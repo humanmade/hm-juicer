@@ -11,7 +11,7 @@
     "bugs": {
         "url": "https://github.com/humanmade/hm-juicer/issues"
     },
-    "browserlist": [
+    "browserslist": [
         "ie >= 11",
         "last 2 Android versions",
         "last 2 ChromeAndroid versions",
