@@ -58,7 +58,7 @@ function enqueue_scripts() {
 		] );
 
 		// CSS.
-		Asset_Loader\autoenqueue( plugins_url( '/build', dirname( __FILE__ ) ), 'hm-juicer-style', [
+		Asset_Loader\autoenqueue( plugins_url( '/build', dirname( __FILE__ ) ), 'styles.css', [
 			'handle' => $css_handle,
 		] );
 

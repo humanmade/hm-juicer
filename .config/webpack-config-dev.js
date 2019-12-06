@@ -19,6 +19,7 @@ module.exports = choosePort( 8080 ).then( port => [
 		entry: {
 			juicer: filePath( 'assets/js/juicer.js' ),
 			load_more: filePath( 'assets/js/load-more.js' ),
+			styles: filePath( 'assets/style.scss' ),
 		},
 		output: {
 			path: filePath( 'build' ),
