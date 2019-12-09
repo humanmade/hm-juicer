@@ -70,7 +70,7 @@ function prepare_response() {
  */
 function enqueue_scripts() {
 	$handle       = 'hm-juicer-load-more';
-	$dependencies = [ 'jquery', 'underscore', 'hm-juicer' ];
+	$dependencies = [ 'jquery', 'underscore', 'hm-juicer-scripts' ];
 
 	if ( function_exists( 'Asset_Loader\\autoenqueue' ) ) {
 		/**
@@ -80,7 +80,7 @@ function enqueue_scripts() {
 		$manifest = dirname( __DIR__ ) . '/build/dev/asset-manifest.json';
 
 		// JS.
-		Asset_Loader\autoregister( $manifest, 'load_more', [
+		Asset_Loader\autoenqueue( $manifest, 'load_more', [
 			'handle'  => $handle,
 			'scripts' => $dependencies,
 		] );
