@@ -74,7 +74,7 @@ function enqueue_scripts() {
 			$js_handle,
 			plugins_url( '/build/prod/juicer.js', dirname( __FILE__ ) ),
 			$js_dependencies,
-			'0.0.1', // TODO: use plugin version.
+			'0.1.0',
 			true
 		);
 
@@ -83,7 +83,7 @@ function enqueue_scripts() {
 			$css_handle,
 			plugins_url( '/build/prod/styles.css', dirname( __FILE__ ) ),
 			[],
-			'0.0.1' // TODO: use plugin version.
+			'0.1.0'
 		);
 	}
 

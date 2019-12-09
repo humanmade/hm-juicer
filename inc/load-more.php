@@ -93,7 +93,7 @@ function enqueue_scripts() {
 			$handle,
 			plugins_url( '/build/prod/load_more.js', dirname( __FILE__ ) ),
 			$dependencies,
-			'0.0.1', // TODO: use plugin version.
+			'0.1.0',
 			true
 		);
 	}
