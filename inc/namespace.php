@@ -44,9 +44,9 @@ function enqueue_scripts() {
 	wp_register_script( 'images-loaded', '//cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/4.1.1/imagesloaded.pkgd.min.js', [], null, true );
 
 	// Enqueue custom assets for HM Juicer.
-	$js_handle = 'hm-juicer-js';
+	$js_handle = 'hm-juicer-scripts';
 	$js_dependencies = [ 'images-loaded' ];
-	$css_handle = 'hm-juicer-css';
+	$css_handle = 'hm-juicer-styles';
 
 	if ( function_exists( 'Asset_Loader\\autoenqueue' ) ) {
 		/**
@@ -72,7 +72,7 @@ function enqueue_scripts() {
 		// JS.
 		wp_enqueue_script(
 			$js_handle,
-			plugins_url( '/build/prod/juicer.js', dirname( __FILE__ ) ),
+			plugins_url( '/build/prod/hm-juicer.js', dirname( __FILE__ ) ),
 			$js_dependencies,
 			'0.1.0',
 			true
@@ -81,7 +81,7 @@ function enqueue_scripts() {
 		// CSS.
 		wp_enqueue_style(
 			$css_handle,
-			plugins_url( '/build/prod/styles.css', dirname( __FILE__ ) ),
+			plugins_url( '/build/prod/hm-juicer.css', dirname( __FILE__ ) ),
 			[],
 			'0.1.0'
 		);

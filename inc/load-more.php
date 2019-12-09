@@ -70,7 +70,7 @@ function prepare_response() {
  */
 function enqueue_scripts() {
 	$handle       = 'hm-juicer-load-more';
-	$dependencies = [ 'jquery', 'underscore', 'hm-juicer-js' ];
+	$dependencies = [ 'jquery', 'underscore', 'hm-juicer' ];
 
 	if ( function_exists( 'Asset_Loader\\autoenqueue' ) ) {
 		/**
@@ -91,7 +91,7 @@ function enqueue_scripts() {
 		// JS.
 		wp_enqueue_script(
 			$handle,
-			plugins_url( '/build/prod/load_more.js', dirname( __FILE__ ) ),
+			plugins_url( '/build/prod/' . $handle . '.js', dirname( __FILE__ ) ),
 			$dependencies,
 			'0.1.0',
 			true
