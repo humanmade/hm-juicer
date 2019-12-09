@@ -69,7 +69,7 @@ function prepare_response() {
  * Enqueue styles and scripts.
  */
 function enqueue_scripts() {
-	$handle = 'hm-juicer-load-more';
+	$handle       = 'hm-juicer-load-more';
 	$dependencies = [ 'jquery', 'underscore', 'hm-juicer-js' ];
 
 	if ( function_exists( 'Asset_Loader\\autoenqueue' ) ) {
