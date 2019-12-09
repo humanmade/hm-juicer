@@ -7,7 +7,7 @@ const { choosePort, cleanOnExit, filePath } = helpers;
 
 // Clean up manifests on exit.
 cleanOnExit( [
-	filePath( 'build/asset-manifest.json' )
+	filePath( 'build/dev/asset-manifest.json' )
 ] );
 
 module.exports = choosePort( 8080 ).then( port => [
