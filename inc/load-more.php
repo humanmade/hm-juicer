@@ -77,8 +77,10 @@ function enqueue_scripts() {
 		 *  Developent mode. Use Asset Loader to manage Webpack assets.
 		 */
 
+		$manifest = dirname( __DIR__ ) . '/build/dev/asset-manifest.json';
+
 		// JS.
-		Asset_Loader\autoregister( plugins_url( '/build/dev', dirname( __FILE__ ) ), 'load_more.js', [
+		Asset_Loader\autoregister( $manifest, 'load_more', [
 			'handle'  => $handle,
 			'scripts' => $dependencies,
 		] );

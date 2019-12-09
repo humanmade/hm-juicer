@@ -53,14 +53,16 @@ function enqueue_scripts() {
 		 *  Developent mode. Use Asset Loader to manage Webpack assets.
 		 */
 
+		$manifest = dirname( __DIR__ ) . '/build/dev/asset-manifest.json';
+
 		// JS.
-		Asset_Loader\autoenqueue( plugins_url( '/build/dev', dirname( __FILE__ ) ), 'juicer.js', [
+		Asset_Loader\autoenqueue( $manifest, 'juicer', [
 			'handle'  => $js_handle,
 			'scripts' => $js_dependencies,
 		] );
 
 		// CSS.
-		Asset_Loader\autoenqueue( plugins_url( '/build/dev', dirname( __FILE__ ) ), 'styles.css', [
+		Asset_Loader\autoenqueue( $manifest, 'styles', [
 			'handle' => $css_handle,
 		] );
 
