@@ -23,7 +23,7 @@ module.exports = choosePort( 8080 ).then( port => [
 		},
 		output: {
 			path: filePath( 'build/dev' ),
-			publicPath: `https://localhost:${ port }/`
+			publicPath: `http://localhost:${ port }/`
 		},
  	} ),
 ] );
