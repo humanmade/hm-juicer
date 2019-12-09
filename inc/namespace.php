@@ -44,9 +44,9 @@ function enqueue_scripts() {
 	wp_register_script( 'images-loaded', '//cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/4.1.1/imagesloaded.pkgd.min.js', [], null, true );
 
 	// Enqueue custom assets for HM Juicer.
-	$js_handle = 'hm-juicer-scripts';
+	$js_handle       = 'hm-juicer-scripts';
 	$js_dependencies = [ 'images-loaded' ];
-	$css_handle = 'hm-juicer-styles';
+	$css_handle      = 'hm-juicer-styles';
 
 	if ( function_exists( 'Asset_Loader\\autoenqueue' ) ) {
 		/**
