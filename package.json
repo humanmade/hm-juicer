@@ -1,6 +1,6 @@
 {
     "name": "hm-juicer",
-    "version": "0.1.0",
+    "version": "1.0.0",
     "description": "Integrates with Juicer API for social feeds and allows accessible display of social media content.",
     "repository": {
         "type": "git",

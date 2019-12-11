@@ -95,7 +95,7 @@ function enqueue_scripts() {
 			$handle,
 			plugins_url( '/build/prod/' . $handle . '.js', dirname( __FILE__ ) ),
 			$dependencies,
-			'0.1.0',
+			'1.0.0',
 			true
 		);
 	}

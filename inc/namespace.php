@@ -86,7 +86,7 @@ function enqueue_scripts() {
 			$js_handle,
 			plugins_url( '/build/prod/hm-juicer.js', dirname( __FILE__ ) ),
 			$js_dependencies,
-			'0.1.0',
+			'1.0.0',
 			true
 		);
 
@@ -95,7 +95,7 @@ function enqueue_scripts() {
 			$css_handle,
 			plugins_url( '/build/prod/hm-juicer.css', dirname( __FILE__ ) ),
 			[],
-			'0.1.0'
+			'1.0.0'
 		);
 	}
 

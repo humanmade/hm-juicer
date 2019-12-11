@@ -2,7 +2,7 @@
 /**
  * Plugin Name: HM Juicer
  * Description: Integrates with Juicer API for social feeds and allows accessible display of social media content.
- * Version: 0.1.0
+ * Version: 1.0.0
  * Author: Human Made
  * Author URI: https://github.com/humanmade
  *
