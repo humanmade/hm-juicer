@@ -16,27 +16,13 @@ git clone git@github.com:humanmade/hm-juicer.git
 ```
 
 ### With Composer
-
-At this time, `humanmade/hm-juicer` does not exist in packagist, so you will need to edit your `composer.json` file to add it as a repository. Vendor packages are installed as WordPress plugins and will need to be activated manually from the Plugins page (or explicitly loaded if installing as a `mu-plugin`).
-
-#### Step 1
-Add the `humanmade/hm-juicer` GitHub repository as a repository in your `composer.json`.
-
-```json
-"repositories": [
-	{
-		"type": "vcs",
-		"url": "git@github.com:humanmade/hm-juicer.git"
-	}
-]
-```
-
-#### Step 2
 Install the plugin via `composer`.
 
 ```bash
 composer require humanmade/hm-juicer
 ```
+
+Vendor packages are installed as WordPress plugins and will need to be activated manually from the Plugins page (or explicitly loaded if installing as a `mu-plugin`).
 
 ### For both: Configure environment
 You may want to define environment variables that define your Juicer account and your site name and URLs. All of these are optional, but if any of them are not defined, a Settings page will appear in your admin to define these settings.
