@@ -19,14 +19,24 @@ const JUICER_ENDPOINT = 'https://www.juicer.io/api/feeds/';
  * Kick everything off.
  */
 function bootstrap() {
+	$has_config = false;
+
+	// If the Juicer constants are defined...
 	if (
-		// If none of the Juicer constants are defined...
-		! defined( 'JUICER_ID' ) ||
-		! defined( 'JUICER_SHORT_URL' ) ||
-		! defined( 'JUICER_LONG_URL' ) ||
-		! defined( 'JUICER_SITE_NAME' ) ||
-		! has_altis_config()
+		defined( 'JUICER_ID' ) &&
+		defined( 'JUICER_SHORT_URL' ) &&
+		defined( 'JUICER_LONG_URL' ) &&
+		defined( 'JUICER_SITE_NAME' )
 	) {
+		$has_config = true;
+	}
+
+	// If the Altis config is in place...
+	if ( function_exists( 'Altis\\get_config' ) && has_altis_config() ) {
+		$has_config = true;
+	}
+
+	if ( ! $has_config ) {
 		// ...load the settings page.
 		require_once __DIR__ . '/settings.php';
 		Settings\bootstrap();
