@@ -8,10 +8,13 @@ const { filePath } = helpers;
 module.exports = presets.production( {
 	externals,
 	entry: {
-		juicer: filePath( 'assets/js/juicer.js' ),
-		load_more: filePath( 'assets/js/load-more.js' ),
+		'hm-juicer': [
+			filePath( 'assets/style.scss' ),
+			filePath( 'assets/js/juicer.js' ),
+		],
+		'hm-juicer-load-more': filePath( 'assets/js/load-more.js' ),
 	},
 	output: {
-		path: filePath( 'build' ),
+		path: filePath( 'build/prod' ),
 	},
  } );

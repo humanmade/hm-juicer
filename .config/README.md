@@ -18,9 +18,9 @@ To build the production ready JS and CSS run:
 npm run build
 ```
 
-* This will build the all the assets for all the themes and plugins.
+* This will build the all the assets for the plugin.
 * This will create production ready assets. (Minified, comments stripped, trees shaken etc.)
-* Built assets should not be tracked in version control, and instead are built as part of the deploy process. This avoids conflicts during development whilst working on multiple things.
+* Built assets are tracked in version control so they are bundled with the plugin.
 
 ### Running development builds
 

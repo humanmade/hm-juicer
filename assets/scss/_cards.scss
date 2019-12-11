@@ -73,7 +73,7 @@
 	&__header,
 	&__sharing {
 		align-items: center;
-		color: lighten( $dark, 30% );
+		color: $grey-text;
 		display: flex;
 		flex-shrink: 0;
 		font-size: 0.9rem;
@@ -97,13 +97,14 @@
 			transition: opacity 0.3s ease;
 			width: 2em;
 		}
-		
+
 		&__name {
 			transition: color 0.3s ease;
 		}
 
+		// Fake link over Facebook icon in bottom right.
 		&:after {
-			background-color: rgba( $light, 0.63 );
+			background-color: rgba( $light, 0.28 );
 			bottom: 0;
 			content: "";
 			height: 3.2em;
@@ -131,7 +132,7 @@
 
 			.juicer-post__author__name {
 				color: lighten( $dark, 25% );
-			}			
+			}
 		}
 	}
 
@@ -213,12 +214,12 @@
 	}
 
 	.juicer-icon {
-		color: lighten( $dark, 55% );
+		color: $grey-text;
 		position: relative;
 		z-index: 2;
 
 		svg {
-			color: currentColor;
+			color: $grey-icon;
 			margin-right: 0.1em;
 
 			&.fa-2x {
@@ -264,8 +265,11 @@
 	}
 
 	&__source.juicer-icon {
-		color: lighten( $dark, 30% );
 		z-index: 0;
+
+		svg {
+			color: lighten( $dark, 30% );
+		}
 	}
 }
 

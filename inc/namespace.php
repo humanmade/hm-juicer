@@ -36,7 +36,6 @@ function bootstrap() {
 	add_filter( 'juicer_filter_item_content', __NAMESPACE__ . '\\get_item_content', 10, 2 );
 }
 
-
 /**
  * Enqueue styles and scripts.
  */
@@ -44,11 +43,51 @@ function enqueue_scripts() {
 	// Enqueue Images Loaded Script.
 	wp_register_script( 'images-loaded', '//cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/4.1.1/imagesloaded.pkgd.min.js', [], null, true );
 
-	// Enqueue custom JS for the HM Juicer layout.
-	Asset_Loader\autoregister( dirname( __DIR__ ) . '/build', 'hm-juicer-js', [
-		'handle'    => 'hm-juicer-js',
-		'scripts'   => [ 'images-loaded' ],
-	] );
+	// Enqueue custom assets for HM Juicer.
+	$js_handle       = 'hm-juicer-scripts';
+	$js_dependencies = [ 'images-loaded' ];
+	$css_handle      = 'hm-juicer-styles';
+
+	if ( function_exists( 'Asset_Loader\\autoenqueue' ) ) {
+		/**
+		 *  Developent mode. Use Asset Loader to manage Webpack assets.
+		 */
+
+		$manifest = dirname( __DIR__ ) . '/build/dev/asset-manifest.json';
+
+		// JS.
+		Asset_Loader\autoenqueue( $manifest, 'juicer', [
+			'handle'  => $js_handle,
+			'scripts' => $js_dependencies,
+		] );
+
+		// CSS.
+		Asset_Loader\autoenqueue( $manifest, 'styles', [
+			'handle' => $css_handle,
+		] );
+
+	} else {
+		/**
+		 * Production mode. Use standard WordPress enqueueing for built assets.
+		 */
+
+		// JS.
+		wp_enqueue_script(
+			$js_handle,
+			plugins_url( '/build/prod/hm-juicer.js', dirname( __FILE__ ) ),
+			$js_dependencies,
+			'0.1.0',
+			true
+		);
+
+		// CSS.
+		wp_enqueue_style(
+			$css_handle,
+			plugins_url( '/build/prod/hm-juicer.css', dirname( __FILE__ ) ),
+			[],
+			'0.1.0'
+		);
+	}
 
 	// TODO: Add Font Awesome package to the plugin.
 }
