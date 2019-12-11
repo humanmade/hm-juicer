@@ -7,7 +7,7 @@ const { choosePort, cleanOnExit, filePath } = helpers;
 
 // Clean up manifests on exit.
 cleanOnExit( [
-	filePath( 'build/asset-manifest.json' )
+	filePath( 'build/dev/asset-manifest.json' )
 ] );
 
 module.exports = choosePort( 8080 ).then( port => [
@@ -19,10 +19,11 @@ module.exports = choosePort( 8080 ).then( port => [
 		entry: {
 			juicer: filePath( 'assets/js/juicer.js' ),
 			load_more: filePath( 'assets/js/load-more.js' ),
+			styles: filePath( 'assets/style.scss' ),
 		},
 		output: {
-			path: filePath( 'build' ),
-			publicPath: `https://localhost:${ port }/`
+			path: filePath( 'build/dev' ),
+			publicPath: `http://localhost:${ port }/`
 		},
  	} ),
 ] );

@@ -69,14 +69,34 @@ function prepare_response() {
  * Enqueue styles and scripts.
  */
 function enqueue_scripts() {
-	// Enqueue custom JS for the HM Juicer layout.
-	Asset_Loader\autoregister( dirname( __DIR__ ) . '/build', 'hm-juicer-load-more', [
-		'handle'  => 'hm-juicer-load-more',
-		'scripts' => [ 'jquery', 'underscore', 'hm-juicer-js' ],
-	] );
+	$handle       = 'hm-juicer-load-more';
+	$dependencies = [ 'jquery', 'underscore', 'hm-juicer-scripts' ];
 
-	// Enqueue custom CSS for the HM Juicer layout.
-	Asset_Loader\autoenqueue( dirname( __DIR__ ) . '/build', 'hm-juicer-style', [
-		'handle'    => 'hm-juicer-style',
-	] );
+	if ( function_exists( 'Asset_Loader\\autoenqueue' ) ) {
+		/**
+		 *  Developent mode. Use Asset Loader to manage Webpack assets.
+		 */
+
+		$manifest = dirname( __DIR__ ) . '/build/dev/asset-manifest.json';
+
+		// JS.
+		Asset_Loader\autoenqueue( $manifest, 'load_more', [
+			'handle'  => $handle,
+			'scripts' => $dependencies,
+		] );
+
+	} else {
+		/**
+		 * Production mode. Use standard WordPress enqueueing for built assets.
+		 */
+
+		// JS.
+		wp_enqueue_script(
+			$handle,
+			plugins_url( '/build/prod/' . $handle . '.js', dirname( __FILE__ ) ),
+			$dependencies,
+			'0.1.0',
+			true
+		);
+	}
 }
